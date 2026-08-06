@@ -1,0 +1,1380 @@
+<!DOCTYPE html>
+<html lang="ko" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>나니와 | 제주시 연동 24시 맛집 - 직접 재배한 무농약 쌈채소와 정갈한 제주 향토음식</title>
+  
+  <!-- [SEO 및 공유 최적화 - Open Graph 메타 태그] -->
+  <meta name="description" content="제주시 연동 신라면세점 후문 위치. 주인장이 직접 재배한 100% 무농약 쌈채소와 정갈한 집밥 느낌의 제육볶음, 노릇한 고등어구이, 깊은 국물의 보말칼국수 전문점. 24시간 연중무휴 영업.">
+  <meta name="keywords" content="나니와, 제주시 연동 맛집, 신제주 맛집, 연동 한식, 제주 24시 식당, 제주 보말칼국수, 제주 제육쌈밥, 신라면세점 맛집, 제주공항 근처 맛집">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="나니와 - 건강한 제주 집밥 & 향토음식전문점">
+  <meta property="og:description" content="직접 재배한 무농약 채소로 차리는 건강한 식탁. 제육쌈밥, 고등어조림, 보말칼국수 24시간 연중무휴!">
+  <meta property="og:image" content="https://images.unsplash.com/photo-1608897013039-887f21d8c804?auto=format&fit=crop&w=1200&h=630&q=80">
+  <meta property="og:url" content="https://naver.me/GZDhrNz2">
+  <meta property="og:site_name" content="나니와">
+  
+  <!-- [웹 폰트 및 라이브러리 로드] -->
+  <!-- Pretendard 폰트 -->
+  <link rel="stylesheet" as="style" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css" />
+  
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  
+  <!-- Tailwind 테마 커스텀 설정 -->
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['Pretendard', 'sans-serif'],
+          },
+          colors: {
+            brand: {
+              darkgreen: '#064e3b',   // 깊은 숲속의 딥그린 (Primary)
+              forest: '#0f3d2a',      // 진한 포레스트 그린
+              wood: '#8c6239',        // 따뜻하고 깊이있는 우드 톤 (Secondary)
+              lightwood: '#b48a5f',   // 부드러운 밝은 우드 톤
+              cream: '#fdfbf7',       // 내츄럴 웜 베이지 배경색
+              accent: '#d97706',      // 딥 엠버 (포인트 CTA 컬러)
+            }
+          },
+          animation: {
+            'fade-in-down': 'fadeInDown 0.8s ease-out forwards',
+            'fade-in-up': 'fadeInUp 0.8s ease-out forwards',
+            'pulse-subtle': 'pulseSubtle 2s infinite ease-in-out',
+          },
+          keyframes: {
+            fadeInDown: {
+              '0%': { opacity: '0', transform: 'translateY(-20px)' },
+              '100%': { opacity: '1', transform: 'translateY(0)' },
+            },
+            fadeInUp: {
+              '0%': { opacity: '0', transform: 'translateY(20px)' },
+              '100%': { opacity: '1', transform: 'translateY(0)' },
+            },
+            pulseSubtle: {
+              '0%, 100%': { transform: 'scale(1)' },
+              '50%': { transform: 'scale(1.03)' },
+            }
+          }
+        }
+      }
+    }
+  </script>
+
+  <!-- FontAwesome 아이콘 -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  
+  <!-- AOS (Scroll Animation) 라이브러리 -->
+  <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+  
+  <!-- Leaflet 지도 라이브러리 (API 키 없이 오픈맵 연동) -->
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin=""/>
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+
+  <style>
+    /* 스크롤바 커스터마이징 */
+    ::-webkit-scrollbar {
+      width: 8px;
+    }
+    ::-webkit-scrollbar-track {
+      background: #f1f1f1;
+    }
+    ::-webkit-scrollbar-thumb {
+      background: #064e3b;
+      border-radius: 4px;
+    }
+    ::-webkit-scrollbar-thumb:hover {
+      background: #0f3d2a;
+    }
+    
+    /* 지도 줌 컨트롤 스타일 가리기 및 커스텀 */
+    .leaflet-control-attribution {
+      display: none !important;
+    }
+  </style>
+
+  <!-- 이미지 자동 교체 및 폴백 시스템 스크립트 -->
+  <script>
+    /**
+     * 사용자가 images/ 폴더에 메뉴 이름과 일치하는 이미지를 넣었을 때 자동 로딩하며,
+     * 파일이 없거나 로드에 실패할 경우 Unsplash의 어울리는 이미지로 자동 대체해주는 헬퍼 함수
+     */
+    function handleMenuImageError(imgElement, menuName, unsplashFallback) {
+      // 브라우저의 이미지 강력 캐시 문제를 우회하기 위한 쿼리스트링 캐시버스터
+      const cacheBuster = "?v=" + Date.now();
+      if (!imgElement.dataset.attempt) {
+        // 1차 시도: .jpg 실패 시 .png 확장자 확인
+        imgElement.dataset.attempt = "png";
+        imgElement.src = `./images/${menuName}.png` + cacheBuster;
+      } else if (imgElement.dataset.attempt === "png") {
+        // 2차 시도: .png 실패 시 .jpeg 확장자 확인
+        imgElement.dataset.attempt = "jpeg";
+        imgElement.src = `./images/${menuName}.jpeg` + cacheBuster;
+      } else if (imgElement.dataset.attempt === "jpeg") {
+        // 3차 시도: .jpeg 실패 시 .gif 확장자 확인
+        imgElement.dataset.attempt = "gif";
+        imgElement.src = `./images/${menuName}.gif` + cacheBuster;
+      } else {
+        // 최종 단계: 모든 로컬 파일 탐색 실패 시 Unsplash 이미지 백업 사용
+        imgElement.src = unsplashFallback;
+        imgElement.onerror = null; // 무한 에러 루프 방지
+      }
+    }
+  </script>
+</head>
+<body class="bg-brand-cream text-stone-800 font-sans antialiased">
+
+  <!-- ========================================== -->
+  <!-- <!-- [1] 헤더 영역 --> -->
+  <!-- ========================================== -->
+  <header id="header" class="fixed top-0 left-0 right-0 z-50 transition-all duration-300 bg-transparent py-4">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex items-center justify-between h-16">
+        
+        <!-- 로고 -->
+        <a href="#" class="flex items-center gap-2 group">
+          <div class="w-10 h-10 rounded-full bg-brand-darkgreen flex items-center justify-center text-white font-bold text-lg shadow-md group-hover:scale-105 transition-transform duration-300">
+            나
+          </div>
+          <span class="text-2xl font-bold tracking-tight text-white transition-colors duration-300" id="header-logo-text">나니와</span>
+          <span class="hidden sm:inline-block text-xs font-medium text-stone-300 bg-brand-darkgreen/60 px-2 py-0.5 rounded-full border border-white/20 transition-all duration-300" id="header-sub-text">제주 향토음식</span>
+        </a>
+
+        <!-- 데스크톱 메뉴 -->
+        <nav class="hidden md:flex items-center space-x-8 text-sm font-semibold transition-colors duration-300 text-white" id="desktop-nav">
+          <a href="#about" class="hover:text-brand-lightwood transition-colors duration-300 py-2">브랜드 스토리</a>
+          <a href="#features" class="hover:text-brand-lightwood transition-colors duration-300 py-2">나니와의 고집</a>
+          <a href="#menu" class="hover:text-brand-lightwood transition-colors duration-300 py-2">대표 메뉴</a>
+          <a href="#reviews" class="hover:text-brand-lightwood transition-colors duration-300 py-2">고객 후기</a>
+          <a href="#location" class="hover:text-brand-lightwood transition-colors duration-300 py-2">오시는 길</a>
+        </nav>
+
+        <!-- 데스크톱 예약/전화 버튼 -->
+        <div class="hidden md:flex items-center gap-3">
+          <a href="tel:064-711-3880" class="flex items-center gap-2 text-xs font-bold text-white border border-white/30 px-4 py-2.5 rounded-full hover:bg-white hover:text-stone-900 transition-all duration-300">
+            <i class="fa-solid fa-phone"></i> 064-711-3880
+          </a>
+          <a href="https://naver.me/GZDhrNz2" target="_blank" rel="noopener noreferrer" class="flex items-center gap-2 text-xs font-bold bg-emerald-600 hover:bg-emerald-500 text-white px-5 py-2.5 rounded-full shadow-lg hover:shadow-emerald-900/30 transition-all duration-300 hover:scale-105">
+            <span class="w-2 h-2 rounded-full bg-green-200 animate-ping"></span>
+            네이버 예약하기
+          </a>
+        </div>
+
+        <!-- 모바일 햄버거 버튼 -->
+        <button id="mobile-menu-btn" class="md:hidden flex items-center justify-center p-2 rounded-md text-white hover:bg-white/10 focus:outline-none transition-colors duration-300" aria-label="메뉴 열기">
+          <svg class="h-6 w-6" stroke="currentColor" fill="none" viewBox="0 0 24 24">
+            <path id="hamburger-icon" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+          </svg>
+        </button>
+
+      </div>
+    </div>
+
+    <!-- 모바일 메뉴 드로어 -->
+    <div id="mobile-drawer" class="fixed inset-0 z-50 md:hidden bg-stone-950/80 backdrop-blur-sm opacity-0 pointer-events-none transition-opacity duration-300">
+      <div class="fixed top-0 right-0 bottom-0 w-3/4 max-w-sm bg-brand-cream shadow-2xl p-6 flex flex-col translate-x-full transition-transform duration-300 ease-out" id="drawer-content">
+        <div class="flex items-center justify-between pb-6 border-b border-stone-200">
+          <div class="flex items-center gap-2">
+            <div class="w-8 h-8 rounded-full bg-brand-darkgreen flex items-center justify-center text-white font-bold text-sm">나</div>
+            <span class="text-lg font-bold text-stone-900">나니와</span>
+          </div>
+          <button id="close-drawer-btn" class="text-stone-500 hover:text-stone-800 focus:outline-none p-1">
+            <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+            </svg>
+          </button>
+        </div>
+        <nav class="flex flex-col space-y-4 mt-8 text-base font-semibold text-stone-850">
+          <a href="#about" class="hover:text-brand-darkgreen py-2 border-b border-stone-100 transition-colors">브랜드 스토리</a>
+          <a href="#features" class="hover:text-brand-darkgreen py-2 border-b border-stone-100 transition-colors">나니와의 고집</a>
+          <a href="#menu" class="hover:text-brand-darkgreen py-2 border-b border-stone-100 transition-colors">대표 메뉴</a>
+          <a href="#reviews" class="hover:text-brand-darkgreen py-2 border-b border-stone-100 transition-colors">고객 후기</a>
+          <a href="#location" class="hover:text-brand-darkgreen py-2 border-b border-stone-100 transition-colors">오시는 길</a>
+        </nav>
+        <div class="mt-auto space-y-3">
+          <a href="tel:064-711-3880" class="flex items-center justify-center gap-2 w-full text-sm font-bold text-stone-800 border border-stone-300 py-3 rounded-xl hover:bg-stone-100 transition-colors">
+            <i class="fa-solid fa-phone"></i> 064-711-3880
+          </a>
+          <a href="https://naver.me/GZDhrNz2" target="_blank" rel="noopener noreferrer" class="flex items-center justify-center gap-2 w-full text-sm font-bold bg-emerald-600 text-white py-3 rounded-xl hover:bg-emerald-700 transition-colors shadow-lg shadow-emerald-900/10">
+            네이버 예약하기
+          </a>
+        </div>
+      </div>
+    </div>
+  </header>
+
+
+  <!-- ========================================== -->
+  <!-- <!-- [2] 메인 배너 (Hero 영역) --> -->
+  <!-- ========================================== -->
+  <section id="hero" class="relative min-h-screen flex items-center justify-center overflow-hidden bg-stone-900 pt-16">
+    <!-- 배경 슬라이더 컨테이너 및 어두운 오버레이 -->
+    <div class="absolute inset-0 z-0">
+      <!-- 슬라이드 1 (매장 전경) -->
+      <div class="hero-slide absolute inset-0 opacity-100 transition-all duration-1000 ease-in-out transform scale-105">
+        <img src="./images/store_front.jpg" onerror="this.src='https://images.unsplash.com/photo-1608897013039-887f21d8c804?auto=format&fit=crop&w=1920&q=85'" alt="나니와 매장 전면" class="w-full h-full object-cover object-center opacity-45">
+      </div>
+      <!-- 슬라이드 2 (골목/간판 전경) -->
+      <div class="hero-slide absolute inset-0 opacity-0 transition-all duration-1000 ease-in-out transform scale-100">
+        <img src="./images/store_side.jpg" onerror="this.src='https://images.unsplash.com/photo-1552566626-52f8b828add9?auto=format&fit=crop&w=1920&q=85'" alt="나니와 신라면세점 골목" class="w-full h-full object-cover object-center opacity-45">
+      </div>
+      <!-- 슬라이드 3 (정갈한 제주 한식 테이블) -->
+      <div class="hero-slide absolute inset-0 opacity-0 transition-all duration-1000 ease-in-out transform scale-100">
+        <img src="https://images.unsplash.com/photo-1608897013039-887f21d8c804?auto=format&fit=crop&w=1920&q=85" alt="제주 한식 테이블" class="w-full h-full object-cover object-center opacity-45">
+      </div>
+      
+      <!-- 그라데이션 오버레이 -->
+      <div class="absolute inset-0 bg-gradient-to-t from-stone-950 via-stone-900/60 to-stone-950/70 z-10"></div>
+      
+      <!-- 잎사귀 그래픽 효과 (자연 친화적 무드) -->
+      <div class="absolute top-1/4 right-0 w-64 h-64 bg-brand-darkgreen/10 rounded-full blur-3xl z-10"></div>
+      <div class="absolute bottom-1/4 left-0 w-80 h-80 bg-brand-wood/10 rounded-full blur-3xl z-10"></div>
+    </div>
+
+    <!-- 콘텐츠 -->
+    <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center text-white py-20 z-10">
+      
+      <!-- 뱃지 -->
+      <span class="inline-flex items-center gap-1.5 px-4 py-1.5 rounded-full text-xs font-bold bg-brand-darkgreen text-green-200 border border-green-700/50 mb-6 uppercase tracking-wider animate-fade-in-down">
+        <i class="fa-solid fa-leaf text-green-400"></i> 주인장이 직접 재배한 100% 무농약 채소
+      </span>
+      
+      <!-- 헤드라인 -->
+      <h1 class="text-4xl sm:text-5xl md:text-6xl font-extrabold tracking-tight leading-tight mb-6 animate-fade-in-up">
+        제주 연동에서 만나는<br>
+        <span class="text-transparent bg-clip-text bg-gradient-to-r from-green-300 via-yellow-200 to-amber-200">정성 가득한 집밥의 따뜻함</span>
+      </h1>
+      
+      <!-- 리드 문구 -->
+      <p class="max-w-2xl mx-auto text-base sm:text-lg md:text-xl text-stone-300 font-medium mb-10 leading-relaxed animate-fade-in-up delay-100">
+        나니와는 직접 가꾼 텃밭의 신선한 무농약 쌈채소와 제주 향토 식재료로 손끝에서 빚어내는 건강한 한 끼를 대접합니다. 24시간 연중무휴로 언제든 든든한 온기를 채워드립니다.
+      </p>
+
+      <!-- 액션 버튼 -->
+      <div class="flex flex-col sm:flex-row items-center justify-center gap-4 animate-fade-in-up delay-200">
+        <a href="https://naver.me/GZDhrNz2" target="_blank" rel="noopener noreferrer" class="group flex items-center justify-center gap-3 w-full sm:w-auto bg-emerald-600 hover:bg-emerald-500 text-white font-bold text-base px-8 py-4 rounded-xl shadow-xl hover:shadow-emerald-700/30 transition-all duration-300 hover:scale-105">
+          <i class="fa-solid fa-calendar-check text-green-200 group-hover:scale-110 transition-transform"></i>
+          네이버 예약 신청
+        </a>
+        <a href="tel:064-711-3880" class="flex items-center justify-center gap-3 w-full sm:w-auto bg-white/10 hover:bg-white/20 text-white font-bold text-base px-8 py-4 rounded-xl border border-white/20 hover:border-white/40 transition-all duration-300 backdrop-blur-sm">
+          <i class="fa-solid fa-phone"></i>
+          전화 주문 및 문의
+        </a>
+      </div>
+
+      <!-- 요약 스펙 리스트 -->
+      <div class="grid grid-cols-2 md:grid-cols-4 gap-6 mt-16 max-w-4xl mx-auto border-t border-white/10 pt-10 text-stone-400 text-xs sm:text-sm font-semibold">
+        <div class="flex flex-col items-center gap-2">
+          <span class="text-brand-lightwood text-2xl"><i class="fa-solid fa-clock"></i></span>
+          <span>24시간 영업 연중무휴</span>
+        </div>
+        <div class="flex flex-col items-center gap-2">
+          <span class="text-brand-lightwood text-2xl"><i class="fa-solid fa-store"></i></span>
+          <span>단체모임/가족석 완비</span>
+        </div>
+        <div class="flex flex-col items-center gap-2">
+          <span class="text-brand-lightwood text-2xl"><i class="fa-solid fa-location-dot"></i></span>
+          <span>신라면세점 후문 1분</span>
+        </div>
+        <div class="flex flex-col items-center gap-2">
+          <span class="text-brand-lightwood text-2xl"><i class="fa-solid fa-square-parking"></i></span>
+          <span>주차 공간 제공</span>
+        </div>
+      </div>
+
+    </div>
+    
+    <!-- 아래로 가기 앵커 -->
+    <div class="absolute bottom-6 left-1/2 -translate-x-1/2 z-10 animate-bounce">
+      <a href="#about" aria-label="브랜드 스토리로 이동">
+        <i class="fa-solid fa-chevron-down text-white/50 text-xl hover:text-white transition-colors"></i>
+      </a>
+    </div>
+  </section>
+
+
+  <!-- ========================================== -->
+  <!-- <!-- [3] 브랜드 스토리 & 업체 특징 영역 --> -->
+  <!-- ========================================== -->
+  <section id="about" class="py-20 sm:py-28 overflow-hidden bg-white">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      
+      <!-- 소개 상단 -->
+      <div class="grid lg:grid-cols-12 gap-12 items-center">
+        <!-- 텍스트 설명 -->
+        <div class="lg:col-span-6" data-aos="fade-right">
+          <span class="text-sm font-bold text-brand-darkgreen uppercase tracking-widest block mb-3">BRAND STORY</span>
+          <h2 class="text-3xl sm:text-4xl font-extrabold text-stone-900 tracking-tight leading-snug mb-6">
+            어머니의 품 같은 한 끼,<br>
+            제주 자연을 그대로 그릇에 담다
+          </h2>
+          <p class="text-stone-600 leading-relaxed mb-6">
+            제주의 푸른 바람과 맑은 햇살 아래에서 자란 농작물이 가장 맛있고 건강합니다. 나니와는 주인장이 직접 텃밭을 일구며 정직하게 가꾼 <strong>100% 무농약 상추와 쌈채소</strong>를 테이블에 올립니다. 
+          </p>
+          <p class="text-stone-600 leading-relaxed mb-8">
+            자극적이고 정형화된 외식 메뉴 대신, 내 가족에게 양보 없이 차리는 정성 어린 밑반찬과 노릇한 생선구이, 그리고 깊은 풍미의 조림 요리까지. 한 입 맛보는 순간 느껴지는 깊고 자극적이지 않은 본연의 맛으로 진짜 제주의 집밥을 선물합니다.
+          </p>
+          
+          <!-- 슬로건 장식 -->
+          <div class="border-l-4 border-brand-darkgreen pl-4 italic text-brand-forest font-semibold text-lg">
+            "우리가 먹지 못하는 것은 절대 상에 올리지 않습니다."
+          </div>
+        </div>
+
+        <!-- 이미지 카드 그리드 (Premium UI) -->
+        <div class="lg:col-span-6 relative" data-aos="fade-left">
+          <div class="grid grid-cols-2 gap-4">
+            <div class="space-y-4">
+              <div class="rounded-3xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300">
+                <img src="./images/vegetable_field.jpg" onerror="this.src='https://images.unsplash.com/photo-1592417817098-8f3d6eb19675?auto=format&fit=crop&w=400&h=500&q=80'" alt="무농약 채소 수확" class="w-full h-auto object-cover hover:scale-110 duration-500">
+              </div>
+              <div class="rounded-3xl overflow-hidden bg-brand-darkgreen p-6 text-white text-center shadow-md">
+                <p class="text-3xl font-extrabold text-yellow-300 mb-1">100%</p>
+                <p class="text-xs font-semibold text-green-100 uppercase tracking-wider">직접 재배 무농약 인증</p>
+              </div>
+            </div>
+            <div class="space-y-4 pt-8">
+              <div class="rounded-3xl overflow-hidden bg-stone-100 p-6 text-center border border-stone-200/60 shadow-sm">
+                <p class="text-3xl font-extrabold text-brand-wood mb-1">24h</p>
+                <p class="text-xs font-semibold text-stone-500 uppercase tracking-wider">연중무휴 밤낮없는 환대</p>
+              </div>
+              <div class="rounded-3xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300">
+                <img src="./images/store_indoor.jpg" onerror="this.src='https://images.unsplash.com/photo-1552566626-52f8b828add9?auto=format&fit=crop&w=400&h=500&q=80'" alt="정갈한 나니와 식사 공간" class="w-full h-auto object-cover hover:scale-110 duration-500">
+              </div>
+            </div>
+          </div>
+          <!-- 장식 포인트 -->
+          <div class="absolute -z-10 -bottom-6 -right-6 w-32 h-32 bg-brand-lightwood/10 rounded-full blur-2xl"></div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- 특징 3가지 세그먼트 -->
+  <section id="features" class="py-20 bg-brand-cream border-y border-stone-200/50">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      
+      <div class="text-center max-w-3xl mx-auto mb-16" data-aos="fade-up">
+        <span class="text-xs font-bold text-brand-wood uppercase tracking-widest bg-brand-wood/10 px-3 py-1 rounded-full">WHY NANIWA</span>
+        <h2 class="text-3xl font-bold text-stone-900 tracking-tight mt-4">단골들이 입을 모아 말하는 나니와의 3가지 약속</h2>
+      </div>
+
+      <div class="grid md:grid-cols-3 gap-8">
+        
+        <!-- 강점 1 -->
+        <div class="bg-white p-8 rounded-3xl shadow-sm border border-stone-200/40 hover:shadow-xl transition-all duration-300 group" data-aos="fade-up" data-aos-delay="100">
+          <div class="w-14 h-14 rounded-2xl bg-green-50 text-brand-darkgreen flex items-center justify-center text-2xl mb-6 group-hover:bg-brand-darkgreen group-hover:text-white transition-all duration-300">
+            <i class="fa-solid fa-leaf"></i>
+          </div>
+          <h3 class="text-xl font-bold text-stone-900 mb-3">직접 재배한 무농약 쌈채소</h3>
+          <p class="text-stone-600 leading-relaxed text-sm">
+            직접 농사를 지어 엄격하게 길러낸 부드러운 상추와 쌈채소들을 아낌없이 가득 내어드립니다. 아삭함이 다른 천연 재배 쌈의 특별함을 확인해보세요.
+          </p>
+        </div>
+
+        <!-- 강점 2 -->
+        <div class="bg-white p-8 rounded-3xl shadow-sm border border-stone-200/40 hover:shadow-xl transition-all duration-300 group" data-aos="fade-up" data-aos-delay="200">
+          <div class="w-14 h-14 rounded-2xl bg-amber-50 text-brand-wood flex items-center justify-center text-2xl mb-6 group-hover:bg-brand-wood group-hover:text-white transition-all duration-300">
+            <i class="fa-solid fa-clock-rotate-left"></i>
+          </div>
+          <h3 class="text-xl font-bold text-stone-900 mb-3">24시간 언제나 열린 정성</h3>
+          <p class="text-stone-600 leading-relaxed text-sm">
+            제주 여행 중 늦은 새벽 도착 시나, 이른 아침 비행기를 타기 전 든든히 먹고 싶을 때 언제나 열려있습니다. 식지 않는 화력으로 따끈한 집밥을 제공합니다.
+          </p>
+        </div>
+
+        <!-- 강점 3 -->
+        <div class="bg-white p-8 rounded-3xl shadow-sm border border-stone-200/40 hover:shadow-xl transition-all duration-300 group" data-aos="fade-up" data-aos-delay="300">
+          <div class="w-14 h-14 rounded-2xl bg-amber-50 text-yellow-700 flex items-center justify-center text-2xl mb-6 group-hover:bg-yellow-700 group-hover:text-white transition-all duration-300">
+            <i class="fa-solid fa-users"></i>
+          </div>
+          <h3 class="text-xl font-bold text-stone-900 mb-3">가족 모임 및 단체 공간 완비</h3>
+          <p class="text-stone-600 leading-relaxed text-sm">
+            편안하고 아늑한 우드 인테리어 공간은 3개의 분할 좌석 구획과 중앙 긴 단체 테이블을 갖추어, 대가족이나 단체 관광객 식사도 쾌적하게 가능합니다. (아기의자 완비)
+          </p>
+        </div>
+
+      </div>
+
+    </div>
+  </section>
+
+
+  <!-- ========================================== -->
+  <!-- <!-- [4] 대표 메뉴 영역 --> -->
+  <!-- ========================================== -->
+  <section id="menu" class="py-20 sm:py-28 bg-white">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      
+      <!-- 상단 헤더 -->
+      <div class="flex flex-col md:flex-row md:items-end justify-between mb-16" data-aos="fade-up">
+        <div>
+          <span class="text-sm font-bold text-brand-darkgreen uppercase tracking-widest block mb-3">SIGNATURE MENU</span>
+          <h2 class="text-3xl sm:text-4xl font-extrabold text-stone-900 tracking-tight">네이버 플레이스 기준 대표 상차림</h2>
+        </div>
+        <p class="mt-4 md:mt-0 text-stone-500 font-semibold text-sm max-w-sm">
+          * 정성을 가득 담아 주문 즉시 즉석 조리하며, 반찬은 놋그릇에 정갈하게 제공됩니다.
+        </p>
+      </div>
+
+      <!-- 메뉴 그리드 (네이버 플레이스 공식 메뉴 8종) -->
+      <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+        
+        <!-- 1. 제육쌈밥정식 -->
+        <div class="bg-brand-cream rounded-3xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300 border border-stone-200/40 flex flex-col group" data-aos="fade-up" data-aos-delay="100">
+          <div class="h-48 overflow-hidden relative">
+            <img src="./images/제육쌈밥정식(2인).jpg" 
+                 onerror="handleMenuImageError(this, '제육쌈밥정식(2인)', 'https://images.unsplash.com/photo-1598515214211-89d3c73ae83b?auto=format&fit=crop&w=600&q=80')" 
+                 alt="제육쌈밥정식" 
+                 class="w-full h-full object-cover group-hover:scale-110 duration-500">
+            <span class="absolute top-4 left-4 bg-red-600 text-white font-bold text-xs px-3 py-1 rounded-full shadow">인기 메뉴</span>
+          </div>
+          <div class="p-6 flex flex-col flex-grow">
+            <h3 class="text-lg font-bold text-stone-900 mb-2 flex items-center justify-between">
+              <span>제육쌈밥정식 <span class="text-xs text-stone-500 font-normal">(2인)</span></span>
+              <span class="text-base font-extrabold text-brand-darkgreen">35,000원</span>
+            </h3>
+            <p class="text-stone-600 text-xs leading-relaxed mb-4 flex-grow">
+              은은하게 감도는 불향과 중독성 강한 매콤달콤 제육볶음! 직접 재배한 아삭하고 부드러운 무농약 쌈채소와 뚝배기 된장찌개가 한 상에 세팅됩니다.
+            </p>
+            <div class="border-t border-stone-200/70 pt-3 flex items-center justify-between mt-auto">
+              <span class="text-[10px] font-semibold text-brand-darkgreen"><i class="fa-solid fa-leaf"></i> 직접 수확 쌈채소 무제한</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- 2. 고등어조림정식 -->
+        <div class="bg-brand-cream rounded-3xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300 border border-stone-200/40 flex flex-col group" data-aos="fade-up" data-aos-delay="200">
+          <div class="h-48 overflow-hidden relative">
+            <img src="./images/고등어조림정식(2인).jpg" 
+                 onerror="handleMenuImageError(this, '고등어조림정식(2인)', 'https://images.unsplash.com/photo-1583085001255-a18e25354940?auto=format&fit=crop&w=600&q=80')" 
+                 alt="고등어조림정식" 
+                 class="w-full h-full object-cover group-hover:scale-110 duration-500">
+            <span class="absolute top-4 left-4 bg-brand-darkgreen text-white font-bold text-xs px-3 py-1 rounded-full shadow">추천</span>
+          </div>
+          <div class="p-6 flex flex-col flex-grow">
+            <h3 class="text-lg font-bold text-stone-900 mb-2 flex items-center justify-between">
+              <span>고등어조림정식 <span class="text-xs text-stone-500 font-normal">(2인)</span></span>
+              <span class="text-base font-extrabold text-brand-darkgreen">35,000원</span>
+            </h3>
+            <p class="text-stone-600 text-xs leading-relaxed mb-4 flex-grow">
+              깊고 칼칼한 맛이 살아있는 매콤 소스에 두툼한 제주산 고등어와 큼직한 무를 달콤하게 졸여냈습니다. 입에 착 감기는 밥도둑 대표 조림 요리입니다.
+            </p>
+            <div class="border-t border-stone-200/70 pt-3 flex items-center justify-between mt-auto">
+              <span class="text-[10px] font-semibold text-stone-500">공기밥 & 된장찌개 기본 제공</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- 3. 고등어구이 정식 -->
+        <div class="bg-brand-cream rounded-3xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300 border border-stone-200/40 flex flex-col group" data-aos="fade-up" data-aos-delay="300">
+          <div class="h-48 overflow-hidden relative">
+            <img src="./images/고등어구이 정식.jpg" 
+                 onerror="handleMenuImageError(this, '고등어구이 정식', 'https://images.unsplash.com/photo-1519708227418-c8fd9a32b7a2?auto=format&fit=crop&w=600&q=80')" 
+                 alt="고등어구이 정식" 
+                 class="w-full h-full object-cover group-hover:scale-110 duration-500">
+          </div>
+          <div class="p-6 flex flex-col flex-grow">
+            <h3 class="text-lg font-bold text-stone-900 mb-2 flex items-center justify-between">
+              <span>고등어구이 정식</span>
+              <span class="text-base font-extrabold text-brand-darkgreen">35,000원</span>
+            </h3>
+            <p class="text-stone-600 text-xs leading-relaxed mb-4 flex-grow">
+              살이 꽉 찬 통통한 고등어를 오븐 화덕에서 겉은 바삭하고 속은 촉촉하게 한 조각 비린내 없이 정성스레 구워냈습니다. (※ 메뉴판 1인 기준 기재)
+            </p>
+            <div class="border-t border-stone-200/70 pt-3 flex items-center justify-between mt-auto">
+              <span class="text-[10px] font-semibold text-stone-500">정갈한 집밥 찬 5종 세트</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- 4. 멜쌈밥정식 -->
+        <div class="bg-brand-cream rounded-3xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300 border border-stone-200/40 flex flex-col group" data-aos="fade-up" data-aos-delay="400">
+          <div class="h-48 overflow-hidden relative">
+            <img src="./images/멜쌈밥정식(2인).jpg" 
+                 onerror="handleMenuImageError(this, '멜쌈밥정식(2인)', 'https://images.unsplash.com/photo-1547592180-85f173990554?auto=format&fit=crop&w=600&q=80')" 
+                 alt="멜쌈밥정식" 
+                 class="w-full h-full object-cover group-hover:scale-110 duration-500">
+            <span class="absolute top-4 left-4 bg-brand-wood text-white font-bold text-xs px-3 py-1 rounded-full shadow">제주 별미</span>
+          </div>
+          <div class="p-6 flex flex-col flex-grow">
+            <h3 class="text-lg font-bold text-stone-900 mb-2 flex items-center justify-between">
+              <span>멜쌈밥정식 <span class="text-xs text-stone-500 font-normal">(2인)</span></span>
+              <span class="text-base font-extrabold text-brand-darkgreen">35,000원</span>
+            </h3>
+            <p class="text-stone-600 text-xs leading-relaxed mb-4 flex-grow">
+              제주 로컬 향토의 숨은 진미! 신선하고 통통한 제주산 멜(멸치)을 자작하고 구수하게 졸여내어 직접 재배한 모둠 쌈채소에 듬뿍 얹어 즐기는 향토식 쌈밥입니다.
+            </p>
+            <div class="border-t border-stone-200/70 pt-3 flex items-center justify-between mt-auto">
+              <span class="text-[10px] font-semibold text-brand-darkgreen">로컬 매니아층 강력 추천</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- 5. 전복해물뚝배기 -->
+        <div class="bg-brand-cream rounded-3xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300 border border-stone-200/40 flex flex-col group" data-aos="fade-up" data-aos-delay="100">
+          <div class="h-48 overflow-hidden relative">
+            <img src="./images/전복해물뚝배기.jpg" 
+                 onerror="handleMenuImageError(this, '전복해물뚝배기', 'https://images.unsplash.com/photo-1626082927389-6cd097cdc6ec?auto=format&fit=crop&w=600&q=80')" 
+                 alt="전복해물뚝배기" 
+                 class="w-full h-full object-cover group-hover:scale-110 duration-500">
+          </div>
+          <div class="p-6 flex flex-col flex-grow">
+            <h3 class="text-lg font-bold text-stone-900 mb-2 flex items-center justify-between">
+              <span>전복해물뚝배기</span>
+              <span class="text-base font-extrabold text-brand-darkgreen">18,000원</span>
+            </h3>
+            <p class="text-stone-600 text-xs leading-relaxed mb-4 flex-grow">
+              꿈틀거리는 싱싱한 제주 전복과 꽃게, 딱새우, 조개 등 모둠 해산물이 듬뿍 담겨 시원하고 깊은 천연 국물 맛을 자랑하는 얼큰 개운한 대표 뚝배기 요리입니다.
+            </p>
+            <div class="border-t border-stone-200/70 pt-3 flex items-center justify-between mt-auto">
+              <span class="text-[10px] font-semibold text-stone-500">현지 해녀 직송 신선 전복</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- 6. 보말칼국수 -->
+        <div class="bg-brand-cream rounded-3xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300 border border-stone-200/40 flex flex-col group" data-aos="fade-up" data-aos-delay="200">
+          <div class="h-48 overflow-hidden relative">
+            <img src="./images/보말칼국수.jpg" 
+                 onerror="handleMenuImageError(this, '보말칼국수', 'https://images.unsplash.com/photo-1569718212165-3a8278d5f624?auto=format&fit=crop&w=600&q=80')" 
+                 alt="보말칼국수" 
+                 class="w-full h-full object-cover group-hover:scale-110 duration-500">
+          </div>
+          <div class="p-6 flex flex-col flex-grow">
+            <h3 class="text-lg font-bold text-stone-900 mb-2 flex items-center justify-between">
+              <span>보말칼국수</span>
+              <span class="text-base font-extrabold text-brand-darkgreen">12,000원</span>
+            </h3>
+            <p class="text-stone-600 text-xs leading-relaxed mb-4 flex-grow">
+              제주 청정 해역의 영양 가득한 미역과 갈지 않고 굵기 그대로를 보존한 굵직한 생보말이 아낌없이 들어가 감칠맛이 극대화된 진국 국수입니다.
+            </p>
+            <div class="border-t border-stone-200/70 pt-3 flex items-center justify-between mt-auto">
+              <span class="text-[10px] font-semibold text-stone-500">성인 단골 선호 1위 칼국수</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- 7. 보말죽 -->
+        <div class="bg-brand-cream rounded-3xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300 border border-stone-200/40 flex flex-col group" data-aos="fade-up" data-aos-delay="300">
+          <div class="h-48 overflow-hidden relative">
+            <img src="./images/보말죽.jpg" 
+                 onerror="handleMenuImageError(this, '보말죽', 'https://images.unsplash.com/photo-1607532941433-304659e8198a?auto=format&fit=crop&w=600&q=80')" 
+                 alt="보말죽" 
+                 class="w-full h-full object-cover group-hover:scale-110 duration-500">
+          </div>
+          <div class="p-6 flex flex-col flex-grow">
+            <h3 class="text-lg font-bold text-stone-900 mb-2 flex items-center justify-between">
+              <span>보말죽</span>
+              <span class="text-base font-extrabold text-brand-darkgreen">15,000원</span>
+            </h3>
+            <p class="text-stone-600 text-xs leading-relaxed mb-4 flex-grow">
+              보말 내장을 한데 모아 진하고 고소하게 다져내어 참기름 향 솔솔 풍기며 아침 속을 편하게 채워주는 영양 가득 웰빙 보말죽입니다.
+            </p>
+            <div class="border-t border-stone-200/70 pt-3 flex items-center justify-between mt-auto">
+              <span class="text-[10px] font-semibold text-stone-500">아침 식사 및 해장 추천</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- 8. 옥돔구이 -->
+        <div class="bg-brand-cream rounded-3xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300 border border-stone-200/40 flex flex-col group" data-aos="fade-up" data-aos-delay="400">
+          <div class="h-48 overflow-hidden relative">
+            <img src="./images/옥돔구이.jpg" 
+                 onerror="handleMenuImageError(this, '옥돔구이', 'https://images.unsplash.com/photo-1534482421-64566f976cfa?auto=format&fit=crop&w=600&q=80')" 
+                 alt="옥돔구이" 
+                 class="w-full h-full object-cover group-hover:scale-110 duration-500">
+          </div>
+          <div class="p-6 flex flex-col flex-grow">
+            <h3 class="text-lg font-bold text-stone-900 mb-2 flex items-center justify-between">
+              <span>옥돔구이</span>
+              <span class="text-base font-extrabold text-brand-darkgreen">40,000원</span>
+            </h3>
+            <p class="text-stone-600 text-xs leading-relaxed mb-4 flex-grow">
+              최고급 품질의 귀한 제주산 옥돔을 정성스레 손질하여 비린내 없이 겉은 노릇노릇하고 속은 쫄깃 담백하게 구워낸 제주 향토 별미 구이입니다.
+            </p>
+            <div class="border-t border-stone-200/70 pt-3 flex items-center justify-between mt-auto">
+              <span class="text-[10px] font-semibold text-stone-500">고품격 제주 잔치상 요리</span>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- 추가 메뉴 영역 (펼쳐보기 클릭 시 노출) -->
+      <div id="extra-menu-container" class="grid md:grid-cols-2 lg:grid-cols-4 gap-8 mt-8 hidden opacity-0 translate-y-4 transition-all duration-300 ease-out">
+        
+        <!-- 9. 성게미역국 -->
+        <div class="bg-brand-cream rounded-3xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300 border border-stone-200/40 flex flex-col group">
+          <div class="h-48 overflow-hidden relative">
+            <img src="./images/성게미역국.png" 
+                 onerror="handleMenuImageError(this, '성게미역국', 'https://images.unsplash.com/photo-1546069901-ba9599a7e63c?auto=format&fit=crop&w=600&q=80')" 
+                 alt="성게미역국" 
+                 class="w-full h-full object-cover group-hover:scale-110 duration-500">
+          </div>
+          <div class="p-6 flex flex-col flex-grow">
+            <h3 class="text-lg font-bold text-stone-900 mb-2 flex items-center justify-between">
+              <span>성게미역국</span>
+              <span class="text-base font-extrabold text-brand-darkgreen">18,000원</span>
+            </h3>
+            <p class="text-stone-600 text-xs leading-relaxed mb-4 flex-grow">
+              귀한 국산 성게알과 청정 제주 미역이 어우러져, 깊고 맑은 바다의 감칠맛을 온전히 뿜어내는 보양식 국 요리입니다.
+            </p>
+            <div class="border-t border-stone-200/70 pt-3 flex items-center justify-between mt-auto">
+              <span class="text-[10px] font-semibold text-stone-500">고소하고 담백한 진한 보양 국물</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- 10. 전복죽 -->
+        <div class="bg-brand-cream rounded-3xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300 border border-stone-200/40 flex flex-col group">
+          <div class="h-48 overflow-hidden relative">
+            <img src="./images/전복죽.png" 
+                 onerror="handleMenuImageError(this, '전복죽', 'https://images.unsplash.com/photo-1534422298391-e4f8c172dddb?auto=format&fit=crop&w=600&q=80')" 
+                 alt="전복죽" 
+                 class="w-full h-full object-cover group-hover:scale-110 duration-500">
+          </div>
+          <div class="p-6 flex flex-col flex-grow">
+            <h3 class="text-lg font-bold text-stone-900 mb-2 flex items-center justify-between">
+              <span>전복죽</span>
+              <span class="text-base font-extrabold text-brand-darkgreen">15,000원</span>
+            </h3>
+            <p class="text-stone-600 text-xs leading-relaxed mb-4 flex-grow">
+              싱싱한 활전복 내장을 고소하게 다져 푹 끓여내어 깊은 바다향과 진한 풍미가 으뜸인 고품격 웰빙 전복죽입니다.
+            </p>
+            <div class="border-t border-stone-200/70 pt-3 flex items-center justify-between mt-auto">
+              <span class="text-[10px] font-semibold text-stone-500">원기 회복에 최고인 영양 죽</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- 11. 김치찌개 -->
+        <div class="bg-brand-cream rounded-3xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300 border border-stone-200/40 flex flex-col group">
+          <div class="h-48 overflow-hidden relative">
+            <img src="./images/김치찌개.png" 
+                 onerror="handleMenuImageError(this, '김치찌개', 'https://images.unsplash.com/photo-1627308595229-7830a5c91f9f?auto=format&fit=crop&w=600&q=80')" 
+                 alt="김치찌개" 
+                 class="w-full h-full object-cover group-hover:scale-110 duration-500">
+          </div>
+          <div class="p-6 flex flex-col flex-grow">
+            <h3 class="text-lg font-bold text-stone-900 mb-2 flex items-center justify-between">
+              <span>김치찌개</span>
+              <span class="text-base font-extrabold text-brand-darkgreen">10,000원</span>
+            </h3>
+            <p class="text-stone-600 text-xs leading-relaxed mb-4 flex-grow">
+              잘 익은 묵은지와 두툼한 돼지고기를 듬뿍 넣어 얼큰하고 칼칼한 국물 맛이 일품인 대표 밥도둑 찌개입니다.
+            </p>
+            <div class="border-t border-stone-200/70 pt-3 flex items-center justify-between mt-auto">
+              <span class="text-[10px] font-semibold text-stone-500">24시간 든든한 소울푸드</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- 12. 된장찌개 -->
+        <div class="bg-brand-cream rounded-3xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300 border border-stone-200/40 flex flex-col group">
+          <div class="h-48 overflow-hidden relative">
+            <img src="./images/된장찌개.png" 
+                 onerror="handleMenuImageError(this, '된장찌개', 'https://images.unsplash.com/photo-1589301760014-d929f3979dbc?auto=format&fit=crop&w=600&q=80')" 
+                 alt="된장찌개" 
+                 class="w-full h-full object-cover group-hover:scale-110 duration-500">
+          </div>
+          <div class="p-6 flex flex-col flex-grow">
+            <h3 class="text-lg font-bold text-stone-900 mb-2 flex items-center justify-between">
+              <span>된장찌개</span>
+              <span class="text-base font-extrabold text-brand-darkgreen">10,000원</span>
+            </h3>
+            <p class="text-stone-600 text-xs leading-relaxed mb-4 flex-grow">
+              구수한 시골식 된장에 두부, 호박, 조개 등 각종 야채와 해물을 듬뿍 넣어 자작하게 끓여낸 정갈한 찌개입니다.
+            </p>
+            <div class="border-t border-stone-200/70 pt-3 flex items-center justify-between mt-auto">
+              <span class="text-[10px] font-semibold text-stone-500">어머니 손맛의 구수하고 시원한 찌개</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- 13. 계란말이 -->
+        <div class="bg-brand-cream rounded-3xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300 border border-stone-200/40 flex flex-col group">
+          <div class="h-48 overflow-hidden relative">
+            <img src="./images/계란말이.png" 
+                 onerror="handleMenuImageError(this, '계란말이', 'https://images.unsplash.com/photo-1600891964599-f61ba0e24092?auto=format&fit=crop&w=600&q=80')" 
+                 alt="계란말이" 
+                 class="w-full h-full object-cover group-hover:scale-110 duration-500">
+          </div>
+          <div class="p-6 flex flex-col flex-grow">
+            <h3 class="text-lg font-bold text-stone-900 mb-2 flex items-center justify-between">
+              <span>계란말이</span>
+              <span class="text-base font-extrabold text-brand-darkgreen">10,000원</span>
+            </h3>
+            <p class="text-stone-600 text-xs leading-relaxed mb-4 flex-grow">
+              신선한 야채가 쏙쏙 박힌 두툼하고 폭신폭신한 왕계란말이! 밥반찬으로도, 술안주로도 최고의 인기를 자랑합니다.
+            </p>
+            <div class="border-t border-stone-200/70 pt-3 flex items-center justify-between mt-auto">
+              <span class="text-[10px] font-semibold text-stone-500">갓 부쳐내어 부드럽고 촉촉한 식감</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- 14. 감자전 -->
+        <div class="bg-brand-cream rounded-3xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300 border border-stone-200/40 flex flex-col group">
+          <div class="h-48 overflow-hidden relative">
+            <img src="./images/감자전.png" 
+                 onerror="handleMenuImageError(this, '감자전', 'https://images.unsplash.com/photo-1599487488170-d11ec9c172f0?auto=format&fit=crop&w=600&q=80')" 
+                 alt="감자전" 
+                 class="w-full h-full object-cover group-hover:scale-110 duration-500">
+          </div>
+          <div class="p-6 flex flex-col flex-grow">
+            <h3 class="text-lg font-bold text-stone-900 mb-2 flex items-center justify-between">
+              <span>감자전</span>
+              <span class="text-base font-extrabold text-brand-darkgreen">25,000원</span>
+            </h3>
+            <p class="text-stone-600 text-xs leading-relaxed mb-4 flex-grow">
+              100% 생감자를 강판에 갈아서 겉은 과자처럼 바삭바삭하고 속은 쫄깃하게 구워내어 고소함이 으뜸인 감자전입니다.
+            </p>
+            <div class="border-t border-stone-200/70 pt-3 flex items-center justify-between mt-auto">
+              <span class="text-[10px] font-semibold text-stone-500">막걸리와 환상의 앙상블을 이루는 맛</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- 15. 낚지볶음 -->
+        <div class="bg-brand-cream rounded-3xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300 border border-stone-200/40 flex flex-col group">
+          <div class="h-48 overflow-hidden relative">
+            <img src="./images/낚지볶음.png" 
+                 onerror="handleMenuImageError(this, '낚지볶음', 'https://images.unsplash.com/photo-1563379091339-03b21ab4a4f8?auto=format&fit=crop&w=600&q=80')" 
+                 alt="낚지볶음" 
+                 class="w-full h-full object-cover group-hover:scale-110 duration-500">
+          </div>
+          <div class="p-6 flex flex-col flex-grow">
+            <h3 class="text-lg font-bold text-stone-900 mb-2 flex items-center justify-between">
+              <span>낚지볶음</span>
+              <span class="text-base font-extrabold text-brand-darkgreen">35,000원</span>
+            </h3>
+            <p class="text-stone-600 text-xs leading-relaxed mb-4 flex-grow">
+              통통하고 실한 낙지를 특제 양념 소스로 센 화력에 빠르게 볶아내어, 기분 좋은 화끈한 매운맛을 자랑합니다.
+            </p>
+            <div class="border-t border-stone-200/70 pt-3 flex items-center justify-between mt-auto">
+              <span class="text-[10px] font-semibold text-stone-500">쫄깃한 소면 사리 기본 매칭</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- 16. 연포탕 -->
+        <div class="bg-brand-cream rounded-3xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300 border border-stone-200/40 flex flex-col group">
+          <div class="h-48 overflow-hidden relative">
+            <img src="./images/연포탕.png" 
+                 onerror="handleMenuImageError(this, '연포탕', 'https://images.unsplash.com/photo-1547592180-85f173990554?auto=format&fit=crop&w=600&q=80')" 
+                 alt="연포탕" 
+                 class="w-full h-full object-cover group-hover:scale-110 duration-500">
+          </div>
+          <div class="p-6 flex flex-col flex-grow">
+            <h3 class="text-lg font-bold text-stone-900 mb-2 flex items-center justify-between">
+              <span>연포탕</span>
+              <span class="text-base font-extrabold text-brand-darkgreen">40,000원</span>
+            </h3>
+            <p class="text-stone-600 text-xs leading-relaxed mb-4 flex-grow">
+              살아있는 활낙지와 향긋한 미나리, 야채를 넣고 맑고 시원하게 끓여내어 보양과 해장에 극상인 국물 요리입니다.
+            </p>
+            <div class="border-t border-stone-200/70 pt-3 flex items-center justify-between mt-auto">
+              <span class="text-[10px] font-semibold text-stone-500">깔끔하고 개운하게 속을 달래는 맑은 탕</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- 17. 전복회 -->
+        <div class="bg-brand-cream rounded-3xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300 border border-stone-200/40 flex flex-col group">
+          <div class="h-48 overflow-hidden relative">
+            <img src="./images/전복회.png" 
+                 onerror="handleMenuImageError(this, '전복회', 'https://images.unsplash.com/photo-1615141982883-c7ad0e69fd62?auto=format&fit=crop&w=600&q=80')" 
+                 alt="전복회" 
+                 class="w-full h-full object-cover group-hover:scale-110 duration-500">
+          </div>
+          <div class="p-6 flex flex-col flex-grow">
+            <h3 class="text-lg font-bold text-stone-900 mb-2 flex items-center justify-between">
+              <span>전복회</span>
+              <span class="text-base font-extrabold text-brand-darkgreen">70,000원</span>
+            </h3>
+            <p class="text-stone-600 text-xs leading-relaxed mb-4 flex-grow">
+              식당 수족관에서 활발히 움직이는 생전복을 주문 즉시 꺼내어 회로 썰어내어, 오독오독 씹히는 극상의 바다 싱그러움이 특징입니다.
+            </p>
+            <div class="border-t border-stone-200/70 pt-3 flex items-center justify-between mt-auto">
+              <span class="text-[10px] font-semibold text-stone-500">살아있는 생전복회 최고의 신선도</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- 18. 산낙지 -->
+        <div class="bg-brand-cream rounded-3xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300 border border-stone-200/40 flex flex-col group">
+          <div class="h-48 overflow-hidden relative">
+            <img src="./images/산낙지.png" 
+                 onerror="handleMenuImageError(this, '산낙지', 'https://images.unsplash.com/photo-1534604973900-c43ab4c2e0ab?auto=format&fit=crop&w=600&q=80')" 
+                 alt="산낙지" 
+                 class="w-full h-full object-cover group-hover:scale-110 duration-500">
+          </div>
+          <div class="p-6 flex flex-col flex-grow">
+            <h3 class="text-lg font-bold text-stone-900 mb-2 flex items-center justify-between">
+              <span>산낙지</span>
+              <span class="text-base font-extrabold text-brand-darkgreen">35,000원</span>
+            </h3>
+            <p class="text-stone-600 text-xs leading-relaxed mb-4 flex-grow">
+              팔딱팔딱 힘 있는 산낙지를 먹기 좋은 크기로 탕탕 썰어 참기름과 깨를 얹어내어 싱그럽고 고소한 술안주 탕탕이 요리입니다.
+            </p>
+            <div class="border-t border-stone-200/70 pt-3 flex items-center justify-between mt-auto">
+              <span class="text-[10px] font-semibold text-stone-500">남녀노소 사랑받는 고소한 낙지 탕탕이</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- 19. 갈치구이 -->
+        <div class="bg-brand-cream rounded-3xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300 border border-stone-200/40 flex flex-col group">
+          <div class="h-48 overflow-hidden relative">
+            <img src="./images/갈치구이.png" 
+                 onerror="handleMenuImageError(this, '갈치구이', 'https://images.unsplash.com/photo-1608897013039-887f21d8c804?auto=format&fit=crop&w=600&q=80')" 
+                 alt="갈치구이" 
+                 class="w-full h-full object-cover group-hover:scale-110 duration-500">
+          </div>
+          <div class="p-6 flex flex-col flex-grow">
+            <h3 class="text-lg font-bold text-stone-900 mb-2 flex items-center justify-between">
+              <span>갈치구이</span>
+              <span class="text-base font-extrabold text-brand-darkgreen">80,000원</span>
+            </h3>
+            <p class="text-stone-600 text-xs leading-relaxed mb-4 flex-grow">
+              제주 청정 바다의 은갈치만을 선별하여, 겉은 바삭하고 촉촉한 흰 살 생선 본연의 단맛과 풍미를 고스란히 느낄 수 있습니다.
+            </p>
+            <div class="border-t border-stone-200/70 pt-3 flex items-center justify-between mt-auto">
+              <span class="text-[10px] font-semibold text-stone-500">제주산 은갈치 특대 크기</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- 20. 갈치조림 -->
+        <div class="bg-brand-cream rounded-3xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300 border border-stone-200/40 flex flex-col group">
+          <div class="h-48 overflow-hidden relative">
+            <img src="./images/갈치조림.png" 
+                 onerror="handleMenuImageError(this, '갈치조림', 'https://images.unsplash.com/photo-1583085001255-a18e25354940?auto=format&fit=crop&w=600&q=80')" 
+                 alt="갈치조림" 
+                 class="w-full h-full object-cover group-hover:scale-110 duration-500">
+          </div>
+          <div class="p-6 flex flex-col flex-grow">
+            <h3 class="text-lg font-bold text-stone-900 mb-2 flex items-center justify-between">
+              <span>갈치조림</span>
+              <span class="text-base font-extrabold text-brand-darkgreen">80,000원</span>
+            </h3>
+            <p class="text-stone-600 text-xs leading-relaxed mb-4 flex-grow">
+              매콤하고 중독성 강한 조림 양념장에 부드러운 은갈치를 큼직한 무와 감자와 함께 오랜 시간 정성스레 졸여낸 정통 조림입니다.
+            </p>
+            <div class="border-t border-stone-200/70 pt-3 flex items-center justify-between mt-auto">
+              <span class="text-[10px] font-semibold text-stone-500">제주 은갈치 대표 조림 명가</span>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- 전체 메뉴 펼쳐보기 / 접기 컨트롤 버튼 -->
+      <div class="mt-12 text-center" data-aos="fade-up">
+        <button id="toggle-menu-btn" onclick="toggleExtraMenu()" class="inline-flex items-center gap-2.5 text-sm font-bold text-emerald-700 hover:text-white bg-emerald-50 hover:bg-emerald-600 px-8 py-4 rounded-full border border-emerald-300/80 transition-all duration-300 shadow-md hover:scale-105">
+          <i class="fa-solid fa-utensils"></i> <span id="toggle-menu-text">전체 메뉴 펼쳐보기 (20개 전체)</span> <i id="toggle-menu-icon" class="fa-solid fa-chevron-down text-xs"></i>
+        </button>
+      </div>
+
+      <!-- 메뉴 추가 안내 탭 -->
+      <div class="mt-16 bg-brand-cream/80 rounded-3xl p-6 sm:p-10 border border-stone-200/50" data-aos="fade-up">
+        <div class="grid md:grid-cols-2 gap-8 items-center">
+          <div class="flex items-start gap-4">
+            <div class="w-12 h-12 rounded-full bg-brand-darkgreen text-white flex items-center justify-center text-xl shrink-0">
+              <i class="fa-solid fa-circle-exclamation"></i>
+            </div>
+            <div>
+              <h4 class="font-bold text-stone-900 text-base">향토음식점 정기 찬 안내</h4>
+              <p class="text-stone-500 text-xs mt-1">밑반찬은 고급 놋그릇에 정갈하게 차려지며, 당일 아침 무쳐낸 오뎅볶음, 콩나물무침, 멸치볶음, 무생채 등 자극적이지 않고 건강한 집밥 반찬을 제공합니다.</p>
+            </div>
+          </div>
+          <div class="flex items-start gap-4">
+            <div class="w-12 h-12 rounded-full bg-brand-wood text-white flex items-center justify-center text-xl shrink-0">
+              <i class="fa-solid fa-store"></i>
+            </div>
+            <div>
+              <h4 class="font-bold text-stone-900 text-base">다양한 한식 및 식사 코너</h4>
+              <p class="text-stone-500 text-xs mt-1">이 외에도 전복죽(15,000원), 성게미역국(18,000원), 된장/김치찌개(10,000원), 계란말이, 갈치구이/조림 및 산낙지, 연포탕 등 다양한 안주 식사 코너가 준비되어 있습니다.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+
+  <!-- ========================================== -->
+  <!-- <!-- [5] 고객 후기 영역 --> -->
+  <!-- ========================================== -->
+  <section id="reviews" class="py-20 sm:py-28 bg-brand-cream border-t border-stone-200">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      
+      <!-- 헤더 -->
+      <div class="text-center max-w-3xl mx-auto mb-16" data-aos="fade-up">
+        <span class="text-sm font-bold text-brand-darkgreen uppercase tracking-widest block mb-3">CUSTOMER REVIEWS</span>
+        <h2 class="text-3xl font-extrabold text-stone-900 tracking-tight mb-4">방문객들이 증명하는 나니와의 평점</h2>
+        
+        <!-- 별점 요약 카드 -->
+        <div class="flex flex-col sm:flex-row items-center justify-center gap-4 mt-6">
+          <div class="flex items-center gap-1.5 text-yellow-500 text-2xl">
+            <i class="fa-solid fa-star"></i>
+            <i class="fa-solid fa-star"></i>
+            <i class="fa-solid fa-star"></i>
+            <i class="fa-solid fa-star"></i>
+            <i class="fa-solid fa-star-half-stroke"></i>
+          </div>
+          <div class="text-stone-600 text-sm font-medium">
+            네이버 한식 평점 <strong class="text-stone-900 text-lg font-bold">4.28</strong>/5.00 (리뷰 <strong class="text-stone-900 font-bold">751</strong>건)
+          </div>
+        </div>
+      </div>
+
+      <!-- 핵심 키워드 리스트 -->
+      <div class="grid grid-cols-2 md:grid-cols-5 gap-4 max-w-5xl mx-auto mb-16" data-aos="fade-up" data-aos-delay="100">
+        <div class="bg-white px-5 py-4 rounded-2xl text-center shadow-xs border border-stone-200/50">
+          <span class="block text-2xl font-bold text-brand-darkgreen mb-1">293명</span>
+          <span class="text-xs font-semibold text-stone-500">"음식이 맛있어요"</span>
+        </div>
+        <div class="bg-white px-5 py-4 rounded-2xl text-center shadow-xs border border-stone-200/50">
+          <span class="block text-2xl font-bold text-brand-wood mb-1">150명</span>
+          <span class="text-xs font-semibold text-stone-500">"친절해요"</span>
+        </div>
+        <div class="bg-white px-5 py-4 rounded-2xl text-center shadow-xs border border-stone-200/50">
+          <span class="block text-2xl font-bold text-emerald-700 mb-1">131명</span>
+          <span class="text-xs font-semibold text-stone-500">"재료가 신선해요"</span>
+        </div>
+        <div class="bg-white px-5 py-4 rounded-2xl text-center shadow-xs border border-stone-200/50">
+          <span class="block text-2xl font-bold text-stone-700 mb-1">107명</span>
+          <span class="text-xs font-semibold text-stone-500">"매장이 청결해요"</span>
+        </div>
+        <div class="bg-white px-5 py-4 rounded-2xl text-center shadow-xs border border-stone-200/50 col-span-2 md:col-span-1">
+          <span class="block text-2xl font-bold text-yellow-600 mb-1">104명</span>
+          <span class="text-xs font-semibold text-stone-500">"가성비가 좋아요"</span>
+        </div>
+      </div>
+
+      <!-- 생생 리뷰 그리드 -->
+      <div class="grid md:grid-cols-3 gap-8">
+        
+        <!-- 후기 1 -->
+        <div class="bg-white p-8 rounded-3xl shadow-sm border border-stone-200/50 flex flex-col justify-between" data-aos="fade-up" data-aos-delay="100">
+          <div>
+            <div class="flex items-center gap-1.5 text-yellow-500 text-sm mb-4">
+              <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+            </div>
+            <p class="text-stone-700 text-sm leading-relaxed italic mb-6">
+              "채소들은 주인장님께서 직접 무농약으로 재배한 것들이라고 하니 너무 안심이 돼요. 쌈 채소가 엄청 부드럽고 신선해요! 자극적이지 않고 정갈한 반찬들은 꼭 엄마가 해주는 집밥 먹는 기분을 느끼게 해 줍니다."
+            </p>
+          </div>
+          <div class="flex items-center justify-between border-t border-stone-100 pt-4 mt-auto">
+            <span class="text-xs font-bold text-stone-900">아리아리 (25.08.13 방문)</span>
+            <span class="text-xs bg-stone-100 text-stone-500 px-2 py-0.5 rounded-full font-medium">영수증 인증</span>
+          </div>
+        </div>
+
+        <!-- 후기 2 -->
+        <div class="bg-white p-8 rounded-3xl shadow-sm border border-stone-200/50 flex flex-col justify-between" data-aos="fade-up" data-aos-delay="200">
+          <div>
+            <div class="flex items-center gap-1.5 text-yellow-500 text-sm mb-4">
+              <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+            </div>
+            <p class="text-stone-700 text-sm leading-relaxed italic mb-6">
+              "메인인 제육볶음 양념이 전혀 자극적이지 않고 딱 밥도둑 스타일입니다! 불향이 솔솔 나서 정말 입에 쫙 감기더라구요. 같이 나오는 된장찌개도 옛날 시골 집된장처럼 구수하고 깊어 한 그릇 뚝딱 비웠습니다."
+            </p>
+          </div>
+          <div class="flex items-center justify-between border-t border-stone-100 pt-4 mt-auto">
+            <span class="text-xs font-bold text-stone-900">galzimao 갈지마오 (25.11.10 방문)</span>
+            <span class="text-xs bg-stone-100 text-stone-500 px-2 py-0.5 rounded-full font-medium">단골고객</span>
+          </div>
+        </div>
+
+        <!-- 후기 3 -->
+        <div class="bg-white p-8 rounded-3xl shadow-sm border border-stone-200/50 flex flex-col justify-between" data-aos="fade-up" data-aos-delay="300">
+          <div>
+            <div class="flex items-center gap-1.5 text-yellow-500 text-sm mb-4">
+              <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+            </div>
+            <p class="text-stone-700 text-sm leading-relaxed italic mb-6">
+              "제주공항 가기 전 마지막 한 끼로 고등어구이정식 먹었어요. 큼직한 고등어가 비린내 하나도 없이 바삭하고 속 촉촉하게 잘 구워졌어요. 반찬도 가짓수가 푸짐하게 나오고 사장님도 너무 친절하셔서 다음에 무조건 재방문 예정입니다."
+            </p>
+          </div>
+          <div class="flex items-center justify-between border-t border-stone-100 pt-4 mt-auto">
+            <span class="text-xs font-bold text-stone-900">랄라라라라라 (25.12.06 방문)</span>
+            <span class="text-xs bg-stone-100 text-stone-500 px-2 py-0.5 rounded-full font-medium">영수증 인증</span>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+  </section>
+
+
+  <!-- ========================================== -->
+  <!-- <!-- [6] 오시는 길 및 안내 영역 --> -->
+  <!-- ========================================== -->
+  <section id="location" class="py-20 sm:py-28 bg-white">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      
+      <div class="grid lg:grid-cols-12 gap-12 items-stretch">
+        
+        <!-- 오시는 길 상세 텍스트 -->
+        <div class="lg:col-span-5 flex flex-col justify-between" data-aos="fade-right">
+          <div>
+            <span class="text-sm font-bold text-brand-darkgreen uppercase tracking-widest block mb-3">LOCATION & INFO</span>
+            <h2 class="text-3xl font-extrabold text-stone-900 tracking-tight leading-tight mb-8">
+              제주 신라면세점 바로 뒤,<br>
+              편안한 발걸음으로 오세요
+            </h2>
+            
+            <div class="space-y-6">
+              
+              <!-- 주소 -->
+              <div class="flex items-start gap-4">
+                <div class="w-10 h-10 rounded-full bg-brand-cream text-brand-darkgreen flex items-center justify-center shrink-0 border border-stone-200/50 shadow-xs">
+                  <i class="fa-solid fa-map-pin"></i>
+                </div>
+                <div>
+                  <h4 class="font-bold text-stone-900 text-base">도로명 주소</h4>
+                  <p class="text-stone-600 text-sm mt-1">제주 제주시 연동3길 36 1층 나니와</p>
+                  <p class="text-stone-400 text-xs mt-0.5">(신제주 신라면세점 후문에서 도보 1분 거리)</p>
+                </div>
+              </div>
+
+              <!-- 영업 시간 -->
+              <div class="flex items-start gap-4">
+                <div class="w-10 h-10 rounded-full bg-brand-cream text-brand-wood flex items-center justify-center shrink-0 border border-stone-200/50 shadow-xs">
+                  <i class="fa-solid fa-clock"></i>
+                </div>
+                <div>
+                  <h4 class="font-bold text-stone-900 text-base">영업 시간</h4>
+                  <p class="text-emerald-700 font-bold text-sm mt-1">24시간 영업, 연중무휴</p>
+                  <p class="text-stone-400 text-xs mt-0.5">※ 단체 및 예약 문의는 전화 또는 네이버 예약 권장</p>
+                </div>
+              </div>
+
+              <!-- 주차 안내 -->
+              <div class="flex items-start gap-4">
+                <div class="w-10 h-10 rounded-full bg-brand-cream text-yellow-700 flex items-center justify-center shrink-0 border border-stone-200/50 shadow-xs">
+                  <i class="fa-solid fa-car"></i>
+                </div>
+                <div>
+                  <h4 class="font-bold text-stone-900 text-base">주차 정보</h4>
+                  <p class="text-stone-600 text-sm mt-1">건물 바로 옆 전용 주차장 구비 (다소 협소할 수 있습니다)</p>
+                  <p class="text-stone-500 text-xs mt-0.5">※ 전용 주차장 만차 시 식당 전면 도로변 주차 또는 도보 이동을 추천합니다.</p>
+                </div>
+              </div>
+
+            </div>
+          </div>
+
+          <!-- 전화 & 예약 바로가기 액션 영역 -->
+          <div class="mt-10 pt-8 border-t border-stone-100 flex flex-col sm:flex-row gap-4">
+            <a href="tel:064-711-3880" class="flex-1 flex items-center justify-center gap-3 bg-stone-900 hover:bg-stone-850 text-white font-bold py-3.5 rounded-xl transition-colors shadow">
+              <i class="fa-solid fa-phone"></i> 전화 문의
+            </a>
+            <a href="https://naver.me/GZDhrNz2" target="_blank" rel="noopener noreferrer" class="flex-1 flex items-center justify-center gap-3 bg-emerald-600 hover:bg-emerald-500 text-white font-bold py-3.5 rounded-xl transition-colors shadow-lg shadow-emerald-900/10">
+              <i class="fa-solid fa-map-location-dot"></i> 네이버 지도로 보기
+            </a>
+          </div>
+
+        </div>
+
+        <!-- 지도 영역 (Leaflet.js + Premium UI Wrapper) -->
+        <div class="lg:col-span-7 relative min-h-[400px] rounded-3xl overflow-hidden shadow-lg border border-stone-200" data-aos="fade-left">
+          <div id="map" class="w-full h-full min-h-[400px] z-10"></div>
+          
+          <!-- 지도 위 오버레이 카드 -->
+          <div class="absolute bottom-4 left-4 right-4 z-20 bg-white/95 backdrop-blur-sm p-4 rounded-2xl shadow-lg border border-stone-100 flex items-center justify-between gap-4 max-w-sm">
+            <div class="flex items-center gap-3">
+              <div class="w-8 h-8 rounded-full bg-brand-darkgreen flex items-center justify-center text-white text-xs font-bold shrink-0">나</div>
+              <div>
+                <h5 class="text-xs font-bold text-stone-900">나니와 향토음식점</h5>
+                <p class="text-[10px] text-stone-500 mt-0.5">제주 제주시 연동3길 36</p>
+              </div>
+            </div>
+            <a href="https://naver.me/GZDhrNz2" target="_blank" rel="noopener noreferrer" class="text-xs font-bold text-emerald-600 hover:underline shrink-0 flex items-center gap-1">
+              길찾기 <i class="fa-solid fa-arrow-up-right-from-square text-[10px]"></i>
+            </a>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+  </section>
+
+
+  <!-- ========================================== -->
+  <!-- <!-- [7] 하단 푸터 영역 --> -->
+  <!-- ========================================== -->
+  <footer class="bg-stone-900 text-stone-400 py-16 border-t border-stone-850">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      
+      <div class="grid md:grid-cols-12 gap-8 items-start mb-12">
+        <!-- 브랜드 정보 -->
+        <div class="md:col-span-5">
+          <div class="flex items-center gap-2 mb-4">
+            <div class="w-8 h-8 rounded-full bg-brand-darkgreen flex items-center justify-center text-white font-bold text-sm">나</div>
+            <span class="text-lg font-bold text-white tracking-wider">나니와</span>
+          </div>
+          <p class="text-stone-500 text-sm leading-relaxed mb-6">
+            주인장이 직접 정성으로 경작한 무농약 쌈채소와 제주의 자연을 놋그릇에 담아내는 제주 향토음식 전문 브랜드입니다. 언제나 따뜻하고 정갈한 밥상으로 모시겠습니다.
+          </p>
+          <div class="flex items-center gap-3">
+            <a href="https://naver.me/GZDhrNz2" target="_blank" rel="noopener noreferrer" class="w-10 h-10 rounded-full bg-white/5 text-white flex items-center justify-center hover:bg-emerald-600 transition-colors shadow-inner" title="네이버 플레이스">
+              <i class="fa-solid fa-map"></i>
+            </a>
+            <a href="tel:064-711-3880" class="w-10 h-10 rounded-full bg-white/5 text-white flex items-center justify-center hover:bg-brand-wood transition-colors shadow-inner" title="전화 상담">
+              <i class="fa-solid fa-phone"></i>
+            </a>
+          </div>
+        </div>
+
+        <!-- 단축 링크 -->
+        <div class="md:col-span-3">
+          <h4 class="text-white font-bold text-sm tracking-wider uppercase mb-4">메뉴 바로가기</h4>
+          <ul class="space-y-2 text-sm text-stone-500">
+            <li><a href="#about" class="hover:text-white transition-colors">브랜드 스토리</a></li>
+            <li><a href="#features" class="hover:text-white transition-colors">나니와의 고집</a></li>
+            <li><a href="#menu" class="hover:text-white transition-colors">대표 메뉴</a></li>
+            <li><a href="#reviews" class="hover:text-white transition-colors">고객 후기</a></li>
+            <li><a href="#location" class="hover:text-white transition-colors">오시는 길</a></li>
+          </ul>
+        </div>
+
+        <!-- 사업자 정보 -->
+        <div class="md:col-span-4">
+          <h4 class="text-white font-bold text-sm tracking-wider uppercase mb-4">매장 및 사업자 정보</h4>
+          <ul class="space-y-2 text-sm text-stone-500">
+            <li><span class="text-stone-400 font-semibold">대표자:</span> 나니와 대표 이모님</li>
+            <li><span class="text-stone-400 font-semibold">주소:</span> 제주 제주시 연동3길 36 1층</li>
+            <li><span class="text-stone-400 font-semibold">예약/문의:</span> <a href="tel:064-711-3880" class="hover:text-white transition-colors">064-711-3880</a></li>
+            <li><span class="text-stone-400 font-semibold">편의사항:</span> 주차, 단체석, 아기의자, 포장, 예약, 반려동물 동반 가능</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- 카피라이트 -->
+      <div class="border-t border-stone-800 pt-8 flex flex-col md:flex-row items-center justify-between text-xs text-stone-600 font-semibold">
+        <p>© 2026 나니와. All Rights Reserved. Designed for Health & Nature.</p>
+        <p class="mt-2 md:mt-0">제주 연동 신라면세점 후문 대표 24시 맛집</p>
+      </div>
+
+    </div>
+  </footer>
+
+  <!-- ========================================== -->
+  <!-- <!-- [8] 인터랙션 스크립트 영역 --> -->
+  <!-- ========================================== -->
+  <!-- AOS 라이브러리 및 설정 -->
+  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+  <script>
+    AOS.init({
+      duration: 800,
+      once: true,
+      easing: 'ease-in-out',
+    });
+  </script>
+
+  <!-- 헤더 스크롤 변화 및 모바일 드로어 제어 스크립트 -->
+  <script>
+    const header = document.getElementById('header');
+    const logoText = document.getElementById('header-logo-text');
+    const subText = document.getElementById('header-sub-text');
+    const desktopNav = document.getElementById('desktop-nav');
+    const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+    const closeDrawerBtn = document.getElementById('close-drawer-btn');
+    const mobileDrawer = document.getElementById('mobile-drawer');
+    const drawerContent = document.getElementById('drawer-content');
+
+    // 스크롤 시 헤더 디자인 변경
+    window.addEventListener('scroll', () => {
+      if (window.scrollY > 50) {
+        header.classList.remove('bg-transparent', 'py-4');
+        header.classList.add('bg-white/90', 'backdrop-blur-md', 'shadow-md', 'py-2');
+        
+        logoText.classList.remove('text-white');
+        logoText.classList.add('text-stone-900');
+        
+        if (subText) {
+          subText.classList.remove('text-stone-300', 'bg-brand-darkgreen/60', 'border-white/20');
+          subText.classList.add('text-brand-darkgreen', 'bg-brand-cream', 'border-brand-darkgreen/20');
+        }
+        
+        desktopNav.classList.remove('text-white');
+        desktopNav.classList.add('text-stone-700');
+
+        mobileMenuBtn.classList.remove('text-white');
+        mobileMenuBtn.classList.add('text-stone-850');
+      } else {
+        header.classList.remove('bg-white/90', 'backdrop-blur-md', 'shadow-md', 'py-2');
+        header.classList.add('bg-transparent', 'py-4');
+        
+        logoText.classList.remove('text-stone-900');
+        logoText.classList.add('text-white');
+        
+        if (subText) {
+          subText.classList.remove('text-brand-darkgreen', 'bg-brand-cream', 'border-brand-darkgreen/20');
+          subText.classList.add('text-stone-300', 'bg-brand-darkgreen/60', 'border-white/20');
+        }
+        
+        desktopNav.classList.remove('text-stone-700');
+        desktopNav.classList.add('text-white');
+
+        mobileMenuBtn.classList.remove('text-stone-850');
+        mobileMenuBtn.classList.add('text-white');
+      }
+    });
+
+    // 드로어 열기
+    function openDrawer() {
+      mobileDrawer.classList.remove('opacity-0', 'pointer-events-none');
+      mobileDrawer.classList.add('opacity-100');
+      drawerContent.classList.remove('translate-x-full');
+    }
+
+    // 드로어 닫기
+    function closeDrawer() {
+      mobileDrawer.classList.remove('opacity-100');
+      mobileDrawer.classList.add('opacity-0', 'pointer-events-none');
+      drawerContent.classList.add('translate-x-full');
+    }
+
+    mobileMenuBtn.addEventListener('click', openDrawer);
+    closeDrawerBtn.addEventListener('click', closeDrawer);
+    mobileDrawer.addEventListener('click', (e) => {
+      if (e.target === mobileDrawer) closeDrawer();
+    });
+
+    // 네비게이션 이동 시 드로어 자동 닫힘
+    const drawerLinks = drawerContent.querySelectorAll('nav a');
+    drawerLinks.forEach(link => {
+      link.addEventListener('click', closeDrawer);
+    });
+  </script>
+
+  <!-- 오픈스트리트맵 (Leaflet.js) 연동 스크립트 -->
+  <script>
+    // 제주시 연동 3길 36 좌표 세팅 (위도: 33.4883, 경도: 126.4916)
+    const map = L.map('map', {
+      center: [33.4883, 126.4916],
+      zoom: 16,
+      zoomControl: false // 커스텀 줌 컨트롤 가능
+    });
+
+    // 맵 타일 레이어 로드 (아름다운 세련된 지도 타일 CartoDB Positron 사용)
+    L.tileLayer('https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png', {
+      maxZoom: 19
+    }).addTo(map);
+
+    // 커스텀 마커 아이콘 설정
+    const customIcon = L.divIcon({
+      html: `
+        <div class="relative flex items-center justify-center">
+          <div class="absolute w-8 h-8 bg-brand-darkgreen rounded-full opacity-35 animate-ping"></div>
+          <div class="w-7 h-7 bg-brand-darkgreen rounded-full border-2 border-white flex items-center justify-center shadow-lg text-white text-[10px]">
+            <i class="fa-solid fa-utensils"></i>
+          </div>
+        </div>
+      `,
+      className: '',
+      iconSize: [30, 30],
+      iconAnchor: [15, 15]
+    });
+
+    // 핀 꽂기
+    L.marker([33.4883, 126.4916], { icon: customIcon }).addTo(map)
+      .bindPopup(`
+        <div style="font-family: 'Pretendard', sans-serif; text-align: center;">
+          <h4 style="margin: 0; font-weight: 800; color: #064e3b; font-size: 13px;">나니와</h4>
+          <p style="margin: 3px 0 0 0; font-size: 11px; color: #555;">직접 재배 무농약 채소 & 한식</p>
+        </div>
+      `)
+      .openPopup();
+  </script>
+
+  <!-- [추가 전체 메뉴 펼쳐보기 인터랙션 스크립트] -->
+  <script>
+    function toggleExtraMenu() {
+      const container = document.getElementById('extra-menu-container');
+      const text = document.getElementById('toggle-menu-text');
+      const icon = document.getElementById('toggle-menu-icon');
+      const btn = document.getElementById('toggle-menu-btn');
+
+      if (container.classList.contains('hidden')) {
+        // 펼치기
+        container.classList.remove('hidden');
+        // 부드러운 애니메이션 효과를 위해 opacity와 transform 유발
+        setTimeout(() => {
+          container.classList.remove('opacity-0', 'translate-y-4');
+        }, 10);
+        text.innerText = '전체 메뉴 접기';
+        icon.classList.remove('fa-chevron-down');
+        icon.classList.add('fa-chevron-up');
+        
+        // 버튼 스타일 포커스 피드백
+        btn.classList.remove('bg-emerald-50', 'text-emerald-700');
+        btn.classList.add('bg-emerald-600', 'text-white');
+      } else {
+        // 접기
+        container.classList.add('opacity-0', 'translate-y-4');
+        setTimeout(() => {
+          container.classList.add('hidden');
+        }, 300);
+        text.innerText = '전체 메뉴 펼쳐보기 (20개 전체)';
+        icon.classList.remove('fa-chevron-up');
+        icon.classList.add('fa-chevron-down');
+
+        btn.classList.remove('bg-emerald-600', 'text-white');
+        btn.classList.add('bg-emerald-50', 'text-emerald-700');
+        
+        // 접을 때 메뉴판 섹션 상단으로 스크롤 이동하여 UX 편의성 향상
+        document.getElementById('menu').scrollIntoView({ behavior: 'smooth' });
+      }
+    }
+
+    // 페이지가 로드될 때 모든 로컬 메뉴 이미지에 대해 강제 캐시버스터 주입하여 갱신 유도
+    window.addEventListener('DOMContentLoaded', () => {
+      const menuImages = document.querySelectorAll('#menu img');
+      const cacheBuster = "?v=" + Date.now();
+      menuImages.forEach(img => {
+        const srcAttr = img.getAttribute('src');
+        if (srcAttr && (srcAttr.includes('images/') || srcAttr.startsWith('./images/'))) {
+          img.src = srcAttr + cacheBuster;
+        }
+      });
+    });
+
+    // 히어로 이미지 배경 슬라이드쇼 제어
+    let currentSlide = 0;
+    const slides = document.querySelectorAll('.hero-slide');
+    
+    function nextSlide() {
+      if (slides.length === 0) return;
+      // 현재 활성화된 슬라이드 서서히 투명화 및 원상태 스케일
+      slides[currentSlide].classList.remove('opacity-100', 'scale-105');
+      slides[currentSlide].classList.add('opacity-0', 'scale-100');
+      
+      // 다음 슬라이드 인덱스 계산
+      currentSlide = (currentSlide + 1) % slides.length;
+      
+      // 다음 슬라이드 서서히 표시 및 미세 확대 (Ken Burns 효과)
+      slides[currentSlide].classList.remove('opacity-0', 'scale-100');
+      slides[currentSlide].classList.add('opacity-100', 'scale-105');
+    }
+    
+    // 5초 간격으로 슬라이드 순환 (디졸브 전환)
+    if (slides.length > 1) {
+      setInterval(nextSlide, 5000);
+    }
+  </script>
+
+</body>
+</html>

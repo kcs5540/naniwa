@@ -231,59 +231,62 @@
       </div>
     </div>
 
-    <!-- 모바일 메뉴 드로어 -->
-    <div id="mobile-drawer" class="fixed inset-0 z-50 md:hidden bg-stone-950/80 backdrop-blur-sm opacity-0 pointer-events-none transition-opacity duration-300">
-      <div class="fixed top-0 right-0 bottom-0 w-3/4 max-w-sm bg-brand-cream shadow-2xl p-6 flex flex-col translate-x-full transition-transform duration-300 ease-out" id="drawer-content">
-        <div class="flex items-center justify-between pb-6 border-b border-stone-200">
-          <div class="flex items-center gap-2">
-            <div class="w-8 h-8 rounded-lg bg-gradient-to-br from-brand-darkgreen to-emerald-800 flex items-center justify-center text-white border border-white/10 shadow-sm">
-              <svg class="w-5 h-5 text-emerald-300" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <!-- 그릇 모양 (Bowl) -->
-                <path d="M4 14C4 17.866 7.13401 21 11 21H13C16.866 21 20 17.866 20 14V13H4V14Z" fill="currentColor" fill-opacity="0.2" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/>
-                <path d="M2 13H22" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
-                <!-- 신선한 새싹 (Fresh Sprout) -->
-                <path d="M12 13V6M12 6C12 6 13.5 4 16 4C16 4 15.5 7 13.5 8C12.5 8.5 12 8.5 12 8.5M12 6C12 6 10.5 4 8 4C8 4 8.5 7 10.5 8C11.5 8.5 12 8.5 12 8.5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-              </svg>
-            </div>
-            <span class="text-lg font-bold text-stone-900">나니와</span>
-          </div>
-          <button id="close-drawer-btn" class="text-stone-500 hover:text-stone-800 focus:outline-none p-1">
-            <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
-            </svg>
-          </button>
-        </div>
-        <nav class="flex flex-col space-y-4 mt-8 text-base font-semibold text-stone-850">
-          <a href="#about" class="hover:text-brand-darkgreen py-2 border-b border-stone-100 transition-colors" data-i18n="nav-about">브랜드 스토리</a>
-          <a href="#features" class="hover:text-brand-darkgreen py-2 border-b border-stone-100 transition-colors" data-i18n="nav-features">나니와의 고집</a>
-          <a href="#gallery" class="hover:text-brand-darkgreen py-2 border-b border-stone-100 transition-colors" data-i18n="nav-gallery">농장 갤러리</a>
-          <a href="#menu" class="hover:text-brand-darkgreen py-2 border-b border-stone-100 transition-colors" data-i18n="nav-menu">대표 메뉴</a>
-          <a href="#reviews" class="hover:text-brand-darkgreen py-2 border-b border-stone-100 transition-colors" data-i18n="nav-reviews">고객 후기</a>
-          <a href="#location" class="hover:text-brand-darkgreen py-2 border-b border-stone-100 transition-colors" data-i18n="nav-location">오시는 길</a>
-        </nav>
-        
-        <!-- 모바일 언어 선택 -->
-        <div class="mt-6 pt-4 border-t border-stone-200" id="lang-selector-mobile">
-          <span class="text-xs font-bold text-stone-400 block mb-2">LANGUAGE</span>
-          <div class="grid grid-cols-4 gap-2">
-            <button onclick="changeLanguage('ko')" class="mobile-lang-btn active py-2 rounded-xl text-xs font-bold border border-emerald-600 bg-emerald-50 text-emerald-800 transition-colors text-center" data-lang="ko">KO</button>
-            <button onclick="changeLanguage('en')" class="mobile-lang-btn py-2 rounded-xl text-xs font-bold border border-stone-200 text-stone-500 hover:bg-stone-100 transition-colors text-center" data-lang="en">EN</button>
-            <button onclick="changeLanguage('zh')" class="mobile-lang-btn py-2 rounded-xl text-xs font-bold border border-stone-200 text-stone-500 hover:bg-stone-100 transition-colors text-center" data-lang="zh">中文</button>
-            <button onclick="changeLanguage('ja')" class="mobile-lang-btn py-2 rounded-xl text-xs font-bold border border-stone-200 text-stone-500 hover:bg-stone-100 transition-colors text-center" data-lang="ja">JP</button>
-          </div>
-        </div>
-
-        <div class="mt-auto space-y-3">
-          <a href="tel:064-711-3880" class="flex items-center justify-center gap-2 w-full text-sm font-bold text-stone-800 border border-stone-300 py-3 rounded-xl hover:bg-stone-100 transition-colors">
-            <i class="fa-solid fa-phone"></i> 064-711-3880
-          </a>
-          <a href="https://naver.me/GZDhrNz2" target="_blank" rel="noopener noreferrer" class="flex items-center justify-center gap-2 w-full text-sm font-bold bg-emerald-600 text-white py-3 rounded-xl hover:bg-emerald-700 transition-colors shadow-lg shadow-emerald-900/10">
-            <span data-i18n="nav-reserve">네이버 예약하기</span>
-          </a>
-        </div>
       </div>
     </div>
   </header>
+
+  <!-- 모바일 메뉴 드로어 (헤더 외부 배치, z-index 최상위화 및 overflow-y-auto 적용으로 스크롤/렌더링 버그 완전 방지) -->
+  <div id="mobile-drawer" class="fixed inset-0 z-[100] md:hidden bg-stone-950/80 backdrop-blur-sm opacity-0 pointer-events-none transition-opacity duration-300">
+    <div class="fixed top-0 right-0 bottom-0 w-3/4 max-w-sm bg-brand-cream shadow-2xl p-6 flex flex-col translate-x-full transition-transform duration-300 ease-out overflow-y-auto" id="drawer-content">
+      <div class="flex items-center justify-between pb-6 border-b border-stone-200">
+        <div class="flex items-center gap-2">
+          <div class="w-8 h-8 rounded-lg bg-gradient-to-br from-brand-darkgreen to-emerald-800 flex items-center justify-center text-white border border-white/10 shadow-sm">
+            <svg class="w-5 h-5 text-emerald-300" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <!-- 그릇 모양 (Bowl) -->
+              <path d="M4 14C4 17.866 7.13401 21 11 21H13C16.866 21 20 17.866 20 14V13H4V14Z" fill="currentColor" fill-opacity="0.2" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/>
+              <path d="M2 13H22" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+              <!-- 신선한 새싹 (Fresh Sprout) -->
+              <path d="M12 13V6M12 6C12 6 13.5 4 16 4C16 4 15.5 7 13.5 8C12.5 8.5 12 8.5 12 8.5M12 6C12 6 10.5 4 8 4C8 4 8.5 7 10.5 8C11.5 8.5 12 8.5 12 8.5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </div>
+          <span class="text-lg font-bold text-stone-900">나니와</span>
+        </div>
+        <button id="close-drawer-btn" class="text-stone-500 hover:text-stone-800 focus:outline-none p-1">
+          <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+          </svg>
+        </button>
+      </div>
+      <nav class="flex flex-col space-y-4 mt-8 text-base font-semibold text-stone-850">
+        <a href="#about" class="hover:text-brand-darkgreen py-2 border-b border-stone-100 transition-colors" data-i18n="nav-about">브랜드 스토리</a>
+        <a href="#features" class="hover:text-brand-darkgreen py-2 border-b border-stone-100 transition-colors" data-i18n="nav-features">나니와의 고집</a>
+        <a href="#gallery" class="hover:text-brand-darkgreen py-2 border-b border-stone-100 transition-colors" data-i18n="nav-gallery">농장 갤러리</a>
+        <a href="#menu" class="hover:text-brand-darkgreen py-2 border-b border-stone-100 transition-colors" data-i18n="nav-menu">대표 메뉴</a>
+        <a href="#reviews" class="hover:text-brand-darkgreen py-2 border-b border-stone-100 transition-colors" data-i18n="nav-reviews">고객 후기</a>
+        <a href="#location" class="hover:text-brand-darkgreen py-2 border-b border-stone-100 transition-colors" data-i18n="nav-location">오시는 길</a>
+      </nav>
+      
+      <!-- 모바일 언어 선택 -->
+      <div class="mt-6 pt-4 border-t border-stone-200" id="lang-selector-mobile">
+        <span class="text-xs font-bold text-stone-400 block mb-2">LANGUAGE</span>
+        <div class="grid grid-cols-4 gap-2">
+          <button onclick="changeLanguage('ko')" class="mobile-lang-btn active py-2 rounded-xl text-xs font-bold border border-emerald-600 bg-emerald-50 text-emerald-800 transition-colors text-center" data-lang="ko">KO</button>
+          <button onclick="changeLanguage('en')" class="mobile-lang-btn py-2 rounded-xl text-xs font-bold border border-stone-200 text-stone-500 hover:bg-stone-100 transition-colors text-center" data-lang="en">EN</button>
+          <button onclick="changeLanguage('zh')" class="mobile-lang-btn py-2 rounded-xl text-xs font-bold border border-stone-200 text-stone-500 hover:bg-stone-100 transition-colors text-center" data-lang="zh">中文</button>
+          <button onclick="changeLanguage('ja')" class="mobile-lang-btn py-2 rounded-xl text-xs font-bold border border-stone-200 text-stone-500 hover:bg-stone-100 transition-colors text-center" data-lang="ja">JP</button>
+        </div>
+      </div>
+
+      <div class="mt-auto space-y-3 pt-6">
+        <a href="tel:064-711-3880" class="flex items-center justify-center gap-2 w-full text-sm font-bold text-stone-800 border border-stone-300 py-3 rounded-xl hover:bg-stone-100 transition-colors">
+          <i class="fa-solid fa-phone"></i> 064-711-3880
+        </a>
+        <a href="https://naver.me/GZDhrNz2" target="_blank" rel="noopener noreferrer" class="flex items-center justify-center gap-2 w-full text-sm font-bold bg-emerald-600 text-white py-3 rounded-xl hover:bg-emerald-700 transition-colors shadow-lg shadow-emerald-900/10">
+          <span data-i18n="nav-reserve">네이버 예약하기</span>
+        </a>
+      </div>
+    </div>
+  </div>
 
 
   <!-- ========================================== -->
@@ -1531,6 +1534,7 @@
       mobileDrawer.classList.remove('opacity-0', 'pointer-events-none');
       mobileDrawer.classList.add('opacity-100');
       drawerContent.classList.remove('translate-x-full');
+      document.body.classList.add('overflow-hidden'); // 배경 스크롤 방지
     }
 
     // 드로어 닫기
@@ -1538,6 +1542,7 @@
       mobileDrawer.classList.remove('opacity-100');
       mobileDrawer.classList.add('opacity-0', 'pointer-events-none');
       drawerContent.classList.add('translate-x-full');
+      document.body.classList.remove('overflow-hidden'); // 배경 스크롤 허용
     }
 
     mobileMenuBtn.addEventListener('click', openDrawer);

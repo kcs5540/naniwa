@@ -94,6 +94,20 @@
     .leaflet-control-attribution {
       display: none !important;
     }
+
+    /* BGM 플레이어 비주얼라이저 막대 애니메이션 */
+    @keyframes bounce-bar {
+      0%, 100% { transform: scaleY(0.2); }
+      50% { transform: scaleY(1); }
+    }
+    .visualizer-bar {
+      animation: bounce-bar 1.0s ease-in-out infinite;
+      transform-origin: bottom;
+    }
+    .visualizer-bar:nth-child(1) { animation-delay: 0.15s; }
+    .visualizer-bar:nth-child(2) { animation-delay: 0.45s; }
+    .visualizer-bar:nth-child(3) { animation-delay: 0.3s; }
+    .visualizer-bar:nth-child(4) { animation-delay: 0.6s; }
   </style>
 
   <!-- 이미지 자동 교체 및 폴백 시스템 스크립트 -->
@@ -1712,6 +1726,162 @@
         document.getElementById('gallery').scrollIntoView({ behavior: 'smooth' });
       }
     }
+  </script>
+
+  <!-- ========================================== -->
+  <!-- [BGM] 배경음악 플레이어 영역 -->
+  <!-- ========================================== -->
+  <div id="bgm-player-container" class="fixed bottom-6 right-6 z-[90] flex flex-col items-end">
+    <!-- 안내 툴팁 -->
+    <div id="bgm-tooltip" class="absolute bottom-16 right-0 bg-brand-darkgreen text-white text-xs px-3.5 py-2 rounded-2xl shadow-lg whitespace-nowrap animate-bounce pointer-events-none transition-all duration-500 ease-in-out">
+      <span>잔잔한 음악과 함께 감상해보세요 🎵</span>
+      <!-- 말풍선 꼬리 -->
+      <div class="absolute -bottom-1 right-6 w-2.5 h-2.5 bg-brand-darkgreen rotate-45"></div>
+    </div>
+
+    <!-- 플레이어 바 -->
+    <div class="flex items-center gap-3 bg-white/90 backdrop-blur-md px-3 py-2 sm:px-4 sm:py-3 rounded-full shadow-lg border border-stone-200/40 hover:shadow-xl transition-all duration-300">
+      <!-- 오디오 객체 -->
+      <audio id="bgm-audio" loop></audio>
+
+      <!-- 음파 비주얼라이저 -->
+      <div id="bgm-visualizer" class="flex items-end gap-0.5 h-3.5 w-4 opacity-40 transition-opacity duration-300">
+        <span class="visualizer-bar w-0.5 bg-brand-darkgreen rounded-full h-full" style="animation-play-state: paused;"></span>
+        <span class="visualizer-bar w-0.5 bg-brand-darkgreen rounded-full h-full" style="animation-play-state: paused;"></span>
+        <span class="visualizer-bar w-0.5 bg-brand-darkgreen rounded-full h-full" style="animation-play-state: paused;"></span>
+        <span class="visualizer-bar w-0.5 bg-brand-darkgreen rounded-full h-full" style="animation-play-state: paused;"></span>
+      </div>
+
+      <!-- 토글 버튼 -->
+      <button id="bgm-toggle-btn" class="w-7 h-7 sm:w-8 sm:h-8 rounded-full bg-brand-darkgreen text-white flex items-center justify-center hover:scale-105 hover:bg-emerald-800 transition-all duration-300 focus:outline-none shadow-sm" aria-label="배경음악 재생/일시정지">
+        <i id="bgm-icon" class="fa-solid fa-play text-xs translate-x-[1px]"></i>
+      </button>
+
+      <!-- 곡 및 앨범명 정보 (모바일에서는 간결함을 위해 숨김) -->
+      <div class="hidden sm:flex flex-col text-[10px] leading-tight select-none border-l border-stone-200/50 pl-3">
+        <span class="font-bold text-stone-700">배경음악</span>
+        <span class="text-stone-400 truncate max-w-[80px]" title="Erik Satie - Gymnopédie No. 1">Gymnopédie No.1</span>
+      </div>
+
+      <!-- 볼륨 슬라이더 (모바일에서는 숨김) -->
+      <div class="hidden sm:flex items-center gap-1.5 border-l border-stone-200/50 pl-3">
+        <i class="fa-solid fa-volume-low text-stone-400 text-[10px]"></i>
+        <input type="range" id="bgm-volume" min="0" max="0.5" step="0.05" value="0.15" class="w-14 h-1 bg-stone-200 rounded-lg appearance-none cursor-pointer accent-brand-darkgreen focus:outline-none" aria-label="음량 조절">
+      </div>
+    </div>
+  </div>
+
+  <script>
+    (function() {
+      const audio = document.getElementById('bgm-audio');
+      const toggleBtn = document.getElementById('bgm-toggle-btn');
+      const icon = document.getElementById('bgm-icon');
+      const visualizer = document.getElementById('bgm-visualizer');
+      const visualizerBars = visualizer.querySelectorAll('.visualizer-bar');
+      const volumeSlider = document.getElementById('bgm-volume');
+      const tooltip = document.getElementById('bgm-tooltip');
+
+      // 장애 대비용 이중 음원 CDN 주소
+      const bgmSources = [
+        "https://archive.org/download/Classical_Sampler-9615/Gymnopedie%20No%201.mp3",
+        "https://archive.org/download/Gymnopedie_201309/Gymnop%C3%A9die+No.+1.mp3"
+      ];
+      let currentSourceIdx = 0;
+
+      // 초기 오디오 객체 설정
+      audio.src = bgmSources[currentSourceIdx];
+      audio.volume = 0.15; // 기본 볼륨 15% (매우 잔잔하게 시작)
+      let isPlaying = false;
+
+      // UI 상태 변경
+      function updateUI(playing) {
+        if (playing) {
+          icon.className = "fa-solid fa-pause text-xs";
+          visualizer.classList.remove('opacity-40');
+          visualizer.classList.add('opacity-100');
+          visualizerBars.forEach(bar => {
+            bar.style.animationPlayState = 'running';
+          });
+          // 재생이 시작되면 안내 툴팁 제거
+          if (tooltip) {
+            tooltip.classList.add('opacity-0');
+            setTimeout(() => {
+              tooltip.style.display = 'none';
+            }, 500);
+          }
+        } else {
+          icon.className = "fa-solid fa-play text-xs translate-x-[1px]";
+          visualizer.classList.remove('opacity-100');
+          visualizer.classList.add('opacity-40');
+          visualizerBars.forEach(bar => {
+            bar.style.animationPlayState = 'paused';
+          });
+        }
+      }
+
+      // 재생/정지 토글 함수
+      function toggleBGM() {
+        removeInteractionListeners();
+        if (isPlaying) {
+          audio.pause();
+          isPlaying = false;
+          updateUI(false);
+        } else {
+          audio.play().then(() => {
+            isPlaying = true;
+            updateUI(true);
+          }).catch(err => {
+            console.error("배경음악 재생 중 에러 발생:", err);
+          });
+        }
+      }
+
+      // 첫 클릭/터치 시 브라우저 차단 우회 자동 재생 시도
+      function autoPlayOnFirstInteraction() {
+        if (!isPlaying) {
+          audio.play().then(() => {
+            isPlaying = true;
+            updateUI(true);
+            removeInteractionListeners();
+          }).catch(err => {
+            console.log("첫 클릭 시 자동 재생 차단 대기 중...", err);
+          });
+        }
+      }
+
+      function removeInteractionListeners() {
+        document.removeEventListener('click', autoPlayOnFirstInteraction);
+        document.removeEventListener('touchstart', autoPlayOnFirstInteraction);
+      }
+
+      // 이벤트 리스너 바인딩
+      toggleBtn.addEventListener('click', toggleBGM);
+      volumeSlider.addEventListener('input', (e) => {
+        removeInteractionListeners();
+        audio.volume = e.target.value;
+      });
+
+      // 브라우저 첫 터치/클릭에 의한 자동 재생 등록
+      document.addEventListener('click', autoPlayOnFirstInteraction);
+      document.addEventListener('touchstart', autoPlayOnFirstInteraction);
+
+      // 음원 로드 에러 발생 시 예비 주소로 스위칭
+      audio.addEventListener('error', () => {
+        console.warn(`BGM 소스 ${currentSourceIdx + 1} 로드 실패. 대체 소스로 재시도합니다.`);
+        currentSourceIdx++;
+        if (currentSourceIdx < bgmSources.length) {
+          audio.src = bgmSources[currentSourceIdx];
+          if (isPlaying) {
+            audio.play().catch(e => console.error("대체 BGM 재생 실패:", e));
+          }
+        } else {
+          console.error("모든 배경음악 소스 로드에 실패했습니다.");
+          toggleBtn.disabled = true;
+          toggleBtn.classList.add('opacity-50', 'cursor-not-allowed');
+          if (tooltip) tooltip.style.display = 'none';
+        }
+      });
+    })();
   </script>
 
 </body>

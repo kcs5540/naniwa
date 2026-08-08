@@ -1760,7 +1760,7 @@
       <!-- 곡 및 앨범명 정보 (모바일에서는 간결함을 위해 숨김) -->
       <div class="hidden sm:flex flex-col text-[10px] leading-tight select-none border-l border-stone-200/50 pl-3">
         <span class="font-bold text-stone-700">배경음악</span>
-        <span class="text-stone-400 truncate max-w-[80px]" title="Erik Satie - Gymnopédie No. 1">Gymnopédie No.1</span>
+        <span id="bgm-track-title" class="text-stone-400 truncate max-w-[80px]" title="Kevin MacLeod - Easy Lemon">Easy Lemon</span>
       </div>
 
       <!-- 볼륨 슬라이더 (모바일에서는 숨김) -->
@@ -1780,16 +1780,36 @@
       const visualizerBars = visualizer.querySelectorAll('.visualizer-bar');
       const volumeSlider = document.getElementById('bgm-volume');
       const tooltip = document.getElementById('bgm-tooltip');
+      const trackTitleEl = document.getElementById('bgm-track-title');
 
-      // 장애 대비용 이중 음원 CDN 주소
-      const bgmSources = [
-        "https://archive.org/download/Gymnopedie_201309/Gymnop%C3%A9die%20No.%201.mp3",
-        "https://incompetech.com/music/royalty-free/mp3-royaltyfree/Gymnopedie%20No%201.mp3"
+      // 밝고 따뜻한 이중 음원 리스트 (인코딩 검증 완료)
+      const bgmTracks = [
+        {
+          title: "Easy Lemon",
+          artist: "Kevin MacLeod",
+          src: "https://incompetech.com/music/royalty-free/mp3-royaltyfree/Easy%20Lemon.mp3"
+        },
+        {
+          title: "Carefree",
+          artist: "Kevin MacLeod",
+          src: "https://incompetech.com/music/royalty-free/mp3-royaltyfree/Carefree.mp3"
+        }
       ];
-      let currentSourceIdx = 0;
+      let currentTrackIdx = 0;
 
-      // 초기 오디오 객체 설정
-      audio.src = bgmSources[currentSourceIdx];
+      // 초기 트랙 로드 및 오디오 객체 설정
+      function loadTrack(index) {
+        if (index < bgmTracks.length) {
+          const track = bgmTracks[index];
+          audio.src = track.src;
+          if (trackTitleEl) {
+            trackTitleEl.innerText = track.title;
+            trackTitleEl.title = `${track.artist} - ${track.title}`;
+          }
+        }
+      }
+
+      loadTrack(currentTrackIdx);
       audio.volume = 0.15; // 기본 볼륨 15% (매우 잔잔하게 시작)
       let isPlaying = false;
 
@@ -1867,10 +1887,10 @@
 
       // 음원 로드 에러 발생 시 예비 주소로 스위칭
       audio.addEventListener('error', () => {
-        console.warn(`BGM 소스 ${currentSourceIdx + 1} 로드 실패. 대체 소스로 재시도합니다.`);
-        currentSourceIdx++;
-        if (currentSourceIdx < bgmSources.length) {
-          audio.src = bgmSources[currentSourceIdx];
+        console.warn(`BGM 소스 ${currentTrackIdx + 1} 로드 실패. 대체 소스로 재시도합니다.`);
+        currentTrackIdx++;
+        if (currentTrackIdx < bgmTracks.length) {
+          loadTrack(currentTrackIdx);
           if (isPlaying) {
             audio.play().catch(e => console.error("대체 BGM 재생 실패:", e));
           }

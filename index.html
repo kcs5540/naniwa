@@ -160,27 +160,44 @@
             </svg>
           </div>
           <span class="text-2xl font-bold tracking-tight text-white transition-colors duration-300 drop-shadow-[0_2px_4px_rgba(0,0,0,0.85)]" id="header-logo-text">나니와</span>
-          <span class="inline-block text-[10px] sm:text-xs font-medium text-stone-300 bg-brand-darkgreen/60 px-2 py-0.5 rounded-full border border-white/20 transition-all duration-300" id="header-sub-text">제주 향토음식</span>
+          <span class="inline-block text-[10px] sm:text-xs font-medium text-stone-300 bg-brand-darkgreen/60 px-2 py-0.5 rounded-full border border-white/20 transition-all duration-300" id="header-sub-text" data-i18n="header-sub-text">제주 향토음식</span>
         </a>
 
         <!-- 데스크톱 메뉴 -->
         <nav class="hidden md:flex items-center space-x-8 text-sm font-semibold transition-colors duration-300 text-white" id="desktop-nav">
-          <a href="#about" class="hover:text-brand-lightwood transition-colors duration-300 py-2">브랜드 스토리</a>
-          <a href="#features" class="hover:text-brand-lightwood transition-colors duration-300 py-2">나니와의 고집</a>
-          <a href="#gallery" class="hover:text-brand-lightwood transition-colors duration-300 py-2">농장 갤러리</a>
-          <a href="#menu" class="hover:text-brand-lightwood transition-colors duration-300 py-2">대표 메뉴</a>
-          <a href="#reviews" class="hover:text-brand-lightwood transition-colors duration-300 py-2">고객 후기</a>
-          <a href="#location" class="hover:text-brand-lightwood transition-colors duration-300 py-2">오시는 길</a>
+          <a href="#about" class="hover:text-brand-lightwood transition-colors duration-300 py-2" data-i18n="nav-about">브랜드 스토리</a>
+          <a href="#features" class="hover:text-brand-lightwood transition-colors duration-300 py-2" data-i18n="nav-features">나니와의 고집</a>
+          <a href="#gallery" class="hover:text-brand-lightwood transition-colors duration-300 py-2" data-i18n="nav-gallery">농장 갤러리</a>
+          <a href="#menu" class="hover:text-brand-lightwood transition-colors duration-300 py-2" data-i18n="nav-menu">대표 메뉴</a>
+          <a href="#reviews" class="hover:text-brand-lightwood transition-colors duration-300 py-2" data-i18n="nav-reviews">고객 후기</a>
+          <a href="#location" class="hover:text-brand-lightwood transition-colors duration-300 py-2" data-i18n="nav-location">오시는 길</a>
         </nav>
 
         <!-- 데스크톱 예약/전화 버튼 -->
         <div class="hidden md:flex items-center gap-3">
+          <!-- 데스크톱 언어 선택 드롭다운 -->
+          <div class="relative inline-block text-left" id="lang-selector-desktop">
+            <button id="lang-btn-desktop" class="flex items-center gap-1.5 text-xs font-bold text-white border border-white/30 px-3.5 py-2.5 rounded-full hover:bg-white/10 transition-all duration-300">
+              <i class="fa-solid fa-globe"></i>
+              <span id="current-lang-text-desktop">KO</span>
+              <i class="fa-solid fa-chevron-down text-[10px]"></i>
+            </button>
+            <div id="lang-dropdown-desktop" class="absolute right-0 mt-2 w-28 rounded-2xl bg-white shadow-xl ring-1 ring-black/5 opacity-0 pointer-events-none transition-all duration-300 transform scale-95 z-50">
+              <div class="py-1">
+                <button onclick="changeLanguage('ko')" class="block w-full text-left px-4 py-2 text-xs font-semibold text-stone-700 hover:bg-stone-100 transition-colors">한국어</button>
+                <button onclick="changeLanguage('en')" class="block w-full text-left px-4 py-2 text-xs font-semibold text-stone-700 hover:bg-stone-100 transition-colors">English</button>
+                <button onclick="changeLanguage('zh')" class="block w-full text-left px-4 py-2 text-xs font-semibold text-stone-700 hover:bg-stone-100 transition-colors">简体中文</button>
+                <button onclick="changeLanguage('ja')" class="block w-full text-left px-4 py-2 text-xs font-semibold text-stone-700 hover:bg-stone-100 transition-colors">日本語</button>
+              </div>
+            </div>
+          </div>
+
           <a href="tel:064-711-3880" class="flex items-center gap-2 text-xs font-bold text-white border border-white/30 px-4 py-2.5 rounded-full hover:bg-white hover:text-stone-900 transition-all duration-300">
             <i class="fa-solid fa-phone"></i> 064-711-3880
           </a>
           <a href="https://naver.me/GZDhrNz2" target="_blank" rel="noopener noreferrer" class="flex items-center gap-2 text-xs font-bold bg-emerald-600 hover:bg-emerald-500 text-white px-5 py-2.5 rounded-full shadow-lg hover:shadow-emerald-900/30 transition-all duration-300 hover:scale-105">
             <span class="w-2 h-2 rounded-full bg-green-200 animate-ping"></span>
-            네이버 예약하기
+            <span data-i18n="nav-reserve">네이버 예약하기</span>
           </a>
         </div>
 
@@ -217,19 +234,31 @@
           </button>
         </div>
         <nav class="flex flex-col space-y-4 mt-8 text-base font-semibold text-stone-850">
-          <a href="#about" class="hover:text-brand-darkgreen py-2 border-b border-stone-100 transition-colors">브랜드 스토리</a>
-          <a href="#features" class="hover:text-brand-darkgreen py-2 border-b border-stone-100 transition-colors">나니와의 고집</a>
-          <a href="#gallery" class="hover:text-brand-darkgreen py-2 border-b border-stone-100 transition-colors">농장 갤러리</a>
-          <a href="#menu" class="hover:text-brand-darkgreen py-2 border-b border-stone-100 transition-colors">대표 메뉴</a>
-          <a href="#reviews" class="hover:text-brand-darkgreen py-2 border-b border-stone-100 transition-colors">고객 후기</a>
-          <a href="#location" class="hover:text-brand-darkgreen py-2 border-b border-stone-100 transition-colors">오시는 길</a>
+          <a href="#about" class="hover:text-brand-darkgreen py-2 border-b border-stone-100 transition-colors" data-i18n="nav-about">브랜드 스토리</a>
+          <a href="#features" class="hover:text-brand-darkgreen py-2 border-b border-stone-100 transition-colors" data-i18n="nav-features">나니와의 고집</a>
+          <a href="#gallery" class="hover:text-brand-darkgreen py-2 border-b border-stone-100 transition-colors" data-i18n="nav-gallery">농장 갤러리</a>
+          <a href="#menu" class="hover:text-brand-darkgreen py-2 border-b border-stone-100 transition-colors" data-i18n="nav-menu">대표 메뉴</a>
+          <a href="#reviews" class="hover:text-brand-darkgreen py-2 border-b border-stone-100 transition-colors" data-i18n="nav-reviews">고객 후기</a>
+          <a href="#location" class="hover:text-brand-darkgreen py-2 border-b border-stone-100 transition-colors" data-i18n="nav-location">오시는 길</a>
         </nav>
+        
+        <!-- 모바일 언어 선택 -->
+        <div class="mt-6 pt-4 border-t border-stone-200" id="lang-selector-mobile">
+          <span class="text-xs font-bold text-stone-400 block mb-2">LANGUAGE</span>
+          <div class="grid grid-cols-4 gap-2">
+            <button onclick="changeLanguage('ko')" class="mobile-lang-btn active py-2 rounded-xl text-xs font-bold border border-emerald-600 bg-emerald-50 text-emerald-800 transition-colors text-center" data-lang="ko">KO</button>
+            <button onclick="changeLanguage('en')" class="mobile-lang-btn py-2 rounded-xl text-xs font-bold border border-stone-200 text-stone-500 hover:bg-stone-100 transition-colors text-center" data-lang="en">EN</button>
+            <button onclick="changeLanguage('zh')" class="mobile-lang-btn py-2 rounded-xl text-xs font-bold border border-stone-200 text-stone-500 hover:bg-stone-100 transition-colors text-center" data-lang="zh">中文</button>
+            <button onclick="changeLanguage('ja')" class="mobile-lang-btn py-2 rounded-xl text-xs font-bold border border-stone-200 text-stone-500 hover:bg-stone-100 transition-colors text-center" data-lang="ja">JP</button>
+          </div>
+        </div>
+
         <div class="mt-auto space-y-3">
           <a href="tel:064-711-3880" class="flex items-center justify-center gap-2 w-full text-sm font-bold text-stone-800 border border-stone-300 py-3 rounded-xl hover:bg-stone-100 transition-colors">
             <i class="fa-solid fa-phone"></i> 064-711-3880
           </a>
           <a href="https://naver.me/GZDhrNz2" target="_blank" rel="noopener noreferrer" class="flex items-center justify-center gap-2 w-full text-sm font-bold bg-emerald-600 text-white py-3 rounded-xl hover:bg-emerald-700 transition-colors shadow-lg shadow-emerald-900/10">
-            네이버 예약하기
+            <span data-i18n="nav-reserve">네이버 예약하기</span>
           </a>
         </div>
       </div>
@@ -268,18 +297,18 @@
     <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center text-white py-20 z-10">
       
       <!-- 뱃지 -->
-      <span class="inline-flex items-center gap-1.5 px-4 py-1.5 rounded-full text-xs font-bold bg-brand-darkgreen text-green-200 border border-green-700/50 mb-6 uppercase tracking-wider animate-fade-in-down">
+      <span class="inline-flex items-center gap-1.5 px-4 py-1.5 rounded-full text-xs font-bold bg-brand-darkgreen text-green-200 border border-green-700/50 mb-6 uppercase tracking-wider animate-fade-in-down" data-i18n="hero-badge">
         <i class="fa-solid fa-leaf text-green-400"></i> 주인장이 직접 재배한 100% 무농약 채소
       </span>
       
       <!-- 헤드라인 -->
-      <h1 class="text-3xl sm:text-5xl md:text-6xl font-extrabold tracking-tight leading-tight mb-6 animate-fade-in-up break-keep">
+      <h1 class="text-3xl sm:text-5xl md:text-6xl font-extrabold tracking-tight leading-tight mb-6 animate-fade-in-up break-keep" data-i18n="hero-title">
         제주 연동에서 만나는<br class="hidden sm:inline">
         <span class="text-transparent bg-clip-text bg-gradient-to-r from-green-300 via-yellow-200 to-amber-200">정성 가득한 집밥의 따뜻함</span>
       </h1>
       
       <!-- 리드 문구 -->
-      <p class="max-w-2xl mx-auto text-base sm:text-lg md:text-xl text-stone-300 font-medium mb-10 leading-relaxed animate-fade-in-up delay-100">
+      <p class="max-w-2xl mx-auto text-base sm:text-lg md:text-xl text-stone-300 font-medium mb-10 leading-relaxed animate-fade-in-up delay-100" data-i18n="hero-desc">
         나니와는 직접 가꾼 텃밭의 신선한 무농약 쌈채소와 제주 향토 식재료로 손끝에서 빚어내는 건강한 한 끼를 대접합니다. 24시간 연중무휴로 언제든 든든한 온기를 채워드립니다.
       </p>
 
@@ -287,11 +316,11 @@
       <div class="flex flex-col sm:flex-row items-center justify-center gap-4 animate-fade-in-up delay-200">
         <a href="https://naver.me/GZDhrNz2" target="_blank" rel="noopener noreferrer" class="group flex items-center justify-center gap-3 w-full sm:w-auto bg-emerald-600 hover:bg-emerald-500 text-white font-bold text-base px-8 py-4 rounded-xl shadow-xl hover:shadow-emerald-700/30 transition-all duration-300 hover:scale-105">
           <i class="fa-solid fa-calendar-check text-green-200 group-hover:scale-110 transition-transform"></i>
-          네이버 예약 신청
+          <span data-i18n="hero-cta-reserve">네이버 예약 신청</span>
         </a>
         <a href="tel:064-711-3880" class="flex items-center justify-center gap-3 w-full sm:w-auto bg-white/10 hover:bg-white/20 text-white font-bold text-base px-8 py-4 rounded-xl border border-white/20 hover:border-white/40 transition-all duration-300 backdrop-blur-sm">
           <i class="fa-solid fa-phone"></i>
-          전화 주문 및 문의
+          <span data-i18n="hero-cta-call">전화 주문 및 문의</span>
         </a>
       </div>
 
@@ -299,19 +328,19 @@
       <div class="grid grid-cols-2 md:grid-cols-4 gap-6 mt-16 max-w-4xl mx-auto border-t border-white/10 pt-10 text-stone-400 text-xs sm:text-sm font-semibold">
         <div class="flex flex-col items-center gap-2">
           <span class="text-brand-lightwood text-2xl"><i class="fa-solid fa-clock"></i></span>
-          <span>24시간 영업 연중무휴</span>
+          <span data-i18n="hero-spec-24h">24시간 영업 연중무휴</span>
         </div>
         <div class="flex flex-col items-center gap-2">
           <span class="text-brand-lightwood text-2xl"><i class="fa-solid fa-store"></i></span>
-          <span>단체모임/가족석 완비</span>
+          <span data-i18n="hero-spec-seats">단체모임/가족석 완비</span>
         </div>
         <div class="flex flex-col items-center gap-2">
           <span class="text-brand-lightwood text-2xl"><i class="fa-solid fa-location-dot"></i></span>
-          <span>신라면세점 후문 1분</span>
+          <span data-i18n="hero-spec-location">신라면세점 후문 1분</span>
         </div>
         <div class="flex flex-col items-center gap-2">
           <span class="text-brand-lightwood text-2xl"><i class="fa-solid fa-square-parking"></i></span>
-          <span>주차 공간 제공</span>
+          <span data-i18n="hero-spec-parking">주차 공간 제공</span>
         </div>
       </div>
 
@@ -336,20 +365,20 @@
       <div class="grid lg:grid-cols-12 gap-12 items-center">
         <!-- 텍스트 설명 -->
         <div class="lg:col-span-6" data-aos="fade-right">
-          <span class="text-sm font-bold text-brand-darkgreen uppercase tracking-widest block mb-3">BRAND STORY</span>
-          <h2 class="text-3xl sm:text-4xl font-extrabold text-stone-900 tracking-tight leading-snug mb-6">
+          <span class="text-sm font-bold text-brand-darkgreen uppercase tracking-widest block mb-3" data-i18n="about-story">BRAND STORY</span>
+          <h2 class="text-3xl sm:text-4xl font-extrabold text-stone-900 tracking-tight leading-snug mb-6" data-i18n="about-title">
             어머니의 품 같은 한 끼,<br>
             제주 자연을 그대로 그릇에 담다
           </h2>
-          <p class="text-stone-600 leading-relaxed mb-6">
+          <p class="text-stone-600 leading-relaxed mb-6" data-i18n="about-p1">
             제주의 푸른 바람과 맑은 햇살 아래에서 자란 농작물이 가장 맛있고 건강합니다. 나니와는 주인장이 직접 텃밭을 일구며 정직하게 가꾼 <strong>100% 무농약 상추와 쌈채소</strong>를 테이블에 올립니다. 
           </p>
-          <p class="text-stone-600 leading-relaxed mb-8">
+          <p class="text-stone-600 leading-relaxed mb-8" data-i18n="about-p2">
             자극적이고 정형화된 외식 메뉴 대신, 내 가족에게 양보 없이 차리는 정성 어린 밑반찬과 노릇한 생선구이, 그리고 깊은 풍미의 조림 요리까지. 한 입 맛보는 순간 느껴지는 깊고 자극적이지 않은 본연의 맛으로 진짜 제주의 집밥을 선물합니다.
           </p>
           
           <!-- 슬로건 장식 -->
-          <div class="border-l-4 border-brand-darkgreen pl-4 italic text-brand-forest font-semibold text-lg">
+          <div class="border-l-4 border-brand-darkgreen pl-4 italic text-brand-forest font-semibold text-lg" data-i18n="about-quote">
             "우리가 먹지 못하는 것은 절대 상에 올리지 않습니다."
           </div>
         </div>
@@ -363,7 +392,7 @@
               </div>
               <div class="rounded-3xl overflow-hidden bg-brand-darkgreen p-6 text-white text-center shadow-md">
                 <p class="text-3xl font-extrabold text-yellow-300 mb-1">100%</p>
-                <p class="text-xs font-semibold text-green-100 uppercase tracking-wider">직접 재배 무농약 인증</p>
+                <p class="text-xs font-semibold text-green-100 uppercase tracking-wider" data-i18n="about-stat-organic">직접 재배 무농약 인증</p>
               </div>
               <div class="rounded-3xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300">
                 <img src="./images/lettuce_greenhouse.jpg" onerror="this.src='https://images.unsplash.com/photo-1592417817098-8f3d6eb19675?auto=format&fit=crop&w=400&h=500&q=80'" alt="직접 재배 무농약 상추 온실" class="w-full h-auto object-cover hover:scale-110 duration-500">
@@ -372,7 +401,7 @@
             <div class="space-y-4 pt-8">
               <div class="rounded-3xl overflow-hidden bg-stone-100 p-6 text-center border border-stone-200/60 shadow-sm">
                 <p class="text-3xl font-extrabold text-brand-wood mb-1">24h</p>
-                <p class="text-xs font-semibold text-stone-500 uppercase tracking-wider">연중무휴 밤낮없는 환대</p>
+                <p class="text-xs font-semibold text-stone-500 uppercase tracking-wider" data-i18n="about-stat-24h">연중무휴 밤낮없는 환대</p>
               </div>
               <div class="rounded-3xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300">
                 <img src="./images/store_indoor.jpg" onerror="this.src='https://images.unsplash.com/photo-1552566626-52f8b828add9?auto=format&fit=crop&w=400&h=500&q=80'" alt="정갈한 나니와 식사 공간" class="w-full h-auto object-cover hover:scale-110 duration-500">
@@ -392,8 +421,8 @@
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       
       <div class="text-center max-w-3xl mx-auto mb-16" data-aos="fade-up">
-        <span class="text-xs font-bold text-brand-wood uppercase tracking-widest bg-brand-wood/10 px-3 py-1 rounded-full">WHY NANIWA</span>
-        <h2 class="text-3xl font-bold text-stone-900 tracking-tight mt-4">단골들이 입을 모아 말하는 나니와의 3가지 약속</h2>
+        <span class="text-xs font-bold text-brand-wood uppercase tracking-widest bg-brand-wood/10 px-3 py-1 rounded-full" data-i18n="features-why">WHY NANIWA</span>
+        <h2 class="text-3xl font-bold text-stone-900 tracking-tight mt-4" data-i18n="features-title">단골들이 입을 모아 말하는 나니와의 3가지 약속</h2>
       </div>
 
       <div class="grid md:grid-cols-3 gap-8">
@@ -403,8 +432,8 @@
           <div class="w-14 h-14 rounded-2xl bg-green-50 text-brand-darkgreen flex items-center justify-center text-2xl mb-6 group-hover:bg-brand-darkgreen group-hover:text-white transition-all duration-300">
             <i class="fa-solid fa-leaf"></i>
           </div>
-          <h3 class="text-xl font-bold text-stone-900 mb-3">직접 재배한 무농약 쌈채소</h3>
-          <p class="text-stone-600 leading-relaxed text-sm">
+          <h3 class="text-xl font-bold text-stone-900 mb-3" data-i18n="feature1-title">직접 재배한 무농약 쌈채소</h3>
+          <p class="text-stone-600 leading-relaxed text-sm" data-i18n="feature1-desc">
             직접 농사를 지어 엄격하게 길러낸 부드러운 상추와 쌈채소들을 아낌없이 가득 내어드립니다. 아삭함이 다른 천연 재배 쌈의 특별함을 확인해보세요.
           </p>
         </div>
@@ -414,8 +443,8 @@
           <div class="w-14 h-14 rounded-2xl bg-amber-50 text-brand-wood flex items-center justify-center text-2xl mb-6 group-hover:bg-brand-wood group-hover:text-white transition-all duration-300">
             <i class="fa-solid fa-clock-rotate-left"></i>
           </div>
-          <h3 class="text-xl font-bold text-stone-900 mb-3">24시간 언제나 열린 정성</h3>
-          <p class="text-stone-600 leading-relaxed text-sm">
+          <h3 class="text-xl font-bold text-stone-900 mb-3" data-i18n="feature2-title">24시간 언제나 열린 정성</h3>
+          <p class="text-stone-600 leading-relaxed text-sm" data-i18n="feature2-desc">
             제주 여행 중 늦은 새벽 도착 시나, 이른 아침 비행기를 타기 전 든든히 먹고 싶을 때 언제나 열려있습니다. 식지 않는 화력으로 따끈한 집밥을 제공합니다.
           </p>
         </div>
@@ -613,7 +642,7 @@
 
       <!-- 갤러리 펼쳐보기 버튼 -->
       <div class="mt-12 text-center" data-aos="fade-up">
-        <button id="toggle-gallery-btn" onclick="toggleGallery()" class="inline-flex items-center gap-2.5 text-sm font-bold text-emerald-700 hover:text-white bg-emerald-50 hover:bg-emerald-600 px-8 py-4 rounded-full border border-emerald-300/80 transition-all duration-300 shadow-md hover:scale-105">
+        <button id="toggle-gallery-btn" onclick="toggleGallery()" class="inline-flex items-center gap-2.5 text-sm font-bold text-emerald-700 hover:text-white bg-emerald-50 hover:bg-emerald-600 px-8 py-4 rounded-full border border-emerald-300/80 transition-all duration-300 shadow-md hover:scale-105" data-i18n="gallery-more">
           <i class="fa-solid fa-images"></i> <span id="toggle-gallery-text">농장 사진 더보기 (17개 전체)</span> <i id="toggle-gallery-icon" class="fa-solid fa-chevron-down text-xs"></i>
         </button>
       </div>
@@ -629,9 +658,9 @@
       
       <!-- 상단 헤더 -->
       <div class="text-center max-w-3xl mx-auto mb-16" data-aos="fade-up">
-        <span class="text-xs font-bold text-brand-darkgreen uppercase tracking-widest bg-green-50 px-3 py-1 rounded-full border border-green-200/30">SIGNATURE MENU</span>
-        <h2 class="text-3xl sm:text-4xl font-extrabold text-stone-900 tracking-tight mt-4">네이버 플레이스 기준 대표 상차림</h2>
-        <p class="mt-4 text-stone-500 font-semibold text-sm leading-relaxed">
+        <span class="text-xs font-bold text-brand-darkgreen uppercase tracking-widest bg-green-50 px-3 py-1 rounded-full border border-green-200/30" data-i18n="menu-signature">SIGNATURE MENU</span>
+        <h2 class="text-3xl sm:text-4xl font-extrabold text-stone-900 tracking-tight mt-4" data-i18n="menu-title">네이버 플레이스 기준 대표 상차림</h2>
+        <p class="mt-4 text-stone-500 font-semibold text-sm leading-relaxed" data-i18n="menu-note">
           * 정성을 가득 담아 주문 즉시 즉석 조리하며, 반찬은 놋그릇에 정갈하게 제공됩니다.
         </p>
       </div>
@@ -1132,8 +1161,8 @@
       
       <!-- 헤더 -->
       <div class="text-center max-w-3xl mx-auto mb-16" data-aos="fade-up">
-        <span class="text-sm font-bold text-brand-darkgreen uppercase tracking-widest block mb-3">CUSTOMER REVIEWS</span>
-        <h2 class="text-3xl font-extrabold text-stone-900 tracking-tight mb-4">방문객들이 증명하는 나니와의 평점</h2>
+        <span class="text-sm font-bold text-brand-darkgreen uppercase tracking-widest block mb-3" data-i18n="reviews-title">CUSTOMER REVIEWS</span>
+        <h2 class="text-3xl font-extrabold text-stone-900 tracking-tight mb-4" data-i18n="reviews-sub">방문객들이 증명하는 나니와의 평점</h2>
         
         <!-- 별점 요약 카드 -->
         <div class="flex flex-col sm:flex-row items-center justify-center gap-4 mt-6">
@@ -1144,7 +1173,7 @@
             <i class="fa-solid fa-star"></i>
             <i class="fa-solid fa-star-half-stroke"></i>
           </div>
-          <div class="text-stone-600 text-sm font-medium">
+          <div class="text-stone-600 text-sm font-medium" data-i18n="reviews-score">
             네이버 한식 평점 <strong class="text-stone-900 text-lg font-bold">4.28</strong>/5.00 (리뷰 <strong class="text-stone-900 font-bold">751</strong>건)
           </div>
         </div>
@@ -1154,23 +1183,23 @@
       <div class="grid grid-cols-2 md:grid-cols-5 gap-4 max-w-5xl mx-auto mb-16" data-aos="fade-up" data-aos-delay="100">
         <div class="bg-white px-5 py-4 rounded-2xl text-center shadow-xs border border-stone-200/50">
           <span class="block text-2xl font-bold text-brand-darkgreen mb-1">293명</span>
-          <span class="text-xs font-semibold text-stone-500">"음식이 맛있어요"</span>
+          <span class="text-xs font-semibold text-stone-500" data-i18n="review-stat-t1">"음식이 맛있어요"</span>
         </div>
         <div class="bg-white px-5 py-4 rounded-2xl text-center shadow-xs border border-stone-200/50">
           <span class="block text-2xl font-bold text-brand-wood mb-1">150명</span>
-          <span class="text-xs font-semibold text-stone-500">"친절해요"</span>
+          <span class="text-xs font-semibold text-stone-500" data-i18n="review-stat-t2">"친절해요"</span>
         </div>
         <div class="bg-white px-5 py-4 rounded-2xl text-center shadow-xs border border-stone-200/50">
           <span class="block text-2xl font-bold text-emerald-700 mb-1">131명</span>
-          <span class="text-xs font-semibold text-stone-500">"재료가 신선해요"</span>
+          <span class="text-xs font-semibold text-stone-500" data-i18n="review-stat-t3">"재료가 신선해요"</span>
         </div>
         <div class="bg-white px-5 py-4 rounded-2xl text-center shadow-xs border border-stone-200/50">
           <span class="block text-2xl font-bold text-stone-700 mb-1">107명</span>
-          <span class="text-xs font-semibold text-stone-500">"매장이 청결해요"</span>
+          <span class="text-xs font-semibold text-stone-500" data-i18n="review-stat-t4">"매장이 청결해요"</span>
         </div>
         <div class="bg-white px-5 py-4 rounded-2xl text-center shadow-xs border border-stone-200/50 col-span-2 md:col-span-1">
           <span class="block text-2xl font-bold text-yellow-600 mb-1">104명</span>
-          <span class="text-xs font-semibold text-stone-500">"가성비가 좋아요"</span>
+          <span class="text-xs font-semibold text-stone-500" data-i18n="review-stat-t5">"가성비가 좋아요"</span>
         </div>
       </div>
 
@@ -1183,13 +1212,13 @@
             <div class="flex items-center gap-1.5 text-yellow-500 text-sm mb-4">
               <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
             </div>
-            <p class="text-stone-700 text-sm leading-relaxed italic mb-6">
+            <p class="text-stone-700 text-sm leading-relaxed italic mb-6" data-i18n="review-r1">
               "채소들은 주인장님께서 직접 무농약으로 재배한 것들이라고 하니 너무 안심이 돼요. 쌈 채소가 엄청 부드럽고 신선해요! 자극적이지 않고 정갈한 반찬들은 꼭 엄마가 해주는 집밥 먹는 기분을 느끼게 해 줍니다."
             </p>
           </div>
           <div class="flex items-center justify-between border-t border-stone-100 pt-4 mt-auto">
-            <span class="text-xs font-bold text-stone-900">아리아리 (25.08.13 방문)</span>
-            <span class="text-xs bg-stone-100 text-stone-500 px-2 py-0.5 rounded-full font-medium">영수증 인증</span>
+            <span class="text-xs font-bold text-stone-900" data-i18n="review-r1-auth">아리아리 (25.08.13 방문)</span>
+            <span class="text-xs bg-stone-100 text-stone-500 px-2 py-0.5 rounded-full font-medium" data-i18n="review-receipt">영수증 인증</span>
           </div>
         </div>
 
@@ -1199,13 +1228,13 @@
             <div class="flex items-center gap-1.5 text-yellow-500 text-sm mb-4">
               <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
             </div>
-            <p class="text-stone-700 text-sm leading-relaxed italic mb-6">
+            <p class="text-stone-700 text-sm leading-relaxed italic mb-6" data-i18n="review-r2">
               "메인인 제육볶음 양념이 전혀 자극적이지 않고 딱 밥도둑 스타일입니다! 불향이 솔솔 나서 정말 입에 쫙 감기더라구요. 같이 나오는 된장찌개도 옛날 시골 집된장처럼 구수하고 깊어 한 그릇 뚝딱 비웠습니다."
             </p>
           </div>
           <div class="flex items-center justify-between border-t border-stone-100 pt-4 mt-auto">
-            <span class="text-xs font-bold text-stone-900">galzimao 갈지마오 (25.11.10 방문)</span>
-            <span class="text-xs bg-stone-100 text-stone-500 px-2 py-0.5 rounded-full font-medium">단골고객</span>
+            <span class="text-xs font-bold text-stone-900" data-i18n="review-r2-auth">galzimao 갈지마오 (25.11.10 방문)</span>
+            <span class="text-xs bg-stone-100 text-stone-500 px-2 py-0.5 rounded-full font-medium" data-i18n="review-regular">단골고객</span>
           </div>
         </div>
 
@@ -1215,13 +1244,13 @@
             <div class="flex items-center gap-1.5 text-yellow-500 text-sm mb-4">
               <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
             </div>
-            <p class="text-stone-700 text-sm leading-relaxed italic mb-6">
+            <p class="text-stone-700 text-sm leading-relaxed italic mb-6" data-i18n="review-r3">
               "제주공항 가기 전 마지막 한 끼로 고등어구이정식 먹었어요. 큼직한 고등어가 비린내 하나도 없이 바삭하고 속 촉촉하게 잘 구워졌어요. 반찬도 가짓수가 푸짐하게 나오고 사장님도 너무 친절하셔서 다음에 무조건 재방문 예정입니다."
             </p>
           </div>
           <div class="flex items-center justify-between border-t border-stone-100 pt-4 mt-auto">
-            <span class="text-xs font-bold text-stone-900">랄라라라라라 (25.12.06 방문)</span>
-            <span class="text-xs bg-stone-100 text-stone-500 px-2 py-0.5 rounded-full font-medium">영수증 인증</span>
+            <span class="text-xs font-bold text-stone-900" data-i18n="review-r3-auth">랄라라라라라 (25.12.06 방문)</span>
+            <span class="text-xs bg-stone-100 text-stone-500 px-2 py-0.5 rounded-full font-medium" data-i18n="review-receipt">영수증 인증</span>
           </div>
         </div>
 
@@ -1242,8 +1271,8 @@
         <!-- 오시는 길 상세 텍스트 -->
         <div class="lg:col-span-5 flex flex-col justify-between" data-aos="fade-right">
           <div>
-            <span class="text-sm font-bold text-brand-darkgreen uppercase tracking-widest block mb-3">LOCATION & INFO</span>
-            <h2 class="text-3xl font-extrabold text-stone-900 tracking-tight leading-tight mb-8">
+            <span class="text-sm font-bold text-brand-darkgreen uppercase tracking-widest block mb-3" data-i18n="loc-title">LOCATION & INFO</span>
+            <h2 class="text-3xl font-extrabold text-stone-900 tracking-tight leading-tight mb-8" data-i18n="loc-sub">
               제주 신라면세점 바로 뒤,<br>
               편안한 발걸음으로 오세요
             </h2>
@@ -1256,9 +1285,9 @@
                   <i class="fa-solid fa-map-pin"></i>
                 </div>
                 <div>
-                  <h4 class="font-bold text-stone-900 text-base">도로명 주소</h4>
-                  <p class="text-stone-600 text-sm mt-1">제주 제주시 연동3길 36 1층 나니와</p>
-                  <p class="text-stone-400 text-xs mt-0.5">(신제주 신라면세점 후문에서 도보 1분 거리)</p>
+                  <h4 class="font-bold text-stone-900 text-base" data-i18n="loc-lbl-addr">도로명 주소</h4>
+                  <p class="text-stone-600 text-sm mt-1" data-i18n="loc-val-addr">제주 제주시 연동3길 36 1층 나니와</p>
+                  <p class="text-stone-400 text-xs mt-0.5" data-i18n="loc-sub-addr">(신제주 신라면세점 후문에서 도보 1분 거리)</p>
                 </div>
               </div>
 
@@ -1268,9 +1297,9 @@
                   <i class="fa-solid fa-clock"></i>
                 </div>
                 <div>
-                  <h4 class="font-bold text-stone-900 text-base">영업 시간</h4>
-                  <p class="text-emerald-700 font-bold text-sm mt-1">24시간 영업, 연중무휴</p>
-                  <p class="text-stone-400 text-xs mt-0.5">※ 단체 및 예약 문의는 전화 또는 네이버 예약 권장</p>
+                  <h4 class="font-bold text-stone-900 text-base" data-i18n="loc-lbl-time">영업 시간</h4>
+                  <p class="text-emerald-700 font-bold text-sm mt-1" data-i18n="loc-val-time">24시간 영업, 연중무휴</p>
+                  <p class="text-stone-400 text-xs mt-0.5" data-i18n="loc-sub-time">※ 단체 및 예약 문의는 전화 또는 네이버 예약 권장</p>
                 </div>
               </div>
 
@@ -1280,9 +1309,9 @@
                   <i class="fa-solid fa-car"></i>
                 </div>
                 <div>
-                  <h4 class="font-bold text-stone-900 text-base">주차 정보</h4>
-                  <p class="text-stone-600 text-sm mt-1">건물 바로 옆 전용 주차장 구비 (다소 협소할 수 있습니다)</p>
-                  <p class="text-stone-500 text-xs mt-0.5">※ 전용 주차장 만차 시 식당 전면 도로변 주차 또는 도보 이동을 추천합니다.</p>
+                  <h4 class="font-bold text-stone-900 text-base" data-i18n="loc-lbl-park">주차 정보</h4>
+                  <p class="text-stone-600 text-sm mt-1" data-i18n="loc-val-park">건물 바로 옆 전용 주차장 구비 (다소 협소할 수 있습니다)</p>
+                  <p class="text-stone-500 text-xs mt-0.5" data-i18n="loc-sub-park">※ 전용 주차장 만차 시 식당 전면 도로변 주차 또는 도보 이동을 추천합니다.</p>
                 </div>
               </div>
 
@@ -1292,10 +1321,10 @@
           <!-- 전화 & 예약 바로가기 액션 영역 -->
           <div class="mt-10 pt-8 border-t border-stone-100 flex flex-col sm:flex-row gap-4">
             <a href="tel:064-711-3880" class="flex-1 flex items-center justify-center gap-3 bg-stone-900 hover:bg-stone-850 text-white font-bold py-3.5 rounded-xl transition-colors shadow">
-              <i class="fa-solid fa-phone"></i> 전화 문의
+              <i class="fa-solid fa-phone"></i> <span data-i18n="loc-btn-call">전화 문의</span>
             </a>
             <a href="https://naver.me/GZDhrNz2" target="_blank" rel="noopener noreferrer" class="flex-1 flex items-center justify-center gap-3 bg-emerald-600 hover:bg-emerald-500 text-white font-bold py-3.5 rounded-xl transition-colors shadow-lg shadow-emerald-900/10">
-              <i class="fa-solid fa-map-location-dot"></i> 네이버 지도로 보기
+              <i class="fa-solid fa-map-location-dot"></i> <span data-i18n="loc-btn-map">네이버 지도로 보기</span>
             </a>
           </div>
 
@@ -1310,11 +1339,11 @@
             <div class="flex items-center gap-3">
               <div class="w-8 h-8 rounded-full bg-brand-darkgreen flex items-center justify-center text-white text-xs font-bold shrink-0">나</div>
               <div>
-                <h5 class="text-xs font-bold text-stone-900">나니와 향토음식점</h5>
-                <p class="text-[10px] text-stone-500 mt-0.5">제주 제주시 연동3길 36</p>
+                <h5 class="text-xs font-bold text-stone-900" data-i18n="loc-map-name">나니와 향토음식점</h5>
+                <p class="text-[10px] text-stone-500 mt-0.5" data-i18n="loc-map-sub">제주 제주시 연동3길 36</p>
               </div>
             </div>
-            <a href="https://naver.me/GZDhrNz2" target="_blank" rel="noopener noreferrer" class="text-xs font-bold text-emerald-600 hover:underline shrink-0 flex items-center gap-1">
+            <a href="https://naver.me/GZDhrNz2" target="_blank" rel="noopener noreferrer" class="text-xs font-bold text-emerald-600 hover:underline shrink-0 flex items-center gap-1" data-i18n="loc-map-dir">
               길찾기 <i class="fa-solid fa-arrow-up-right-from-square text-[10px]"></i>
             </a>
           </div>
@@ -1347,7 +1376,7 @@
             </div>
             <span class="text-lg font-bold text-white tracking-wider">나니와</span>
           </div>
-          <p class="text-stone-500 text-sm leading-relaxed mb-6">
+          <p class="text-stone-500 text-sm leading-relaxed mb-6" data-i18n="footer-desc">
             주인장이 직접 정성으로 경작한 무농약 쌈채소와 제주의 자연을 놋그릇에 담아내는 제주 향토음식 전문 브랜드입니다. 언제나 따뜻하고 정갈한 밥상으로 모시겠습니다.
           </p>
           <div class="flex items-center gap-3">
@@ -1362,33 +1391,33 @@
 
         <!-- 단축 링크 -->
         <div class="md:col-span-3">
-          <h4 class="text-white font-bold text-sm tracking-wider uppercase mb-4">메뉴 바로가기</h4>
+          <h4 class="text-white font-bold text-sm tracking-wider uppercase mb-4" data-i18n="footer-menu">메뉴 바로가기</h4>
           <ul class="space-y-2 text-sm text-stone-500">
-            <li><a href="#about" class="hover:text-white transition-colors">브랜드 스토리</a></li>
-            <li><a href="#features" class="hover:text-white transition-colors">나니와의 고집</a></li>
-            <li><a href="#gallery" class="hover:text-white transition-colors">농장 갤러리</a></li>
-            <li><a href="#menu" class="hover:text-white transition-colors">대표 메뉴</a></li>
-            <li><a href="#reviews" class="hover:text-white transition-colors">고객 후기</a></li>
-            <li><a href="#location" class="hover:text-white transition-colors">오시는 길</a></li>
+            <li><a href="#about" class="hover:text-white transition-colors" data-i18n="nav-about">브랜드 스토리</a></li>
+            <li><a href="#features" class="hover:text-white transition-colors" data-i18n="nav-features">나니와의 고집</a></li>
+            <li><a href="#gallery" class="hover:text-white transition-colors" data-i18n="nav-gallery">농장 갤러리</a></li>
+            <li><a href="#menu" class="hover:text-white transition-colors" data-i18n="nav-menu">대표 메뉴</a></li>
+            <li><a href="#reviews" class="hover:text-white transition-colors" data-i18n="nav-reviews">고객 후기</a></li>
+            <li><a href="#location" class="hover:text-white transition-colors" data-i18n="nav-location">오시는 길</a></li>
           </ul>
         </div>
 
         <!-- 사업자 정보 -->
         <div class="md:col-span-4">
-          <h4 class="text-white font-bold text-sm tracking-wider uppercase mb-4">매장 및 사업자 정보</h4>
+          <h4 class="text-white font-bold text-sm tracking-wider uppercase mb-4" data-i18n="footer-info">매장 및 사업자 정보</h4>
           <ul class="space-y-2 text-sm text-stone-500">
-            <li><span class="text-stone-400 font-semibold">대표자:</span> 나니와 대표 이모님</li>
-            <li><span class="text-stone-400 font-semibold">주소:</span> 제주 제주시 연동3길 36 1층</li>
-            <li><span class="text-stone-400 font-semibold">예약/문의:</span> <a href="tel:064-711-3880" class="hover:text-white transition-colors">064-711-3880</a></li>
-            <li><span class="text-stone-400 font-semibold">편의사항:</span> 주차, 단체석, 아기의자, 포장, 예약, 반려동물 동반 가능</li>
+            <li><span class="text-stone-400 font-semibold" data-i18n="footer-rep">대표자:</span> <span data-i18n="footer-rep-val">나니와 대표 이모님</span></li>
+            <li><span class="text-stone-400 font-semibold" data-i18n="footer-addr">주소:</span> <span data-i18n="footer-addr-val">제주 제주시 연동3길 36 1층</span></li>
+            <li><span class="text-stone-400 font-semibold" data-i18n="footer-call">예약/문의:</span> <a href="tel:064-711-3880" class="hover:text-white transition-colors">064-711-3880</a></li>
+            <li><span class="text-stone-400 font-semibold" data-i18n="footer-amen">편의사항:</span> <span data-i18n="footer-amen-val">주차, 단체석, 아기의자, 포장, 예약, 반려동물 동반 가능</span></li>
           </ul>
         </div>
       </div>
 
       <!-- 카피라이트 -->
       <div class="border-t border-stone-800 pt-8 flex flex-col md:flex-row items-center justify-between text-xs text-stone-600 font-semibold">
-        <p>© 2026 나니와. All Rights Reserved. Designed for Health & Nature.</p>
-        <p class="mt-2 md:mt-0">제주 연동 신라면세점 후문 대표 24시 맛집</p>
+        <p data-i18n="footer-copy">© 2026 나니와. All Rights Reserved. Designed for Health & Nature.</p>
+        <p class="mt-2 md:mt-0" data-i18n="footer-sub">제주 연동 신라면세점 후문 대표 24시 맛집</p>
       </div>
 
     </div>
@@ -1420,6 +1449,7 @@
 
     // 스크롤 시 헤더 디자인 변경
     window.addEventListener('scroll', () => {
+      const langBtnDesktop = document.getElementById('lang-btn-desktop');
       if (window.scrollY > 50) {
         header.classList.remove('bg-transparent', 'py-4');
         header.classList.add('bg-white/90', 'backdrop-blur-md', 'shadow-md', 'py-2');
@@ -1437,6 +1467,11 @@
 
         mobileMenuBtn.classList.remove('text-white');
         mobileMenuBtn.classList.add('text-stone-850');
+        
+        if (langBtnDesktop) {
+          langBtnDesktop.classList.remove('text-white', 'border-white/30');
+          langBtnDesktop.classList.add('text-stone-700', 'border-stone-300');
+        }
       } else {
         header.classList.remove('bg-white/90', 'backdrop-blur-md', 'shadow-md', 'py-2');
         header.classList.add('bg-transparent', 'py-4');
@@ -1454,6 +1489,11 @@
 
         mobileMenuBtn.classList.remove('text-stone-850');
         mobileMenuBtn.classList.add('text-white');
+        
+        if (langBtnDesktop) {
+          langBtnDesktop.classList.remove('text-stone-700', 'border-stone-300');
+          langBtnDesktop.classList.add('text-white', 'border-white/30');
+        }
       }
     });
 
@@ -1514,14 +1554,14 @@
     });
 
     // 핀 꽂기
-    L.marker([33.4883, 126.4916], { icon: customIcon }).addTo(map)
+    window.mapMarker = L.marker([33.4883, 126.4916], { icon: customIcon }).addTo(map)
       .bindPopup(`
         <div style="font-family: 'Pretendard', sans-serif; text-align: center;">
           <h4 style="margin: 0; font-weight: 800; color: #064e3b; font-size: 13px;">나니와</h4>
           <p style="margin: 3px 0 0 0; font-size: 11px; color: #555;">직접 재배 무농약 채소 & 한식</p>
         </div>
-      `)
-      .openPopup();
+      `);
+    window.mapMarker.openPopup();
   </script>
 
   <!-- [추가 전체 메뉴 펼쳐보기 인터랙션 스크립트] -->
@@ -1532,6 +1572,20 @@
       const icon = document.getElementById('toggle-menu-icon');
       const btn = document.getElementById('toggle-menu-btn');
 
+      const currentLang = document.documentElement.lang || 'ko';
+      const showTextMap = {
+        ko: '전체 메뉴 펼쳐보기 (20개 전체)',
+        en: 'View All Menu (20 Items)',
+        zh: '展开全部菜单 (共20个)',
+        ja: 'メニューをすべて開く (全20種)'
+      };
+      const hideTextMap = {
+        ko: '전체 메뉴 접기',
+        en: 'Collapse Menu',
+        zh: '收起菜单',
+        ja: 'メニューを折りたたむ'
+      };
+
       if (container.classList.contains('hidden')) {
         // 펼치기
         container.classList.remove('hidden');
@@ -1539,7 +1593,7 @@
         setTimeout(() => {
           container.classList.remove('opacity-0', 'translate-y-4');
         }, 10);
-        text.innerText = '전체 메뉴 접기';
+        text.innerText = hideTextMap[currentLang] || hideTextMap['ko'];
         icon.classList.remove('fa-chevron-down');
         icon.classList.add('fa-chevron-up');
         
@@ -1552,7 +1606,7 @@
         setTimeout(() => {
           container.classList.add('hidden');
         }, 300);
-        text.innerText = '전체 메뉴 펼쳐보기 (20개 전체)';
+        text.innerText = showTextMap[currentLang] || showTextMap['ko'];
         icon.classList.remove('fa-chevron-up');
         icon.classList.add('fa-chevron-down');
 
@@ -1714,6 +1768,20 @@
       const hiddenItems = Array.from(items).slice(8);
       const isHidden = hiddenItems[0].classList.contains('hidden');
 
+      const currentLang = document.documentElement.lang || 'ko';
+      const showTextMap = {
+        ko: '농장 사진 더보기 (17개 전체)',
+        en: 'View More Photos (All 17)',
+        zh: '查看更多农场照片 (共17张)',
+        ja: '農場の写真をもっと見る (全17枚)'
+      };
+      const hideTextMap = {
+        ko: '갤러리 접기',
+        en: 'Collapse Gallery',
+        zh: '收起画廊',
+        ja: 'ギャラリーを閉じる'
+      };
+
       if (isHidden) {
         // 보이기
         hiddenItems.forEach((item, idx) => {
@@ -1724,7 +1792,7 @@
             item.classList.add('opacity-100', 'translate-y-0');
           }, idx * 50);
         });
-        text.innerText = '갤러리 접기';
+        text.innerText = hideTextMap[currentLang] || hideTextMap['ko'];
         icon.classList.remove('fa-chevron-down');
         icon.classList.add('fa-chevron-up');
         btn.classList.remove('bg-emerald-50', 'text-emerald-700');
@@ -1738,7 +1806,7 @@
             item.classList.add('hidden');
           }, 300);
         });
-        text.innerText = '농장 사진 더보기 (17개 전체)';
+        text.innerText = showTextMap[currentLang] || showTextMap['ko'];
         icon.classList.remove('fa-chevron-up');
         icon.classList.add('fa-chevron-down');
         btn.classList.remove('bg-emerald-600', 'text-white');
@@ -1756,7 +1824,7 @@
   <div id="bgm-player-container" class="fixed bottom-6 right-6 z-[90] flex flex-col items-end">
     <!-- 안내 툴팁 -->
     <div id="bgm-tooltip" class="absolute bottom-16 right-0 bg-brand-darkgreen text-white text-xs px-3.5 py-2 rounded-2xl shadow-lg whitespace-nowrap animate-bounce pointer-events-none transition-all duration-500 ease-in-out">
-      <span>잔잔한 음악과 함께 감상해보세요 🎵</span>
+      <span data-i18n="bgm-tooltip">잔잔한 음악과 함께 감상해보세요 🎵</span>
       <!-- 말풍선 꼬리 -->
       <div class="absolute -bottom-1 right-6 w-2.5 h-2.5 bg-brand-darkgreen rotate-45"></div>
     </div>
@@ -1781,7 +1849,7 @@
 
       <!-- 곡 및 앨범명 정보 (모바일에서는 간결함을 위해 숨김) -->
       <div class="hidden sm:flex flex-col text-[10px] leading-tight select-none border-l border-stone-200/50 pl-3">
-        <span class="font-bold text-stone-700">배경음악</span>
+        <span class="font-bold text-stone-700" data-i18n="bgm-label">배경음악</span>
         <span id="bgm-track-title" class="text-stone-400 truncate max-w-[80px]" title="Kevin MacLeod - Easy Lemon">Easy Lemon</span>
       </div>
 
@@ -1924,6 +1992,638 @@
         }
       });
     })();
+  </script>
+
+  <!-- ========================================== -->
+  <!-- [10] 다국어 번역 시스템 (i18n) 스크립트 -->
+  <!-- ========================================== -->
+  <script>
+    const translations = {
+      ko: {
+        "header-sub-text": "제주 향토음식",
+        "nav-about": "브랜드 스토리",
+        "nav-features": "나니와의 고집",
+        "nav-gallery": "농장 갤러리",
+        "nav-menu": "대표 메뉴",
+        "nav-reviews": "고객 후기",
+        "nav-location": "오시는 길",
+        "nav-reserve": "네이버 예약하기",
+        "hero-badge": `<i class="fa-solid fa-leaf text-green-400"></i> 주인장이 직접 재배한 100% 무농약 채소`,
+        "hero-title": `제주 연동에서 만나는<br class="hidden sm:inline"> <span class="text-transparent bg-clip-text bg-gradient-to-r from-green-300 via-yellow-200 to-amber-200">정성 가득한 집밥의 따뜻함</span>`,
+        "hero-desc": `나니와는 직접 가꾼 텃밭의 신선한 무농약 쌈채소와 제주 향토 식재료로 손끝에서 빚어내는 건강한 한 끼를 대접합니다. 24시간 연중무휴로 언제든 든든한 온기를 채워드립니다.`,
+        "hero-cta-reserve": "네이버 예약 신청",
+        "hero-cta-call": "전화 주문 및 문의",
+        "hero-spec-24h": "24시간 영업 연중무휴",
+        "hero-spec-seats": "단체모임/가족석 완비",
+        "hero-spec-location": "신라면세점 후문 1분",
+        "hero-spec-parking": "주차 공간 제공",
+        "about-story": "BRAND STORY",
+        "about-title": `어머니의 품 같은 한 끼,<br>제주 자연을 그대로 그릇에 담다`,
+        "about-p1": `제주의 푸른 바람과 맑은 햇살 아래에서 자란 농작물이 가장 맛있고 건강합니다. 나니와는 주인장이 직접 텃밭을 일구며 정직하게 가꾼 <strong>100% 무농약 상추와 쌈채소</strong>를 테이블에 올립니다.`,
+        "about-p2": `자극적이고 정형화된 외식 메뉴 대신, 내 가족에게 양보 없이 차리는 정성 어린 밑반찬과 노릇한 생선구이, 그리고 깊은 풍미의 조림 요리까지. 한 입 맛보는 순간 느껴지는 깊고 자극적이지 않은 본연의 맛으로 진짜 제주의 집밥을 선물합니다.`,
+        "about-quote": `"우리가 먹지 못하는 것은 절대 상에 올리지 않습니다."`,
+        "about-stat-organic": "직접 재배 무농약 인증",
+        "about-stat-24h": "연중무휴 밤낮없는 환대",
+        "features-why": "WHY NANIWA",
+        "features-title": "단골들이 입을 모아 말하는 나니와의 3가지 약속",
+        "feature1-title": "직접 재배한 무농약 쌈채소",
+        "feature1-desc": "직접 농사를 지어 엄격하게 길러낸 부드러운 상추와 쌈채소들을 아낌없이 가득 내어드립니다. 아삭함이 다른 천연 재배 쌈의 특별함을 확인해보세요.",
+        "feature2-title": "24시간 언제나 열린 정성",
+        "feature2-desc": "제주 여행 중 늦은 새벽 도착 시나, 이른 아침 비행기를 타기 전 든든히 먹고 싶을 때 언제나 열려있습니다. 식지 않는 화력으로 따끈한 집밥을 제공합니다.",
+        "feature3-title": "가족 모임 및 단체 공간 완비",
+        "feature3-desc": "편안하고 아늑한 우드 인테리어 공간은 3개의 분할 좌석 구획과 중앙 긴 단체 테이블을 갖추어, 대가족이나 단체 관광객 식사도 쾌적하게 가능합니다. (아기의자 완비)",
+        "gallery-title": `안심하고 즐기는 먹거리,<br class="sm:hidden"> 나니와 친환경 직영 농장`,
+        "gallery-desc": `저희 매장에서 제공하는 신선한 쌈채소는 주인장이 직접 100% 무농약으로 친환경 재배합니다. 정직한 땀방울과 신선함이 가득한 농장의 풍경을 소개합니다.`,
+        "gallery-more": `<i class="fa-solid fa-images"></i> <span id="toggle-gallery-text">농장 사진 더보기 (17개 전체)</span> <i id="toggle-gallery-icon" class="fa-solid fa-chevron-down text-xs"></i>`,
+        "menu-signature": "SIGNATURE MENU",
+        "menu-title": "네이버 플레이스 기준 대표 상차림",
+        "menu-note": "* 정성을 가득 담아 주문 즉시 즉석 조리하며, 반찬은 놋그릇에 정갈하게 제공됩니다.",
+        "menu-toggle-more": `<i class="fa-solid fa-utensils"></i> <span id="toggle-menu-text">전체 메뉴 펼쳐보기 (20개 전체)</span> <i id="toggle-menu-icon" class="fa-solid fa-chevron-down text-xs"></i>`,
+        "menu-info-h4-side": "향토음식점 정기 찬 안내",
+        "menu-info-p-side": "밑반찬은 고급 놋그릇에 정갈하게 차려지며, 당일 아침 무쳐낸 오뎅볶음, 콩나물무침, 멸치볶음, 무생채 등 자극적이지 않고 건강한 집밥 반찬을 제공합니다.",
+        "menu-info-h4-extra": "다양한 한식 및 식사 코너",
+        "menu-info-p-extra": "이 외에도 전복죽(15,000원), 성게미역국(18,000원), 된장/김치찌개(10,000원), 계란말이, 갈치구이/조림 및 산낙지, 연포탕 등 다양한 안주 식사 코너가 준비되어 있습니다.",
+        "reviews-title": "CUSTOMER REVIEWS",
+        "reviews-sub": "방문객들이 증명하는 나니와의 평점",
+        "reviews-score": `네이버 한식 평점 <strong class="text-stone-900 text-lg font-bold">4.28</strong>/5.00 (리뷰 <strong class="text-stone-900 font-bold">751</strong>건)`,
+        "review-stat-t1": `"음식이 맛있어요"`,
+        "review-stat-t2": `"친절해요"`,
+        "review-stat-t3": `"재료가 신선해요"`,
+        "review-stat-t4": `"매장이 청결해요"`,
+        "review-stat-t5": `"가성비가 좋아요"`,
+        "review-receipt": "영수증 인증",
+        "review-regular": "단골고객",
+        "review-r1": `"채소들은 주인장님께서 직접 무농약으로 재배한 것들이라고 하니 너무 안심이 돼요. 쌈 채소가 엄청 부드럽고 신선해요! 자극적이지 않고 정갈한 반찬들은 꼭 엄마가 해주는 집밥 먹는 기분을 느끼게 해 줍니다."`,
+        "review-r1-auth": "아리아리 (25.08.13 방문)",
+        "review-r2": `"메인인 제육볶음 양념이 전혀 자극적이지 않고 딱 밥도둑 스타일입니다! 불향이 솔솔 나서 정말 입에 쫙 감기더라구요. 같이 나오는 된장찌개도 옛날 시골 집된장처럼 구수하고 깊어 한 그릇 뚝딱 비웠습니다."`,
+        "review-r2-auth": "galzimao 갈지마오 (25.11.10 방문)",
+        "review-r3": `"제주공항 가기 전 마지막 한 끼로 고등어구이정식 먹었어요. 큼직한 고등어가 비린내 하나도 없이 바삭하고 속 촉촉하게 잘 구워졌어요. 반찬도 가짓수가 푸짐하게 나오고 사장님도 너무 친절하셔서 다음에 무조건 재방문 예정입니다."`,
+        "review-r3-auth": "랄라라라라라 (25.12.06 방문)",
+        "loc-title": "LOCATION & INFO",
+        "loc-sub": `제주 신라면세점 바로 뒤,<br>편안한 발걸음으로 오세요`,
+        "loc-lbl-addr": "도로명 주소",
+        "loc-val-addr": "제주 제주시 연동3길 36 1층 나니와",
+        "loc-sub-addr": "(신제주 신라면세점 후문에서 도보 1분 거리)",
+        "loc-lbl-time": "영업 시간",
+        "loc-val-time": "24시간 영업, 연중무휴",
+        "loc-sub-time": "※ 단체 및 예약 문의는 전화 또는 네이버 예약 권장",
+        "loc-lbl-park": "주차 정보",
+        "loc-val-park": "건물 바로 옆 전용 주차장 구비 (다소 협소할 수 있습니다)",
+        "loc-sub-park": "※ 전용 주차장 만차 시 식당 전면 도로변 주차 또는 도보 이동을 추천합니다.",
+        "loc-btn-call": "전화 문의",
+        "loc-btn-map": "네이버 지도로 보기",
+        "loc-map-name": "나니와 향토음식점",
+        "loc-map-sub": "제주 제주시 연동3길 36",
+        "loc-map-dir": `길찾기 <i class="fa-solid fa-arrow-up-right-from-square text-[10px]"></i>`,
+        "footer-desc": "주인장이 직접 정성으로 경작한 무농약 쌈채소와 제주의 자연을 놋그릇에 담아내는 제주 향토음식 전문 브랜드입니다. 언제나 따뜻하고 정갈한 밥상으로 모시겠습니다.",
+        "footer-menu": "메뉴 바로가기",
+        "footer-info": "매장 및 사업자 정보",
+        "footer-rep": "대표자:",
+        "footer-rep-val": "나니와 대표 이모님",
+        "footer-addr": "주소:",
+        "footer-addr-val": "제주 제주시 연동3길 36 1층",
+        "footer-call": "예약/문의:",
+        "footer-amen": "편의사항:",
+        "footer-amen-val": "주차, 단체석, 아기의자, 포장, 예약, 반려동물 동반 가능",
+        "footer-copy": "© 2026 나니와. All Rights Reserved. Designed for Health & Nature.",
+        "footer-sub": "제주 연동 신라면세점 후문 대표 24시 맛집",
+        "bgm-tooltip": "잔잔한 음악과 함께 감상해보세요 🎵",
+        "bgm-label": "배경음악"
+      },
+      en: {
+        "header-sub-text": "Jeju Local Food",
+        "nav-about": "Brand Story",
+        "nav-features": "Our Philosophy",
+        "nav-gallery": "Farm Gallery",
+        "nav-menu": "Signature Menu",
+        "nav-reviews": "Reviews",
+        "nav-location": "Location",
+        "nav-reserve": "Book on Naver",
+        "hero-badge": `<i class="fa-solid fa-leaf text-green-400"></i> 100% Organic Vegetables Grown by Owner`,
+        "hero-title": `The Warmth of a Heartfelt<br class="hidden sm:inline"> <span class="text-transparent bg-clip-text bg-gradient-to-r from-green-300 via-yellow-200 to-amber-200">Home-cooked Meal in Jeju</span>`,
+        "hero-desc": `Naniwa serves a healthy, handmade meal featuring fresh organic wrap vegetables from our garden and authentic Jeju ingredients. Open 24/7, we are always ready to fill you with warmth.`,
+        "hero-cta-reserve": "Book on Naver",
+        "hero-cta-call": "Call to Order/Inquire",
+        "hero-spec-24h": "Open 24/7 All Year",
+        "hero-spec-seats": "Group & Family Seats",
+        "hero-spec-location": "1 Min from Shilla Duty Free",
+        "hero-spec-parking": "Parking Provided",
+        "about-story": "BRAND STORY",
+        "about-title": `A Meal Like a Mother's Embrace,<br>Serving Jeju's Nature in a Bowl`,
+        "about-p1": `Crops grown under Jeju's blue wind and bright sunlight are the most delicious and healthy. Naniwa serves <strong>100% organic lettuce and wrap vegetables</strong> honestly cultivated by the owner in our garden.`,
+        "about-p2": `Instead of stimulating and standardized restaurant menus, we offer heartfelt side dishes, golden grilled fish, and deeply flavorful braised dishes made without compromise as if for our own family. We present real Jeju home-cooked meals with clean, non-stimulating tastes that you can feel from the first bite.`,
+        "about-quote": `"We never serve what we wouldn't eat ourselves."`,
+        "about-stat-organic": "100% Self-Grown Organic Certified",
+        "about-stat-24h": "24h Open All Year Welcoming Day & Night",
+        "features-why": "WHY NANIWA",
+        "features-title": "Naniwa's 3 Promises Confirmed by Our Regulars",
+        "feature1-title": "Self-Grown Organic Vegetables",
+        "feature1-desc": "We generously serve tender lettuce and wrap vegetables strictly cultivated on our farm. Experience the exceptional crispiness of naturally grown wraps.",
+        "feature2-title": "Always Open 24/7 Sincerity",
+        "feature2-desc": "Whether you arrive in Jeju late at night or need a hearty meal before an early morning flight, we are always open. We serve warm home-cooked meals with constant dedication.",
+        "feature3-title": "Group & Family Space Ready",
+        "feature3-desc": "Our comfortable, cozy wooden interior features three separate seating zones and a long central table, accommodating large families or tour groups comfortably. (High chairs available)",
+        "gallery-title": `Safe Food You Can Trust,<br class="sm:hidden"> Naniwa's Organic Direct Farm`,
+        "gallery-desc": `The fresh wrap vegetables served at our restaurant are 100% organic and eco-friendly, grown directly by the owner. Here is a glimpse of our farm, filled with honest sweat and freshness.`,
+        "gallery-more": `<i class="fa-solid fa-images"></i> <span id="toggle-gallery-text">View More Photos (All 17)</span> <i id="toggle-gallery-icon" class="fa-solid fa-chevron-down text-xs"></i>`,
+        "menu-signature": "SIGNATURE MENU",
+        "menu-title": "Signature Dishes from Naver Place",
+        "menu-note": "* Prepared fresh upon order with great care. Side dishes are neatly served in traditional brassware.",
+        "menu-toggle-more": `<i class="fa-solid fa-utensils"></i> <span id="toggle-menu-text">View All Menu (20 Items)</span> <i id="toggle-menu-icon" class="fa-solid fa-chevron-down text-xs"></i>`,
+        "menu-info-h4-side": "Local Restaurant Side Dish Info",
+        "menu-info-p-side": "Side dishes are neatly served in premium brassware, including stir-fried fish cakes, seasoned soybean sprouts, stir-fried anchovies, and seasoned radish strip salad prepared fresh every morning.",
+        "menu-info-h4-extra": "Various Korean Dining Options",
+        "menu-info-p-extra": "Additionally, we offer a variety of meals and drinking snacks such as abalone porridge (15,000 KRW), sea urchin seaweed soup (18,000 KRW), soybean/kimchi stew (10,000 KRW), rolled omelette, grilled/braised hairtail, live octopus, and clear octopus soup.",
+        "reviews-title": "CUSTOMER REVIEWS",
+        "reviews-sub": "Naniwa's Ratings Proven by Our Visitors",
+        "reviews-score": `Naver Korean Restaurant Rating <strong class="text-stone-900 text-lg font-bold">4.28</strong>/5.00 (<strong class="text-stone-900 font-bold">751</strong> Reviews)`,
+        "review-stat-t1": `"The food is delicious"`,
+        "review-stat-t2": `"Friendly service"`,
+        "review-stat-t3": `"Fresh ingredients"`,
+        "review-stat-t4": `"Clean environment"`,
+        "review-stat-t5": `"Good value for money"`,
+        "review-receipt": "Receipt Verified",
+        "review-regular": "Regular",
+        "review-r1": `"I feel so relieved knowing the vegetables are organically grown by the owner. The wrap greens are very tender and fresh! The clean, mild side dishes make me feel like I'm eating a mother's home-cooked meal."`,
+        "review-r1-auth": "Ariari (Visited on 25.08.13)",
+        "review-r2": `"The main spicy pork isn't stimulating at all, it's a perfect rice-thief! The subtle smoky flavor clings to your mouth. The accompanying soybean paste stew is as deep and savory as old countryside paste."`,
+        "review-r2-auth": "galzimao (Visited on 25.11.10)",
+        "review-r3": `"Had the grilled mackerel set as my last meal before going to Jeju Airport. The large mackerel was perfectly grilled, crispy outside and moist inside with no smell. With generous side dishes and friendly staff, I'll definitely return."`,
+        "review-r3-auth": "Lalala (Visited on 25.12.06)",
+        "loc-title": "LOCATION & INFO",
+        "loc-sub": `Right Behind Jeju Shilla Duty Free,<br>Walk Over with Comfort`,
+        "loc-lbl-addr": "Road Name Address",
+        "loc-val-addr": "Naniwa 1F, 36 Yeondong 3-gil, Jeju-si, Jeju",
+        "loc-sub-addr": "(1 minute walk from Shilla Duty Free Shop back gate in Shinjeju)",
+        "loc-lbl-time": "Business Hours",
+        "loc-val-time": "Open 24 Hours, All Year Round",
+        "loc-sub-time": "* Phone calls or Naver Bookings are recommended for groups and reservations",
+        "loc-lbl-park": "Parking Info",
+        "loc-val-park": "Dedicated parking lot next to the building (can be small)",
+        "loc-sub-park": "* If full, roadside parking in front of the restaurant or walking is recommended.",
+        "loc-btn-call": "Call Inquiry",
+        "loc-btn-map": "View on Naver Map",
+        "loc-map-name": "Naniwa Local Restaurant",
+        "loc-map-sub": "36 Yeondong 3-gil, Jeju-si, Jeju",
+        "loc-map-dir": `Directions <i class="fa-solid fa-arrow-up-right-from-square text-[10px]"></i>`,
+        "footer-desc": "Naniwa is a local Jeju brand serving nature in brassware along with organic wrap vegetables grown with care by the owner. We always welcome you with a warm, neat meal.",
+        "footer-menu": "Menu Shortcuts",
+        "footer-info": "Store & Business Info",
+        "footer-rep": "Representative:",
+        "footer-rep-val": "Naniwa Representative",
+        "footer-addr": "Address:",
+        "footer-addr-val": "1F, 36 Yeondong 3-gil, Jeju-si, Jeju",
+        "footer-call": "Reservations/Inquiry:",
+        "footer-amen": "Amenities:",
+        "footer-amen-val": "Parking, Group seating, High chairs, Takeout, Reservation, Pet friendly",
+        "footer-copy": "© 2026 Naniwa. All Rights Reserved. Designed for Health & Nature.",
+        "footer-sub": "Jeju Yeon-dong Shilla Duty Free Back Gate Representative 24/7 Restaurant",
+        "bgm-tooltip": "Enjoy with gentle background music 🎵",
+        "bgm-label": "BGM"
+      },
+      zh: {
+        "header-sub-text": "济州本土餐",
+        "nav-about": "品牌故事",
+        "nav-features": "我们的坚持",
+        "nav-gallery": "农场画廊",
+        "nav-menu": "招牌菜单",
+        "nav-reviews": "客户评价",
+        "nav-location": "交通指南",
+        "nav-reserve": "Naver 预约",
+        "hero-badge": `<i class="fa-solid fa-leaf text-green-400"></i> 店主亲手种植的100%无农药蔬菜`,
+        "hero-title": `在济州莲洞品尝<br class="hidden sm:inline"> <span class="text-transparent bg-clip-text bg-gradient-to-r from-green-300 via-yellow-200 to-amber-200">充满诚意的家常便饭</span>`,
+        "hero-desc": `“Naniwa”用亲自打理的菜园里的新鲜无农药包饭菜和济州本土食材，为您献上手工制作 of 健康一餐。24小时全年无休，随时为您提供满满的温暖。`,
+        "hero-cta-reserve": "预约 Naver",
+        "hero-cta-call": "电话订购与咨询",
+        "hero-spec-24h": "24小时营业 全年无休",
+        "hero-spec-seats": "团队聚会/家庭席完备",
+        "hero-spec-location": "新罗免税店后门1分钟",
+        "hero-spec-parking": "提供停车位",
+        "about-story": "品牌故事",
+        "about-title": `母亲怀抱般的一餐，<br>将济州自然原汁原味呈现在碗中`,
+        "about-p1": `在济州蔚蓝的微风和明媚的阳光下长大的农作物最美味、最健康。 “Naniwa”为您提供店主在菜园里诚心种植的<strong>100%无农药生菜和包饭菜</strong>。`,
+        "about-p2": `我们不提供刺激、公式化的外餐菜单，而是像为家人准备一样，毫无保留地献上充满心意的精美小菜、金黄的烤鱼以及风味浓郁的炖煮料理。入口即能感受到深邃、清淡的食材本味，为您送上真正的济州家常饭。`,
+        "about-quote": `"我们自己不吃的东西，绝不端上桌。"`,
+        "about-stat-organic": "100%亲手种植 无农药认证",
+        "about-stat-24h": "24小时全年无休 日夜热情款待",
+        "features-why": "WHY NANIWA",
+        "features-title": "常客们一致赞赏的 Naniwa 的 3大承诺",
+        "feature1-title": "亲手种植的无农药包饭菜",
+        "feature1-desc": "我们毫不吝啬地为您提供亲自耕作、严格栽培的鲜嫩生菜和包饭菜。请来体验口感格外爽脆的天然种植包菜的独特之处。",
+        "feature2-title": "24小时常在的诚意",
+        "feature2-desc": "无论您是在济州旅行中深夜抵达，还是想在清晨乘机前饱餐一顿，我们随时恭候。以不减的热情为您提供热腾腾的家常便饭。",
+        "feature3-title": "家庭聚会与团队空间完备",
+        "feature3-desc": "舒适温馨的原木风内装空间，设有3个分隔的座位区和中央的长条团队桌，即使是大家庭或团队游客也能舒适用餐。（备有婴儿椅）",
+        "gallery-title": `安心享用的美味,<br class="sm:hidden"> Naniwa 环保直营农场`,
+        "gallery-desc": `我们店内提供的新鲜包饭菜是由店主100%无农药亲自环保种植的。为您介绍充满诚实汗水与新鲜活力的农场风光。`,
+        "gallery-more": `<i class="fa-solid fa-images"></i> <span id="toggle-gallery-text">查看更多农场照片 (共17张)</span> <i id="toggle-gallery-icon" class="fa-solid fa-chevron-down text-xs"></i>`,
+        "menu-signature": "SIGNATURE MENU",
+        "menu-title": "Naver Place 招牌套餐",
+        "menu-note": "* 我们用心烹饪，现点现做，小菜整齐地盛放在黄铜器皿中。",
+        "menu-toggle-more": `<i class="fa-solid fa-utensils"></i> <span id="toggle-menu-text">展开全部菜单 (共20个)</span> <i id="toggle-menu-icon" class="fa-solid fa-chevron-down text-xs"></i>`,
+        "menu-info-h4-side": "本土餐饮定期小菜指南",
+        "menu-info-p-side": "小菜整齐地盛放在高档黄铜器皿中，提供当天清晨调拌的炒鱼饼、凉拌豆芽、炒鳀鱼、凉拌萝卜丝等清淡健康的家常小菜。",
+        "menu-info-h4-extra": "丰富多样的韩餐与用餐专区",
+        "menu-info-p-extra": "此外，还准备了鲍鱼粥（15,000韩元）、海胆海带汤（18,000韩元）、大酱/泡菜汤（10,000韩元）、鸡蛋卷、烤/炖带鱼、生章鱼、章鱼延泡汤等各种下酒菜和主食专区。",
+        "reviews-title": "CUSTOMER REVIEWS",
+        "reviews-sub": "游客证实的 Naniwa 评分",
+        "reviews-score": `Naver 韩餐评分 <strong class="text-stone-900 text-lg font-bold">4.28</strong>/5.00 (评论 <strong class="text-stone-900 font-bold">751</strong>条)`,
+        "review-stat-t1": `"食物好吃"`,
+        "review-stat-t2": `"服务态度好"`,
+        "review-stat-t3": `"食材新鲜"`,
+        "review-stat-t4": `"店内整洁"`,
+        "review-stat-t5": `"性价比高"`,
+        "review-receipt": "小票认证",
+        "review-regular": "老顾客",
+        "review-r1": `"听说蔬菜是店主亲自无农药种植的，让人非常放心。包饭菜特别鲜嫩新鲜！清淡整洁的小菜让人感觉就像在吃妈妈做的家常饭。"`,
+        "review-r1-auth": "Ariari (25.08.13 访问)",
+        "review-r2": `"主菜辣炒猪肉的调料一点也不刺激，简直是绝佳的下饭菜！带有淡淡的火香，味道十分美妙。附赠的大酱汤也像古老的乡下大酱一样香浓深邃，让人转眼就吃完了一整碗饭。"`,
+        "review-r2-auth": "galzimao (25.11.10 访问)",
+        "review-r3": `"去济州机场前吃的最后一餐是烤青鱼套餐。大块的青鱼烤得外酥里嫩，一点腥味都没有。小菜种类丰富，老板也十分热情，下次来济州一定会再光顾。"`,
+        "review-r3-auth": "Lalala (25.12.06 访问)",
+        "loc-title": "LOCATION & INFO",
+        "loc-sub": `济州新罗免税店正后方，<br>轻松步行即可到达`,
+        "loc-lbl-addr": "道路名地址",
+        "loc-val-addr": "济州济州市莲洞3街36 1楼 Naniwa",
+        "loc-sub-addr": "(从新济州新罗免税店后门步行1分钟)",
+        "loc-lbl-time": "营业时间",
+        "loc-val-time": "24小时营业，全年无休",
+        "loc-sub-time": "※ 团队及预约咨询建议通过电话或 Naver 预约",
+        "loc-lbl-park": "停车信息",
+        "loc-val-park": "大楼旁备有专用停车场（可能比较狭窄）",
+        "loc-sub-park": "※ 专用停车场满车时，建议在餐厅前马路边停车或步行前往。",
+        "loc-btn-call": "电话咨询",
+        "loc-btn-map": "在 Naver 地图查看",
+        "loc-map-name": "Naniwa 本土餐馆",
+        "loc-map-sub": "济州济州市莲洞3街36",
+        "loc-map-dir": `路线 <i class="fa-solid fa-arrow-up-right-from-square text-[10px]"></i>`,
+        "footer-desc": "“Naniwa”是济州本土餐饮专门品牌，为您献上店主倾心种植的无农药包饭菜，并将济州的自然之美融入黄铜器皿中。我们将始终为您提供温暖而整洁的餐桌。",
+        "footer-menu": "菜单导航",
+        "footer-info": "商家与事业者信息",
+        "footer-rep": "法人代表:",
+        "footer-rep-val": "Naniwa 代表",
+        "footer-addr": "地址:",
+        "footer-addr-val": "济州济州市莲洞3街36 1楼",
+        "footer-call": "预约/咨询:",
+        "footer-amen": "便利设施:",
+        "footer-amen-val": "停车、团体席、婴儿椅、外带、预约、可携带宠物",
+        "footer-copy": "© 2026 Naniwa. All Rights Reserved. Designed for Health & Nature.",
+        "footer-sub": "济州莲洞新罗免税店后门代表性24小时美食店",
+        "bgm-tooltip": "伴随着温和的背景音乐赏析吧 🎵",
+        "bgm-label": "背景音乐"
+      },
+      ja: {
+        "header-sub-text": "済州郷土料理",
+        "nav-about": "ブランドストーリー",
+        "nav-features": "なにわのこだわり",
+        "nav-gallery": "農場ギャラリー",
+        "nav-menu": "代表メニュー",
+        "nav-reviews": "お客様の声",
+        "nav-location": "アクセス",
+        "nav-reserve": "Naver予約",
+        "hero-badge": `<i class="fa-solid fa-leaf text-green-400"></i> 店主が直接栽培した100%無農薬野菜`,
+        "hero-title": `済州連洞で味わう<br class="hidden sm:inline"> <span class="text-transparent bg-clip-text bg-gradient-to-r from-green-300 via-yellow-200 to-amber-200">真心こもった家庭料理の温かさ</span>`,
+        "hero-desc": `なにわは、自家菜園で育てた新鮮な無農薬包み野菜と済州の郷土食材を使い、手作りで健康的な一食をご提供します。24時間年中無休で、いつでも温かい料理でお迎えします。`,
+        "hero-cta-reserve": "Naver予約",
+        "hero-cta-call": "電話注文・お問い合わせ",
+        "hero-spec-24h": "24時間営業 年중무휴",
+        "hero-spec-seats": "団体利用・家族席完備",
+        "hero-spec-location": "新羅免税店裏門から徒歩1分",
+        "hero-spec-parking": "駐車場あり",
+        "about-story": "BRAND STORY",
+        "about-title": `母の腕の中のような一食、<br>済州の自然をそのまま器に盛る`,
+        "about-p1": `済州の青い風と澄んだ日差しの中で育った作物が最も美味しく健康的です. なにわは、店主が畑を耕し、正直に育てた<strong>100%無農薬のサンチュと包み野菜</strong>をテーブルにお届けします。`,
+        "about-p2": `刺激的で画一的な外食メニューの代わりに、自分の家族に振る舞うように妥協なく作る心のこもったおかずや香ばしい焼き魚、그리고深い味わいの煮込み料理まで。一口食べた瞬間に感じられる、深く刺激の少ない本来の味で、本物の済州の家庭料理をお届けします。`,
+        "about-quote": `"私たちが食べられないものは、絶対に食卓に出しません。"`,
+        "about-stat-organic": "100%直接栽培 無農薬認証",
+        "about-stat-24h": "24時間年中無休 昼夜を問わぬおもてなし",
+        "features-why": "WHY NANIWA",
+        "features-title": "常連客が口を揃えて話すなにわの3つの約束",
+        "feature1-title": "直接栽培した無農薬包み野菜",
+        "feature1-desc": "直接畑仕事をして厳格に育て上げた柔らかいサンチュと包み野菜を惜しみなくたっぷりとお出しします。シャキシャキ感が違う天然栽培野菜の特別さをお確かめください。",
+        "feature2-title": "24時間いつでも開かれた真心",
+        "feature2-desc": "済州旅行中に深夜に到着された際や、早朝のフライト前にしっかり食事をしたい時など、いつでも開いています。冷めない火力で温かい家庭料理をご提供します。",
+        "feature3-title": "家族の集まりや団体スペース完備",
+        "feature3-desc": "居心地が良く温かみのあるウッドインテリアの空間は、3つの分割された座席エリアと中央の長い団体用テーブルを備え、大家族や団体観光客の食事も快適に楽しめます。（ベビーチェア完備）",
+        "gallery-title": `安心してお楽しみいただける食、<br class="sm:hidden"> なにわクリーン直営農場`,
+        "gallery-desc": `当店で提供する新鮮な包み野菜は、店主が直接100%無農薬で環境に優しく栽培したものです。正直な汗の雫と新鮮さに満ちた農장의風景をご紹介します。`,
+        "gallery-more": `<i class="fa-solid fa-images"></i> <span id="toggle-gallery-text">農場の写真をもっと見る (全17枚)</span> <i id="toggle-gallery-icon" class="fa-solid fa-chevron-down text-xs"></i>`,
+        "menu-signature": "SIGNATURE MENU",
+        "menu-title": "Naverプレイス基準の代表的なお膳",
+        "menu-note": "* 真心を込めてご注文をいただいてからその場で調理し、おかずは真鍮の器に綺麗に盛り付けられて提供されます。",
+        "menu-toggle-more": `<i class="fa-solid fa-utensils"></i> <span id="toggle-menu-text">メニューをすべて開く (全20種)</span> <i id="toggle-menu-icon" class="fa-solid fa-chevron-down text-xs"></i>`,
+        "menu-info-h4-side": "郷土料理店 定期おかず案内",
+        "menu-info-p-side": "おかずは高級な真鍮의器에綺麗に並べられ、当日の朝に和えたおでん炒め, もやし和え, イワシ炒め, 大根の千切りキム치 등, 刺激が少なく健康的な家庭料理のおかずを提供します。",
+        "menu-info-h4-extra": "様々な韓国料理＆お食事コーナー",
+        "menu-info-p-extra": "この他にもアワビ粥(15,000ウォン)、ウニワカメスープ(18,000ウォン)、味噌/キムチチゲ(10,000ウォン)、卵焼き、太刀魚焼き/煮付け、生タコ, ヨンポタンなど, 様々なおつまみやお食事コーナーが用意されています。",
+        "reviews-title": "CUSTOMER REVIEWS",
+        "reviews-sub": "訪問客が証明するなにわの評価",
+        "reviews-score": `Naver韓国料理の評価 <strong class="text-stone-900 text-lg font-bold">4.28</strong>/5.00 (口コミ <strong class="text-stone-900 font-bold">751</strong>件)`,
+        "review-stat-t1": `"料理が美味しいです"`,
+        "review-stat-t2": `"親切です"`,
+        "review-stat-t3": `"食材が新鮮です"`,
+        "review-stat-t4": `"店内が清潔です"`,
+        "review-stat-t5": `"コスパが良いです"`,
+        "review-receipt": "領収書認証",
+        "review-regular": "常連客",
+        "review-r1": `"野菜は店主が直接無農薬で栽培したものだそうで、とても安心できます。包み野菜がとても柔らかくて新鮮です！刺激が少なく端正なおかずは、まるで母が作ってくれる家庭料理を食べているような気分にさせてくれます。"`,
+        "review-r1-auth": "アリアリ (25.08.13 訪問)",
+        "review-r2": `"メインの豚肉炒めのタレが全く刺激的ではなく、まさにご飯が進むスタイルです！火の香りがふわっと漂って、本当に口の中にぴったり馴染みます。一緒に出てくる大味噌チゲも昔の田舎の家味噌のように香ばしく深みがあり、あっという間に一杯平らげました。"`,
+        "review-r2-auth": "galzimao (25.11.10 訪問)",
+        "review-r3": `"済州空港に行く前の最後の一食としてサバ焼き定食を食べました。大きめのサバが生臭さも全くなく、外はパリッと中はしっとりと美味しく焼かれていました。おかずも豊富に出てきて、社長さんもとても親切で、次回も絶対に再訪問する予定です。"`,
+        "review-r3-auth": "ラララ (25.12.06 訪問)",
+        "loc-title": "LOCATION & INFO",
+        "loc-sub": `済州新羅免税店の真裏、<br>心地よい足取りでお越しください`,
+        "loc-lbl-addr": "道路名住所",
+        "loc-val-addr": "済州済州市連洞3街36 1階 なにわ",
+        "loc-sub-addr": "(新済州新羅免税店裏門から徒歩1分)",
+        "loc-lbl-time": "営業時間",
+        "loc-val-time": "24時間営業、年中無休",
+        "loc-sub-time": "※ 団体および予約のご案内は、お電話またはNaver予約をおすすめします",
+        "loc-lbl-park": "駐車場情報",
+        "loc-val-park": "建物真横に専用駐車場あり（多少狭い場合があります）",
+        "loc-sub-park": "※ 専用駐車場が満車の場合は、食堂正面の道路脇に駐車するか、徒歩でのご移動をお勧めします。",
+        "loc-btn-call": "電話問い合わせ",
+        "loc-btn-map": "Naver地図で見る",
+        "loc-map-name": "なにわ郷土料理店",
+        "loc-map-sub": "済州済州市連洞3街36",
+        "loc-map-dir": `道案内 <i class="fa-solid fa-arrow-up-right-from-square text-[10px]"></i>`,
+        "footer-desc": "なにわは、店主が自ら丹精込めて耕作した無農薬包み野菜と済州の自然を真鍮の器に盛り付ける、済州郷土料理専門ブランドです。いつも温かく綺麗な食卓でお迎えいたします。",
+        "footer-menu": "メニューショートカット",
+        "footer-info": "店舗・事業者情報",
+        "footer-rep": "代表者:",
+        "footer-rep-val": "なにわ代表",
+        "footer-addr": "住所:",
+        "footer-addr-val": "済州済州市連洞3街36 1階",
+        "footer-call": "予約/問い合わせ:",
+        "footer-amen": "アメニティ:",
+        "footer-amen-val": "駐車場、団体席、ベビーチェア、テイクアウト、予約、ペット同伴可能",
+        "footer-copy": "© 2026 Naniwa. All Rights Reserved. Designed for Health & Nature.",
+        "footer-sub": "済州連洞新羅免税店裏門代表24時間名店",
+        "bgm-tooltip": "穏やかなBGMと共にお楽しみください 🎵",
+        "bgm-label": "BGM"
+      }
+    };
+
+    const menuTranslations = {
+      ko: {
+        1: { tag: "인기 메뉴", title: '제육쌈밥정식 <span class="text-xs text-stone-500 font-normal">(2인)</span>', desc: "은은하게 감도는 불향과 중독성 강한 매콤달콤 제육볶음! 직접 재배한 아삭하고 부드러운 무농약 쌈채소와 뚝배기 된장찌개가 한 상에 세팅됩니다.", footer: "직접 수확 쌈채소 무제한" },
+        2: { tag: "추천", title: '고등어조림정식 <span class="text-xs text-stone-500 font-normal">(2인)</span>', desc: "깊고 칼칼한 맛이 살아있는 매콤 소스에 두툼한 제주산 고등어와 큼직한 무를 달콤하게 졸여냈습니다. 입에 착 감기는 밥도둑 대표 조림 요리입니다.", footer: "공기밥 & 된장찌개 기본 제공" },
+        3: { tag: "", title: '고등어구이 정식', desc: "살이 꽉 찬 통통한 고등어를 오븐 화덕에서 겉은 바삭하고 속은 촉촉하게 한 조각 비린내 없이 정성스레 구워냈습니다. (※ 메뉴판 1인 기준 기재)", footer: "정갈한 집밥 찬 5종 세트" },
+        4: { tag: "제주 별미", title: '멜쌈밥정식 <span class="text-xs text-stone-500 font-normal">(2인)</span>', desc: "제주 로컬 향토의 숨은 진미! 신선하고 통통한 제주산 멜(멸치)을 자작하고 구수하게 졸여내어 직접 재배한 모둠 쌈채소에 듬뿍 얹어 즐기는 향토식 쌈밥입니다.", footer: "로컬 매니아층 강력 추천" },
+        5: { tag: "", title: '전복해물뚝배기', desc: "꿈틀거리는 싱싱한 제주 전복과 꽃게, 딱새우, 조개 등 모둠 해산물이 듬뿍 담겨 시원하고 깊은 천연 국물 맛을 자랑하는 얼큰 개운한 대표 뚝배기 요리입니다.", footer: "현지 해녀 직송 신선 전복" },
+        6: { tag: "", title: '보말칼국수', desc: "제주 청정 해역의 영양 가득한 미역과 갈지 않고 굵기 그대로를 보존한 굵직한 생보말이 아낌없이 들어가 감칠맛이 극대화된 진국 국수입니다.", footer: "성인 단골 선호 1위 칼국수" },
+        7: { tag: "", title: '보말죽', desc: "보말 내장을 한데 모아 진하고 고소하게 다져내어 참기름 향 솔솔 풍기며 아침 속을 편하게 채워주는 영양 가득 웰빙 보말죽입니다.", footer: "아침 식사 및 해장 추천" },
+        8: { tag: "", title: '옥돔구이 정식', desc: "최고급 품질의 귀한 제주산 옥돔을 정성스레 손질하여 비린내 없이 겉은 노릇노릇하고 속은 쫄깃 담백하게 구워낸 제주 향토 별미 구이입니다.", footer: "고품격 제주 잔치상 요리" },
+        9: { tag: "", title: '성게미역국', desc: "귀한 국산 성게알과 청정 제주 미역이 어우러져, 깊고 맑은 바다의 감칠맛을 온전히 뿜어내는 보양식 국 요리입니다.", footer: "고소하고 담백한 진한 보양 국물" },
+        10: { tag: "", title: '전복죽', desc: "싱싱한 활전복 내장을 고소하게 다져 푹 끓여내어 깊은 바다향과 진한 풍미가 으뜸인 고품격 웰빙 전복죽입니다.", footer: "원기 회복에 최고인 영양 죽" },
+        11: { tag: "", title: '김치찌개', desc: "잘 익은 묵은지와 두툼한 돼지고기를 듬뿍 넣어 얼큰하고 칼칼한 국물 맛이 일품인 대표 밥도둑 찌개입니다.", footer: "24시간 든든한 소울푸드" },
+        12: { tag: "", title: '된장찌개', desc: "구수한 시골식 된장에 두부, 호박, 조개 등 각종 야채와 해물을 듬뿍 넣어 자작하게 끓여낸 정갈한 찌개입니다.", footer: "어머니 손맛의 구수하고 시원한 찌개" },
+        13: { tag: "", title: '계란말이', desc: "신선한 야채가 쏙쏙 박힌 두툼하고 폭신폭신한 왕계란말이! 밥반찬으로도, 술안주로도 최고의 인기를 자랑합니다.", footer: "갓 부쳐내어 부드럽고 촉촉한 식감" },
+        14: { tag: "", title: '감자전', desc: "100% 생감자를 강판에 갈아서 겉은 과자처럼 바삭바삭하고 속은 쫄깃하게 구워내어 고소함이 으뜸인 감자전입니다.", footer: "막걸리와 환상의 앙상블을 이루는 맛" },
+        15: { tag: "", title: '낚지볶음', desc: "통통하고 실한 낙지를 특제 양념 소스로 센 화력에 빠르게 볶아내어, 기분 좋은 화끈한 매운맛을 자랑합니다.", footer: "쫄깃한 소면 사리 기본 매칭" },
+        16: { tag: "", title: '연포탕', desc: "살아있는 활낙지와 향긋한 미나리, 야채를 넣고 맑고 시원하게 끓여내어 보양과 해장에 극상인 국물 요리입니다.", footer: "깔끔하고 개운하게 속을 달래는 맑은 탕" },
+        17: { tag: "", title: '전복회', desc: "식당 수족관에서 활발히 움직이는 생전복을 주문 즉시 꺼내어 회로 썰어내어, 오독오독 씹히는 극상의 바다 싱그러움이 특징입니다.", footer: "살아있는 생전복회 최고의 신선도" },
+        18: { tag: "", title: '산낙지', desc: "팔딱팔딱 힘 있는 산낙지를 먹기 좋은 크기로 탕탕 썰어 참기름과 깨를 얹어내어 싱그럽고 고소한 술안주 탕탕이 요리입니다.", footer: "남녀노소 사랑받는 고소한 낙지 탕탕이" },
+        19: { tag: "", title: '갈치구이', desc: "제주 청정 바다의 은갈치만을 선별하여, 겉은 바삭하고 촉촉한 흰 살 생선 본연의 단맛과 풍미를 고스란히 느낄 수 있습니다.", footer: "제주산 은갈치 특대 크기" },
+        20: { tag: "", title: '갈치조림', desc: "매콤하고 중독성 강한 조림 양념장에 부드러운 은갈치를 큼직한 무와 감자와 함께 오랜 시간 정성스레 졸여낸 정통 조림입니다.", footer: "제주 은갈치 대표 조림 명가" }
+      },
+      en: {
+        1: { tag: "Popular", title: 'Spicy Pork Wrap Set <span class="text-xs text-stone-500 font-normal">(2 Servings)</span>', desc: "Smoky and addictive sweet-and-spicy pork! Served with fresh, tender self-grown organic wrap vegetables and a hot pot soybean paste stew.", footer: "Unlimited Self-Harvested Vegetables" },
+        2: { tag: "Recommended", title: 'Braised Mackerel Set <span class="text-xs text-stone-500 font-normal">(2 Servings)</span>', desc: "Thick Jeju mackerel and large radish chunks braised sweet and spicy in a deep, sharp sauce. A signature rice-thief dish.", footer: "Rice & Soybean Paste Stew Included" },
+        3: { tag: "", title: 'Grilled Mackerel Set', desc: "Plump mackerel grilled in an oven till crispy outside and moist inside, with absolutely no fishy smell. (* Price listed per person)", footer: "5 House Side Dishes Set" },
+        4: { tag: "Jeju Delicacy", title: 'Anchovy Wrap Set <span class="text-xs text-stone-500 font-normal">(2 Servings)</span>', desc: "A hidden local Jeju delicacy! Plump local anchovies braised savory and thick, served with self-grown wrap vegetables.", footer: "Highly Recommended by Locals" },
+        5: { tag: "", title: 'Abalone & Seafood Clay Pot', desc: "Jeju abalone, blue crab, redbanded lobster, and clams in a refreshing, deep natural broth. A spicy and clean hot pot signature.", footer: "Fresh Abalone Direct from Haenyeo" },
+        6: { tag: "", title: 'Jeju Sea Snail Noodle Soup', desc: "Nutritious seaweed from Jeju's clean sea and whole, unground local sea snails in a rich, savory noodle broth.", footer: "#1 Noodle Choice for Regulars" },
+        7: { tag: "", title: 'Jeju Sea Snail Porridge', desc: "Rich and savory porridge made from fresh sea snail offal, with a drizzle of sesame oil. Perfect for a comforting breakfast.", footer: "Great for Breakfast & Hangover Recovery" },
+        8: { tag: "", title: 'Grilled Tilefish Set', desc: "Premium Jeju tilefish prepared with care, grilled golden brown outside and chewy-tender inside, with no fishy smell.", footer: "High-class Jeju Feast Cuisine" },
+        9: { tag: "", title: 'Sea Urchin Seaweed Soup', desc: "Precious domestic sea urchin and clean Jeju seaweed combined for a deep, clear sea-flavored nourishing soup.", footer: "Rich, savory and light nutritious broth" },
+        10: { tag: "", title: 'Abalone Porridge', desc: "High-quality wellness porridge cooked with fresh abalone intestines, offering a deep ocean aroma and rich flavor.", footer: "Excellent nutritional porridge for stamina" },
+        11: { tag: "", title: 'Kimchi Stew', desc: "A hearty stew packed with well-fermented kimchi and thick pork slices, boasting a spicy, hot broth that pairs perfectly with rice.", footer: "Fulfilling 24h comfort soul food" },
+        12: { tag: "", title: 'Soybean Paste Stew', desc: "A neat stew made with savory country-style soybean paste, tofu, squash, clams, and various vegetables and seafood.", footer: "Savory and refreshing home-style taste" },
+        13: { tag: "", title: 'Rolled Omelette', desc: "A thick, fluffy giant rolled omelette packed with fresh vegetables. A highly popular side dish or drinking snack.", footer: "Freshly made soft and moist texture" },
+        14: { tag: "", title: 'Potato Pancake', desc: "100% raw potato grated and pan-fried until crispy like a cracker outside and chewy inside. Extremely savory.", footer: "Pairs perfectly with Makgeolli" },
+        15: { tag: "", title: 'Spicy Stir-fried Octopus', desc: "Plump, fleshy octopus quickly stir-fried over high heat in a special seasoning sauce. A delightfully fiery spice.", footer: "Served with chewy somyeon noodles" },
+        16: { tag: "", title: 'Clear Octopus Soup', desc: "Live octopus, fragrant water dropwort, and vegetables boiled in a clear, refreshing broth. Excellent for stamina and hangovers.", footer: "Clean and refreshing clear soup to soothe your stomach" },
+        17: { tag: "", title: 'Fresh Abalone Sashimi', desc: "Fresh abalone taken straight from our aquarium and sliced upon order. Offers a crunchy texture and ultimate sea freshness.", footer: "Ultimate freshness of live abalone sashimi" },
+        18: { tag: "", title: 'San-nakji (Live Octopus)', desc: "Active live octopus chopped into bite-sized pieces and served with sesame oil and seeds. A fresh, savory drinking snack.", footer: "Savory chopped octopus loved by all ages" },
+        19: { tag: "", title: 'Grilled Hairtail Fish', desc: "Only silver hairtail from Jeju's clean sea selected. Crispy outside, moist inside, bringing out the fish's natural sweetness.", footer: "Extra large Jeju silver hairtail" },
+        20: { tag: "", title: 'Braised Hairtail Fish', desc: "Tender silver hairtail braised for a long time with large radish chunks and potatoes in an addictive spicy sauce.", footer: "Renowned restaurant for Jeju hairtail stew" }
+      },
+      zh: {
+        1: { tag: "人气", title: '辣炒猪肉包饭套餐 <span class="text-xs text-stone-500 font-normal">(2人份)</span>', desc: "隐约的火香与令人上瘾的酸甜辣炒猪肉！亲自种植的爽脆鲜嫩的无农药包饭菜和石锅大酱汤整齐地摆满一桌。", footer: "亲手采摘包饭菜无限量供应" },
+        2: { tag: "推荐", title: '炖青鱼套餐 <span class="text-xs text-stone-500 font-normal">(2人份)</span>', desc: "在浓郁火辣的秘制酱汁中，将肥美的济州产青鱼和大块萝卜炖煮得香甜入味。是一道让人胃口大开的经典炖菜料理。", footer: "提供米饭和大酱汤" },
+        3: { tag: "", title: '烤青鱼套餐', desc: "将肉质饱满肥美的青鱼放入烤箱中精心烘烤，外酥里嫩，毫无腥味。（※ 菜单为单人份基准）", footer: "精美家常小菜5种组合" },
+        4: { tag: "济州美味", title: '炖鳀鱼包饭套餐 <span class="text-xs text-stone-500 font-normal">(2人份)</span>', desc: "济州当地隐藏的美味！将新鲜肥美的济州产鳀鱼炖煮得浓郁可口，搭配亲自种植的各种包饭菜一起享用的本土风味包饭。", footer: "深受当地老饕强烈推荐" },
+        5: { tag: "", title: '鲍鱼海鲜石锅汤', desc: "放入鲜活的济州鲍鱼、花蟹、红带大青虾、贝类等各种海鲜，汤汁清爽浓郁，是一道香辣解酒的招牌石锅料理。", footer: "当地海女直供新鲜鲍鱼" },
+        6: { tag: "", title: '海螺刀切面', desc: "济州洁净海域营养丰富的海带，配上完整保留原状的饱满新鲜海螺，是一碗鲜美无比的浓汤面条。", footer: "成年常客最爱刀切面第1名" },
+        7: { tag: "", title: '海螺粥', desc: "将海螺内脏收集在一起熬制成浓郁香浓的粥，散发着芝麻油的香气，是一碗营养满满、温暖晨胃的健康海螺粥。", footer: "推荐作为早餐与解酒餐" },
+        8: { tag: "", title: '烤马头鱼套餐', desc: "精心处理高品质的珍贵济州产马头鱼，外皮焦黄，肉质紧致清淡，毫无腥味，是济州本土特有的美味烤鱼。", footer: "高档济州宴席料理" },
+        9: { tag: "", title: '海胆海带汤', desc: "珍贵的国产海胆和济州洁净海带相融合，散发出深邃清澈的海洋鲜美，是一道滋补汤品。", footer: "香浓清淡的滋补浓汤" },
+        10: { tag: "", title: '鲍鱼粥', desc: "将新鲜活鲍鱼的内脏切碎后精心熬煮，海味浓郁，风味独特的高档健康鲍鱼粥。", footer: "最适合恢复元气的营养粥" },
+        11: { tag: "", title: '泡菜汤', desc: "放入大量熟透的酸泡菜和厚实的猪肉，汤头香辣过瘾，是经典的下饭汤。", footer: "24小时温暖人心的灵魂美食" },
+        12: { tag: "", title: '大酱汤', desc: "在香浓的乡下大酱中放入豆腐、角瓜、蛤蜊等各种蔬菜和海鲜，炖煮得浓稠鲜美的精美汤羹。", footer: "妈妈手艺般香浓清爽的汤" },
+        13: { tag: "", title: '鸡蛋卷', desc: "夹杂着新鲜蔬菜的厚实蓬松的大鸡蛋卷！无论是下饭还是下酒，都极具人气。", footer: "现做现烤，口感柔嫩多汁" },
+        14: { tag: "", title: '土豆饼', desc: "将100%生土豆擦成泥，煎至外皮像饼干一样酥脆，内里软糯，香气四溢的土豆饼。", footer: "与马格利酒绝配的美味" },
+        15: { tag: "", title: '辣炒章鱼', desc: "在旺火上快速翻炒肥美多汁的章鱼，佐以特制调料酱，具有令人愉悦的火辣口感。", footer: "标配劲道的面条" },
+        16: { tag: "", title: '章鱼延泡汤', desc: "加入鲜活的章鱼、香气扑鼻的水芹和蔬菜，炖煮成清澈清爽的汤汁，是滋补和解酒的极品料理。", footer: "清爽解腻、温暖肠胃的清汤" },
+        17: { tag: "", title: '生鲍鱼片', desc: "现点现从店内水族箱中捞出鲜活鲍鱼切成片，口感爽脆，散发着海洋的极致鲜美。", footer: "活生鲍鱼片，极致新鲜" },
+        18: { tag: "", title: '生拌章鱼', desc: "将活力十足的生章鱼切成易于食用的大小，淋上香油、撒上芝麻，是一道新鲜香浓的下酒菜。", footer: "老少皆宜的香浓章鱼碎" },
+        19: { tag: "", title: '烤带鱼', desc: "仅选用济州洁净海域的银带鱼，外焦里嫩，能充分感受到白肉鱼特有的清甜与风味。", footer: "特大规格济州产银带鱼" },
+        20: { tag: "", title: '炖带鱼', desc: "在香辣诱人的炖酱中，将细嫩的银带鱼与大块萝卜、土豆一起精心慢炖而成的正宗炖菜。", footer: "济州银带鱼经典炖菜名店" }
+      },
+      ja: {
+        1: { tag: "人気", title: '豚肉炒め包みご飯定食 <span class="text-xs text-stone-500 font-normal">(2人前)</span>', desc: "ほのかに漂う火の香りと中毒性の強い甘辛い豚肉炒め！直接栽培したシャキシャキして柔らかい無農薬包み野菜と、土鍋大醤チゲがお膳にセットされます。", footer: "直接収穫した包み野菜食べ放題" },
+        2: { tag: "おすすめ", title: 'サバの煮付け定食 <span class="text-xs text-stone-500 font-normal">(2人前)</span>', desc: "深みのあるピリ辛のタレに、肉厚な済州産のサバと大きめのダイコンを甘く煮込みました。ご飯が進む代表的な煮付け料理です。", footer: "ご飯＆大豆チゲ基本提供" },
+        3: { tag: "", title: 'サバ焼き定食', desc: "身の詰まった脂の乗ったサバをオーブン窯で外はカリッと、中はしっとりと, 生臭さなく丁寧に焼き上げました。（※メニュー表は1人前基準で記載）", footer: "端正な家庭料理のおかず5種セット" },
+        4: { tag: "済州の珍味", title: 'メル（イワシ）包みご飯定食 <span class="text-xs text-stone-500 font-normal">(2人前)</span>', desc: "済州ローカルの隠れた珍味！新鮮で丸々とした済州産のメル（イワシ）をじっくり香ばしく煮込み、直接栽培した盛り合わせ包み野菜にたっぷり乗せて楽しむ郷土風包みご飯です。", footer: "地元のマニア層に大人気" },
+        5: { tag: "", title: 'アワビ海鮮土鍋', desc: "生きのいい新鮮な済州産アワビやワタリガニ、ミナミアカエビ、貝など盛り合わせ海鮮がたっぷり入って、すっきりと深い天然のスープが自慢のピリ辛で爽快な代表적土鍋料理です。", footer: "現地の海女直送の新鮮アワビ" },
+        6: { tag: "", title: 'ボマル（クボガイ）カルグクス', desc: "済州の美しい海域の栄養たっぷりなワカメと、潰さずにそのままの大きさを保った太い生ボマル（クボガイ）が惜しみなく入り、旨味が極限まで引き出された濃厚スープの麺料理です。", footer: "大人の常連客の好み1位のカルグクス" },
+        7: { tag: "", title: 'ボマル粥', desc: "ボマルの内臓を集めて濃厚で香ばしく仕上げ、ごま油の香りが漂う、朝の胃に優しく栄養たっぷりのウェルビーイングボマル粥です。", footer: "朝食や二日酔い防止におすすめ" },
+        8: { tag: "", title: '甘鯛焼き定食', desc: "最高品質の貴重な済州産アマダイを丁寧に下処理し、生臭さなく外はこんがり、中はもちもちで淡白に焼き上げた済州郷土の珍味焼きです。", footer: "高品格な済州の宴会料理" },
+        9: { tag: "", title: 'ウニワカメスープ', desc: "貴重な国産ウニと澄んだ済州のワカメが調和し、深く澄んだ海の旨味を存分に引き出した滋養強壮スープ料理です。", footer: "香ばしく淡白な濃厚健康スープ" },
+        10: { tag: "", title: 'アワビ粥', desc: "新鮮な活アワビの内臓を香ばしく刻んでじっくり煮込み, 深い海の香りと濃厚な風味が抜群の高級ウェルビーイングアワビ粥です。", footer: "元気回復に最高の栄養粥" },
+        11: { tag: "", title: 'キムチチゲ', desc: "程よく熟したムグンジ（熟成キムチ）と厚切りの豚肉をたっぷり入れ、ピリ辛でコクのあるスープの味が絶品の代表的なご飯が進むチゲです。", footer: "24時間お腹を満たすソウルフード" },
+        12: { tag: "", title: '味噌チゲ', desc: "香ばしい田舎風の味噌に豆腐、カボチャ、アサリなど様々な野菜や海鮮をたっぷり入れて煮込んだ端正なチゲです。", footer: "母の手作りの味のような香ばしくてすっきりしたチゲ" },
+        13: { tag: "", title: '卵焼き', desc: "新鮮な野菜がちりばめられた、厚くてふわふわの巨大卵焼き！ご飯のおかずとしても、お酒のつまみとしても絶大な人気を誇ります。", footer: "出来立てで柔らかくしっとりした食感" },
+        14: { tag: "", title: 'ジャガイモのチヂミ', desc: "100%生のジャガイモをおろし器ですりおろし、外はクッキーのようにサクサク、中はモチモチに焼き上げた、香ばしさが抜群의ジャガイモのチヂミです。", footer: "マッコリと最高の相性を誇る味" },
+        15: { tag: "", title: 'タコ炒め', desc: "丸々とした大ぶりのタコを特製調味料ソースで強火で素早く炒め、心地よいピリッとした辛さが自慢です。", footer: "モチモチした素麺（そうめん）が基本セット" },
+        16: { tag: "", title: 'ヨンポタン', desc: "生きた手長ダコと香り高いセリ、野菜を入れ、澄んですっきりと煮込み、滋養強壮と二日酔い解消に極上のスープ料理です。", footer: "すっきりとして胃に優しい澄んだスープ" },
+        17: { tag: "", title: 'アワビの刺身', desc: "食堂の水槽で活発に動いている生アワビをご注文を受けてから取り出し、刺身に仕上げ、コリコリとした食感の極上の海の新鮮さが特徴です。", footer: "生きている生アワビの刺身で最高の新鮮さ" },
+        18: { tag: "", title: 'サンナクチ', desc: "ピチピチと元気な手長ダコを食べやすい大きさに切り、ごま油とゴマをトッピングした、新鮮で香ばしいお酒のつまみ料理です。", footer: "老若男女に愛される香ばしい手長ダコの踊り食い" },
+        19: { tag: "", title: '太刀魚焼き', desc: "済州の美しい海のシルバー太刀魚のみを選別し、外はパリッと、中はしっとりとした白身魚本来の甘みと風味をそのまま感じられます。", footer: "済州産シルバー太刀魚特大サイズ" },
+        20: { tag: "", title: '太刀魚の煮付け', desc: "ピリ辛で中毒性の高いタレに、柔らかい太刀魚を大きめのダイコンやジャガイモと一緒に長時間丁寧に煮込んだ伝統的な煮付けです。", footer: "済州の太刀魚の煮付け代表名家" }
+      }
+    };
+
+    // 데스크톱 언어 선택 드롭다운 제어
+    const langBtnDesktop = document.getElementById('lang-btn-desktop');
+    const langDropdownDesktop = document.getElementById('lang-dropdown-desktop');
+    if (langBtnDesktop && langDropdownDesktop) {
+      langBtnDesktop.addEventListener('click', (e) => {
+        e.stopPropagation();
+        langDropdownDesktop.classList.toggle('opacity-0');
+        langDropdownDesktop.classList.toggle('pointer-events-none');
+        langDropdownDesktop.classList.toggle('scale-95');
+        langDropdownDesktop.classList.toggle('scale-100');
+      });
+      document.addEventListener('click', () => {
+        langDropdownDesktop.classList.add('opacity-0', 'pointer-events-none', 'scale-95');
+        langDropdownDesktop.classList.remove('scale-100');
+      });
+    }
+
+    // 언어 전환 핵심 함수
+    function changeLanguage(lang) {
+      // 1. html lang attribute 변경
+      document.documentElement.lang = lang;
+
+      // 2. data-i18n 속성 번역 처리
+      document.querySelectorAll('[data-i18n]').forEach(el => {
+        const key = el.getAttribute('data-i18n');
+        if (translations[lang] && translations[lang][key] !== undefined) {
+          el.innerHTML = translations[lang][key];
+        } else if (translations['ko'] && translations['ko'][key] !== undefined) {
+          // 폴백: 한국어 원문 사용
+          el.innerHTML = translations['ko'][key];
+        }
+      });
+
+      // 3. 대표 메뉴 20종 동적 번역 처리 (grid 내 카드 순서 매칭)
+      const menuCards = document.querySelectorAll('#menu .group');
+      menuCards.forEach((card, idx) => {
+        const itemNum = idx + 1;
+        const trans = menuTranslations[lang] ? menuTranslations[lang][itemNum] : null;
+        const koTrans = menuTranslations['ko'][itemNum];
+        if (!trans && !koTrans) return;
+
+        const currentTrans = trans || koTrans;
+
+        // 인기/추천 뱃지
+        const badge = card.querySelector('.absolute.top-4.left-4');
+        if (badge) {
+          if (currentTrans.tag) {
+            badge.textContent = currentTrans.tag;
+            badge.style.display = '';
+          } else {
+            badge.style.display = 'none';
+          }
+        }
+
+        // 제목
+        const titleSpan = card.querySelector('h3 > span:first-child');
+        if (titleSpan) {
+          titleSpan.innerHTML = currentTrans.title;
+        }
+
+        // 상세 설명
+        const descP = card.querySelector('p');
+        if (descP) {
+          descP.textContent = currentTrans.desc;
+        }
+
+        // 하단 푸터 (아이콘 구조 유지하며 텍스트만 갱신)
+        const footerSpan = card.querySelector('.border-t span');
+        if (footerSpan) {
+          const icon = footerSpan.querySelector('i');
+          if (icon) {
+            footerSpan.innerHTML = '';
+            footerSpan.appendChild(icon);
+            footerSpan.appendChild(document.createTextNode(' ' + currentTrans.footer));
+          } else {
+            footerSpan.textContent = currentTrans.footer;
+          }
+        }
+      });
+
+      // 4. 오픈스트리트맵 (Leaflet.js) 마커 팝업 번역 처리
+      if (window.mapMarker) {
+        const popupContents = {
+          ko: `<div style="font-family: 'Pretendard', sans-serif; text-align: center;"><h4 style="margin: 0; font-weight: 800; color: #064e3b; font-size: 13px;">나니와</h4><p style="margin: 3px 0 0 0; font-size: 11px; color: #555;">직접 재배 무농약 채소 & 한식</p></div>`,
+          en: `<div style="font-family: 'Pretendard', sans-serif; text-align: center;"><h4 style="margin: 0; font-weight: 800; color: #064e3b; font-size: 13px;">Naniwa</h4><p style="margin: 3px 0 0 0; font-size: 11px; color: #555;">Self-Grown Organic Vegetables & Korean Food</p></div>`,
+          zh: `<div style="font-family: 'Pretendard', sans-serif; text-align: center;"><h4 style="margin: 0; font-weight: 800; color: #064e3b; font-size: 13px;">Naniwa</h4><p style="margin: 3px 0 0 0; font-size: 11px; color: #555;">亲手种植无农药蔬菜 & 韩餐</p></div>`,
+          ja: `<div style="font-family: 'Pretendard', sans-serif; text-align: center;"><h4 style="margin: 0; font-weight: 800; color: #064e3b; font-size: 13px;">なにわ</h4><p style="margin: 3px 0 0 0; font-size: 11px; color: #555;">直接栽培無農薬野菜 ＆ 韓国料理</p></div>`
+        };
+        window.mapMarker.setPopupContent(popupContents[lang]);
+      }
+
+      // 5. 언어 변경 버튼 활성화 클래스 상태 갱신
+      // 데스크톱
+      const currentLangDesktop = document.getElementById('current-lang-text-desktop');
+      if (currentLangDesktop) {
+        currentLangDesktop.textContent = lang.toUpperCase();
+      }
+
+      // 모바일
+      document.querySelectorAll('.mobile-lang-btn').forEach(btn => {
+        if (btn.getAttribute('data-lang') === lang) {
+          btn.classList.add('active', 'border-emerald-600', 'bg-emerald-50', 'text-emerald-800');
+          btn.classList.remove('border-stone-200', 'text-stone-500');
+        } else {
+          btn.classList.remove('active', 'border-emerald-600', 'bg-emerald-50', 'text-emerald-800');
+          btn.classList.add('border-stone-200', 'text-stone-500', 'hover:bg-stone-100');
+        }
+      });
+
+      // 6. 언어 토글 상태 갱신 (전체 메뉴 & 갤러리 텍스트 즉시 언어 동기화)
+      const menuContainer = document.getElementById('extra-menu-container');
+      if (menuContainer) {
+        const text = document.getElementById('toggle-menu-text');
+        const showTextMap = {
+          ko: '전체 메뉴 펼쳐보기 (20개 전체)',
+          en: 'View All Menu (20 Items)',
+          zh: '展开全部菜单 (共20个)',
+          ja: 'メニューをすべて開く (全20種)'
+        };
+        const hideTextMap = {
+          ko: '전체 메뉴 접기',
+          en: 'Collapse Menu',
+          zh: '收起菜单',
+          ja: 'メニューを折りたたむ'
+        };
+        if (text) {
+          text.innerText = menuContainer.classList.contains('hidden') 
+            ? (showTextMap[lang] || showTextMap['ko']) 
+            : (hideTextMap[lang] || hideTextMap['ko']);
+        }
+      }
+
+      const galleryItems = document.querySelectorAll('.gallery-item');
+      if (galleryItems.length > 0) {
+        const text = document.getElementById('toggle-gallery-text');
+        const hiddenGallery = Array.from(galleryItems).slice(8);
+        const isHidden = hiddenGallery[0].classList.contains('hidden');
+        const showTextMap = {
+          ko: '농장 사진 더보기 (17개 전체)',
+          en: 'View More Photos (All 17)',
+          zh: '查看更多农场照片 (共17张)',
+          ja: '農場の写真をもっと見る (全17枚)'
+        };
+        const hideTextMap = {
+          ko: '갤러리 접기',
+          en: 'Collapse Gallery',
+          zh: '收起画廊',
+          ja: 'ギャラリーを閉じる'
+        };
+        if (text) {
+          text.innerText = isHidden 
+            ? (showTextMap[lang] || showTextMap['ko']) 
+            : (hideTextMap[lang] || hideTextMap['ko']);
+        }
+      }
+
+      // 7. 선택한 언어 LocalStorage 영구 보존
+      localStorage.setItem('naniwa_lang', lang);
+    }
+
+    // 초기 로드 시 캐시된 언어 설정 복원
+    window.addEventListener('DOMContentLoaded', () => {
+      const savedLang = localStorage.getItem('naniwa_lang') || 'ko';
+      // Leaflet 지도 핀 로드 완료를 위해 약간의 딜레이 보장
+      setTimeout(() => {
+        changeLanguage(savedLang);
+      }, 150);
+    });
   </script>
 
 </body>
